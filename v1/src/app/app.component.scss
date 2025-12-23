@@ -1,0 +1,381 @@
+:host {
+  display: block;
+}
+
+.resume {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.hero {
+  margin-bottom: 32px;
+  animation: fadeIn 0.8s ease;
+}
+
+.hero-card {
+  position: relative;
+  padding: 32px;
+  border-radius: 28px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.hero-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(30, 95, 116, 0.12), transparent 45%),
+    repeating-linear-gradient(
+      120deg,
+      rgba(197, 97, 43, 0.07) 0,
+      rgba(197, 97, 43, 0.07) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  pointer-events: none;
+}
+
+.hero-header,
+.card-block {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.identity h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3vw, 3rem);
+  margin: 8px 0 6px;
+}
+
+.role {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+}
+
+.location {
+  color: var(--muted);
+  margin: 0;
+  font-weight: 500;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  gap: 8px;
+  background: #f3e8dc;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.lang-button {
+  border: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted-strong);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-button.active {
+  background: var(--accent);
+  color: #fffaf3;
+}
+
+.card-block h2 {
+  font-family: var(--font-display);
+  margin: 0 0 16px;
+  font-size: 1.4rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.fact {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #fff6ea;
+  border: 1px solid rgba(197, 97, 43, 0.2);
+}
+
+.fact-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.fact-value {
+  font-weight: 600;
+  color: var(--muted-strong);
+}
+
+.panel {
+  margin: 28px 0;
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 250, 243, 0.9);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 34px rgba(24, 18, 12, 0.12);
+  opacity: 0;
+  transform: translateY(18px);
+  animation: riseIn 0.7s ease forwards;
+}
+
+.profile {
+  animation-delay: 0.1s;
+}
+
+.overview {
+  animation-delay: 0.2s;
+}
+
+.experience {
+  animation-delay: 0.3s;
+}
+
+.skills {
+  animation-delay: 0.4s;
+}
+
+.courses {
+  animation-delay: 0.5s;
+}
+
+.panel-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin: 0 0 16px;
+}
+
+.panel-body p {
+  color: var(--muted-strong);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+.overview-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.overview-item {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #fef4e6;
+  border: 1px solid rgba(30, 95, 116, 0.2);
+}
+
+.overview-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.overview-company {
+  color: var(--muted-strong);
+}
+
+.overview-period {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.overview-role {
+  margin-top: 6px;
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.experience-list {
+  display: grid;
+  gap: 18px;
+}
+
+.experience-card {
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(82, 71, 62, 0.15);
+  background: #fffdf7;
+}
+
+.experience-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.experience-summary h3 {
+  font-family: var(--font-display);
+  margin: 6px 0;
+  font-size: 1.2rem;
+}
+
+.experience-period {
+  color: var(--muted);
+  margin: 0;
+  font-weight: 600;
+}
+
+.experience-role {
+  margin: 0;
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.toggle-button {
+  border: 1px solid rgba(197, 97, 43, 0.3);
+  background: #f8e5d4;
+  color: var(--muted-strong);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+.toggle-button:hover {
+  background: #f2d2b8;
+}
+
+.experience-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.experience-details.open {
+  max-height: 1200px;
+  opacity: 1;
+  margin-top: 16px;
+}
+
+.detail-block h4 {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.skills-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.skill-group h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  color: var(--muted-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(30, 95, 116, 0.1);
+  border: 1px solid rgba(30, 95, 116, 0.25);
+  font-size: 0.85rem;
+}
+
+.course-list {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.course-item {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #fef1df;
+  border: 1px solid rgba(197, 97, 43, 0.2);
+  color: var(--muted-strong);
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  .resume {
+    padding: 32px 18px 60px;
+  }
+
+  .hero-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .experience-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toggle-button {
+    align-self: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .hero {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .experience-details {
+    transition: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

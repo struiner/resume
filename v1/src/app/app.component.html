@@ -47,6 +47,42 @@
           >
             EN
           </button>
+          <button
+            type="button"
+            class="lang-button"
+            [class.active]="lang() === 'fr'"
+            [attr.aria-pressed]="lang() === 'fr'"
+            (click)="setLanguage('fr')"
+          >
+            FR
+          </button>
+          <button
+            type="button"
+            class="lang-button"
+            [class.active]="lang() === 'de'"
+            [attr.aria-pressed]="lang() === 'de'"
+            (click)="setLanguage('de')"
+          >
+            DE
+          </button>
+          <button
+            type="button"
+            class="lang-button"
+            [class.active]="lang() === 'es'"
+            [attr.aria-pressed]="lang() === 'es'"
+            (click)="setLanguage('es')"
+          >
+            ES
+          </button>
+          <button
+            type="button"
+            class="lang-button"
+            [class.active]="lang() === 'zh-Hans'"
+            [attr.aria-pressed]="lang() === 'zh-Hans'"
+            (click)="setLanguage('zh-Hans')"
+          >
+            中文
+          </button>
         </div>
       </div>
     </div>

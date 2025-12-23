@@ -1,12 +1,33 @@
-<main class="resume">
-  <header class="hero">
-    <div class="hero-card">
-      <div class="hero-header">
-        <div class="identity">
-          <p class="role">{{ data().personalia.title }}</p>
-          <h1>{{ data().personalia.name }}</h1>
-          <p class="location">{{ data().personalia.location }}</p>
-        </div>
+<div class="app" [class.filters-open]="filtersOpen()">
+  <header class="toolbar">
+    <div class="toolbar-main">
+      <div class="search-field">
+        <input
+          type="search"
+          [value]="searchQuery()"
+          [placeholder]="data().labels.searchPlaceholder"
+          (input)="setSearch($any($event.target).value)"
+          [attr.aria-label]="data().labels.searchPlaceholder"
+        />
+      </div>
+      <div class="toolbar-actions">
+        <button
+          type="button"
+          class="filter-toggle"
+          [attr.aria-expanded]="filtersOpen()"
+          (click)="toggleFiltersOpen()"
+        >
+          {{ data().labels.filtersTitle }}
+        </button>
+        <details class="download-menu">
+          <summary>{{ data().labels.downloadTitle }}</summary>
+          <div class="download-list">
+            <button type="button" (click)="downloadPdf()">{{ data().labels.downloadPdf }}</button>
+            <button type="button" (click)="downloadTxt()">{{ data().labels.downloadTxt }}</button>
+            <button type="button" (click)="downloadMd()">{{ data().labels.downloadMd }}</button>
+            <button type="button" (click)="downloadDocx()">{{ data().labels.downloadDocx }}</button>
+          </div>
+        </details>
         <div class="lang-toggle" role="group" [attr.aria-label]="data().labels.languageToggle">
           <button
             type="button"
@@ -28,141 +49,200 @@
           </button>
         </div>
       </div>
-
-      <section class="card-block">
-        <h2>{{ data().labels.personalia }}</h2>
-        <div class="facts">
-          <div class="fact">
-            <span class="fact-label">{{ data().labels.facts.name }}</span>
-            <span class="fact-value">{{ data().personalia.name }}</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">{{ data().labels.facts.title }}</span>
-            <span class="fact-value">{{ data().personalia.title }}</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">{{ data().labels.facts.location }}</span>
-            <span class="fact-value">{{ data().personalia.location }}</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">{{ data().labels.facts.birthDate }}</span>
-            <span class="fact-value">{{ data().personalia.birthDate }}</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">{{ data().labels.facts.nationality }}</span>
-            <span class="fact-value">{{ data().personalia.nationality }}</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">{{ data().labels.facts.experienceSince }}</span>
-            <span class="fact-value">{{ data().personalia.experienceSince }}</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">{{ data().labels.facts.maritalStatus }}</span>
-            <span class="fact-value">{{ data().personalia.maritalStatus }}</span>
-          </div>
-        </div>
-      </section>
+    </div>
+    <div class="toolbar-filters" [class.open]="filtersOpen()">
+      <div class="filters-block">
+        <span class="filters-title">{{ data().labels.sectionsTitle }}</span>
+        <label class="filter-pill">
+          <input
+            type="checkbox"
+            [checked]="isSectionVisible('overview')"
+            (change)="toggleSection('overview')"
+          />
+          <span>{{ data().labels.overview }}</span>
+        </label>
+        <label class="filter-pill">
+          <input
+            type="checkbox"
+            [checked]="isSectionVisible('experience')"
+            (change)="toggleSection('experience')"
+          />
+          <span>{{ data().labels.experience }}</span>
+        </label>
+        <label class="filter-pill">
+          <input
+            type="checkbox"
+            [checked]="isSectionVisible('skills')"
+            (change)="toggleSection('skills')"
+          />
+          <span>{{ data().labels.skills }}</span>
+        </label>
+        <label class="filter-pill">
+          <input
+            type="checkbox"
+            [checked]="isSectionVisible('courses')"
+            (change)="toggleSection('courses')"
+          />
+          <span>{{ data().labels.courses }}</span>
+        </label>
+      </div>
     </div>
   </header>
 
-  <section class="panel profile">
-    <div class="panel-header">
-      <h2>{{ data().labels.profile }}</h2>
-    </div>
-    <div class="panel-body">
-      @for (paragraph of data().profile.paragraphs; track paragraph) {
-        <p>{{ paragraph }}</p>
-      }
-    </div>
-  </section>
-
-  <section class="panel overview">
-    <div class="panel-header">
-      <h2>{{ data().labels.overview }}</h2>
-    </div>
-    <div class="panel-body overview-grid">
-      @for (item of data().overview.items; track item.company + item.period) {
-        <div class="overview-item">
-          <div class="overview-top">
-            <span class="overview-company">{{ item.company }}</span>
-            <span class="overview-period">{{ item.period }}</span>
+  <main class="resume">
+    <header class="hero">
+      <div class="hero-card">
+        <div class="hero-header">
+          <div class="identity">
+            <p class="role">{{ data().personalia.title }}</p>
+            <h1>{{ data().personalia.name }}</h1>
+            <p class="location">{{ data().personalia.location }}</p>
           </div>
-          <div class="overview-role">{{ item.role }}</div>
         </div>
-      }
-    </div>
-  </section>
 
-  <section class="panel experience">
-    <div class="panel-header">
-      <h2>{{ data().labels.experience }}</h2>
-    </div>
-    <div class="panel-body experience-list">
-      @for (item of data().experience.items; track item.id) {
-        <article class="experience-card">
-          <div class="experience-summary">
-            <div>
-              <p class="experience-period">{{ item.period }}</p>
-              <h3>{{ item.company }}</h3>
-              <p class="experience-role">{{ item.role }}</p>
+        <section class="card-block">
+          <h2>{{ data().labels.personalia }}</h2>
+          <div class="facts">
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.name }}</span>
+              <span class="fact-value">{{ data().personalia.name }}</span>
             </div>
-            <button
-              type="button"
-              class="toggle-button"
-              [attr.aria-expanded]="isExpanded(item.id)"
-              [attr.aria-controls]="'experience-' + item.id"
-              (click)="toggleExperience(item.id)"
-            >
-              {{ isExpanded(item.id) ? data().labels.collapse : data().labels.expand }}
-            </button>
-          </div>
-          <div
-            class="experience-details"
-            [id]="'experience-' + item.id"
-            [class.open]="isExpanded(item.id)"
-          >
-            <div class="detail-block">
-              <h4>{{ data().labels.responsibilities }}</h4>
-              <p>{{ item.responsibilities }}</p>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.title }}</span>
+              <span class="fact-value">{{ data().personalia.title }}</span>
             </div>
-            <div class="detail-block">
-              <h4>{{ data().labels.environment }}</h4>
-              <p>{{ item.environment }}</p>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.location }}</span>
+              <span class="fact-value">{{ data().personalia.location }}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.birthDate }}</span>
+              <span class="fact-value">{{ data().personalia.birthDate }}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.nationality }}</span>
+              <span class="fact-value">{{ data().personalia.nationality }}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.experienceSince }}</span>
+              <span class="fact-value">{{ data().personalia.experienceSince }}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.maritalStatus }}</span>
+              <span class="fact-value">{{ data().personalia.maritalStatus }}</span>
             </div>
           </div>
-        </article>
-      }
-    </div>
-  </section>
+        </section>
+      </div>
+    </header>
 
-  <section class="panel skills">
-    <div class="panel-header">
-      <h2>{{ data().labels.skills }}</h2>
-    </div>
-    <div class="panel-body skills-grid">
-      @for (group of data().skills.groups; track group.title) {
-        <div class="skill-group">
-          <h3>{{ group.title }}</h3>
-          <div class="skill-chips">
-            @for (item of group.items; track item) {
-              <span class="chip">{{ item }}</span>
+    <section class="panel profile">
+      <div class="panel-header">
+        <h2>{{ data().labels.profile }}</h2>
+      </div>
+      <div class="panel-body">
+        @for (paragraph of data().profile.paragraphs; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+    </section>
+
+    @if (isSectionVisible('overview')) {
+      <section class="panel overview">
+        <div class="panel-header">
+          <h2>{{ data().labels.overview }}</h2>
+        </div>
+        <div class="panel-body overview-grid">
+          @for (item of filteredOverview(); track item.company + item.period) {
+            <div class="overview-item">
+              <div class="overview-top">
+                <span class="overview-company">{{ item.company }}</span>
+                <span class="overview-period">{{ item.period }}</span>
+              </div>
+              <div class="overview-role">{{ item.role }}</div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    @if (isSectionVisible('experience')) {
+      <section class="panel experience">
+        <div class="panel-header">
+          <h2>{{ data().labels.experience }}</h2>
+        </div>
+        <div class="panel-body experience-list">
+          @for (item of filteredExperience(); track item.id) {
+            <article class="experience-card">
+              <div class="experience-summary">
+                <div>
+                  <p class="experience-period">{{ item.period }}</p>
+                  <h3>{{ item.company }}</h3>
+                  <p class="experience-role">{{ item.role }}</p>
+                </div>
+                <button
+                  type="button"
+                  class="toggle-button"
+                  [attr.aria-expanded]="isExpanded(item.id)"
+                  [attr.aria-controls]="'experience-' + item.id"
+                  (click)="toggleExperience(item.id)"
+                >
+                  {{ isExpanded(item.id) ? data().labels.collapse : data().labels.expand }}
+                </button>
+              </div>
+              <div
+                class="experience-details"
+                [id]="'experience-' + item.id"
+                [class.open]="isExpanded(item.id)"
+              >
+                <div class="detail-block">
+                  <h4>{{ data().labels.responsibilities }}</h4>
+                  <p>{{ item.responsibilities }}</p>
+                </div>
+                <div class="detail-block">
+                  <h4>{{ data().labels.environment }}</h4>
+                  <p>{{ item.environment }}</p>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    @if (isSectionVisible('skills')) {
+      <section class="panel skills">
+        <div class="panel-header">
+          <h2>{{ data().labels.skills }}</h2>
+        </div>
+        <div class="panel-body skills-grid">
+          @for (group of filteredSkills(); track group.title) {
+            <div class="skill-group">
+              <h3>{{ group.title }}</h3>
+              <div class="skill-chips">
+                @for (item of group.items; track item) {
+                  <span class="chip">{{ item }}</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    @if (isSectionVisible('courses')) {
+      <section class="panel courses">
+        <div class="panel-header">
+          <h2>{{ data().labels.courses }}</h2>
+        </div>
+        <div class="panel-body">
+          <div class="course-list">
+            @for (course of filteredCourses(); track course) {
+              <div class="course-item">{{ course }}</div>
             }
           </div>
         </div>
-      }
-    </div>
-  </section>
-
-  <section class="panel courses">
-    <div class="panel-header">
-      <h2>{{ data().labels.courses }}</h2>
-    </div>
-    <div class="panel-body">
-      <div class="course-list">
-        @for (course of data().courses.items; track course) {
-          <div class="course-item">{{ course }}</div>
-        }
-      </div>
-    </div>
-  </section>
-</main>
+      </section>
+    }
+  </main>
+</div>

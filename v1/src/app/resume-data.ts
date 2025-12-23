@@ -12,6 +12,14 @@ export type ResumeData = {
     environment: string;
     responsibilities: string;
     languageToggle: string;
+    searchPlaceholder: string;
+    filtersTitle: string;
+    sectionsTitle: string;
+    downloadTitle: string;
+    downloadPdf: string;
+    downloadTxt: string;
+    downloadMd: string;
+    downloadDocx: string;
     expand: string;
     collapse: string;
     facts: {
@@ -77,6 +85,14 @@ export const resumeData: Record<Language, ResumeData> = {
       environment: 'Omgeving',
       responsibilities: 'Werkzaamheden',
       languageToggle: 'Taal',
+      searchPlaceholder: 'Zoek in ervaring, vaardigheden en opleidingen',
+      filtersTitle: 'Filters',
+      sectionsTitle: 'Secties',
+      downloadTitle: 'Download',
+      downloadPdf: 'PDF',
+      downloadTxt: 'TXT',
+      downloadMd: 'MD',
+      downloadDocx: 'DOCX',
       expand: 'Details',
       collapse: 'Verbergen',
       facts: {
@@ -100,10 +116,10 @@ export const resumeData: Record<Language, ResumeData> = {
     },
     profile: {
       paragraphs: [
-        'Yuri is een gedreven applicatie ontwikkelaar met oog voor detail. Hij is sterk in het ontwikkelen van creatieve oplossingen voor niet alledaagse problemen, en weet dus altijd wel een passende oplossing te vinden voor elk softwarematig probleem. Hij heeft een integer karakter, is communicatief vaardig en een rustgevende factor in elke situatie. Hij heeft gewerkt binnen en voor een breed scala aan organisaties, waaronder de Overheid, maar ook in de Financiele sector.',
-        'Aan kwaliteit in zijn werk hecht Yuri grote waarde. Hij streeft bij voorkeur naar toekomst-vaste applicaties die voldoen aan de eisen van de opdrachtgever waarbij hij goed onderhoudbaar en uitbreidbaar niet uit het oog verliest. Door zijn consistente manier van werken zorgt hij dat applicaties overzichtelijk opgebouwd zijn en blijven.',
-        'Tijdens de opleiding Communicatie en Multimedia Design heeft hij expertise opgedaan in het ontwikkelen van zowel de voor- als achterkant van applicaties. Hij is bekwaam in zowel vormgeving, lay-out als de technische aspecten van programma\'s en websites.',
-        'De afgelopen jaren heeft hij veel ervaring opgedaan binnen Front-End ontwikkeling en heeft Yuri zich toegespitst op het maken van maatwerkapplicaties die platform onafhankelijk functioneren.'
+        'Yuri is een gedreven applicatieontwikkelaar met een scherp oog voor detail. Hij blinkt uit in het bedenken van creatieve oplossingen voor complexe en niet-alledaagse vraagstukken en weet softwarematige uitdagingen steevast te vertalen naar doordachte, werkbare oplossingen. Met zijn integere karakter, sterke communicatieve vaardigheden en kalme houding is hij een stabiele en prettige factor binnen elk team. Yuri heeft ervaring opgedaan binnen een breed scala aan organisaties, variërend van de overheid tot de financiële sector.',
+        'Kwaliteit staat centraal in zijn werk. Yuri richt zich bij voorkeur op toekomstbestendige applicaties die niet alleen voldoen aan de wensen van de opdrachtgever, maar ook goed onderhoudbaar en eenvoudig uitbreidbaar zijn. Door zijn gestructureerde en consistente werkwijze bouwt hij applicaties die overzichtelijk blijven, ook op de lange termijn.',
+        'Tijdens zijn opleiding Communicatie en Multimedia Design heeft Yuri zich ontwikkeld tot een allround developer met kennis van zowel front-end als back-end ontwikkeling. Hij combineert gevoel voor vormgeving en lay-out met een solide technische basis, waardoor hij complete en goed doordachte applicaties en websites realiseert.',
+        'In de afgelopen jaren heeft Yuri zich verder gespecialiseerd in front-end ontwikkeling en het bouwen van maatwerkapplicaties die platformonafhankelijk functioneren. Daarbij verliest hij gebruiksvriendelijkheid, performance en duurzaamheid nooit uit het oog.'
       ]
     },
     overview: {
@@ -383,6 +399,14 @@ export const resumeData: Record<Language, ResumeData> = {
       environment: 'Environment',
       responsibilities: 'Responsibilities',
       languageToggle: 'Language',
+      searchPlaceholder: 'Search across experience, skills, and courses',
+      filtersTitle: 'Filters',
+      sectionsTitle: 'Sections',
+      downloadTitle: 'Download',
+      downloadPdf: 'PDF',
+      downloadTxt: 'TXT',
+      downloadMd: 'MD',
+      downloadDocx: 'DOCX',
       expand: 'Details',
       collapse: 'Hide',
       facts: {

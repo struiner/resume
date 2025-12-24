@@ -20,8 +20,10 @@ export const resumeDataZhHans: ResumeData = {
     downloadTxt: 'TXT',
     downloadMd: 'MD',
     downloadDocx: 'DOCX',
-      expand: '??',
-      collapse: '??',
+    adsHide: '无广告模式',
+    adsShow: '显示广告',
+    expand: '详情',
+    collapse: '收起',
     facts: {
       name: '姓名',
       title: '职位',

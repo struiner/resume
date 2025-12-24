@@ -52,6 +52,16 @@
   gap: 12px;
 }
 
+.ad-toggle {
+  border: 1px solid rgba(31, 26, 20, 0.2);
+  background: #fffdf7;
+  color: var(--muted-strong);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .download-menu {
   position: relative;
 }
@@ -159,14 +169,104 @@
   accent-color: var(--accent);
 }
 
-.resume {
-  max-width: 1120px;
+.resume-layout {
+  max-width: 1440px;
   margin: 0 auto;
   padding: 168px 24px 80px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr) minmax(180px, 240px);
+  align-items: start;
 }
 
-.app.filters-open .resume {
+.resume {
+  min-width: 0;
+  transition: opacity 0.2s ease;
+}
+
+.app.filters-open .resume-layout {
   padding-top: 230px;
+}
+
+.ad-column {
+  position: sticky;
+  top: 120px;
+  display: grid;
+  gap: 16px;
+}
+
+.ad-spacer {
+  min-height: 1px;
+}
+
+:host-context(.tiles-expanded) .resume {
+  opacity: 0;
+  pointer-events: none;
+}
+
+:host-context(.tiles-expanded) .ad-panel {
+  opacity: 0;
+  pointer-events: none;
+}
+
+:host-context(.tiles-expanded) .ad-panel.tile-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tile-dialog {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 24px;
+  color: #f5f0ff;
+  text-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+}
+
+.tile-dialog-title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.tile-dialog-subtitle {
+  font-size: 13px;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.tile-dialog.sentient {
+  color: #4cff7c;
+}
+
+.tile-dialog.mana {
+  color: #e9d5ff;
+}
+
+.tile-dialog.glitch {
+  color: #7ffcff;
+}
+
+.tile-dialog.quantum {
+  color: #ffef9a;
+}
+
+.ad-panel {
+  border-radius: 18px;
+  border: 1px dashed rgba(197, 97, 43, 0.4);
+  padding: 16px;
+  background: rgba(255, 250, 243, 0.85);
+  color: var(--muted);
+  font-weight: 600;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .hero {
@@ -300,6 +400,7 @@
   background: rgba(255, 250, 243, 0.9);
   border: 1px solid var(--border);
   box-shadow: 0 18px 34px rgba(24, 18, 12, 0.12);
+  scroll-margin-top: 220px;
   opacity: 0;
   transform: translateY(18px);
   animation: riseIn 0.7s ease forwards;
@@ -489,12 +590,17 @@
 }
 
 @media (max-width: 720px) {
-  .resume {
+  .resume-layout {
+    grid-template-columns: 1fr;
     padding: 200px 18px 60px;
   }
 
-  .app.filters-open .resume {
+  .app.filters-open .resume-layout {
     padding-top: 260px;
+  }
+
+  .ad-column {
+    display: none;
   }
 
   .hero-header {

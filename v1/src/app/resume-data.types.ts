@@ -20,6 +20,8 @@ export type ResumeData = {
     downloadTxt: string;
     downloadMd: string;
     downloadDocx: string;
+    adsHide: string;
+    adsShow: string;
     expand: string;
     collapse: string;
     facts: {

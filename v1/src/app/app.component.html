@@ -19,6 +19,9 @@
         >
           {{ data().labels.filtersTitle }}
         </button>
+        <button type="button" class="ad-toggle" (click)="toggleAds()">
+          {{ adsHidden() ? data().labels.adsShow : data().labels.adsHide }}
+        </button>
         <details class="download-menu">
           <summary>{{ data().labels.downloadTitle }}</summary>
           <div class="download-list">
@@ -125,7 +128,38 @@
     </div>
   </header>
 
-  <main class="resume">
+  <main class="resume-layout">
+    @if (!adsHidden()) {
+      <aside class="ad-column left">
+        <div class="ad-panel">
+          <expandable-tile theme="candy">
+            <tile-candy-overload tile></tile-candy-overload>
+            <candy-preloader dialog></candy-preloader>
+          </expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <expandable-tile theme="sentient">
+            <tile-sentient-os tile></tile-sentient-os>
+            <div dialog class="tile-dialog sentient">
+              <div class="tile-dialog-title">SENTIENT OS</div>
+              <div class="tile-dialog-subtitle">Autonomous diagnostics online.</div>
+            </div>
+          </expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <expandable-tile theme="mana">
+            <tile-mana-bloom tile></tile-mana-bloom>
+            <div dialog class="tile-dialog mana">
+              <div class="tile-dialog-title">MANA BLOOM</div>
+              <div class="tile-dialog-subtitle">Arcane core stabilizing.</div>
+            </div>
+          </expandable-tile>
+        </div>
+      </aside>
+    } @else {
+      <div class="ad-spacer" aria-hidden="true"></div>
+    }
+    <section class="resume">
     <header class="hero">
       <div class="hero-card">
         <div class="hero-header">
@@ -184,7 +218,7 @@
     </section>
 
     @if (isSectionVisible('overview')) {
-      <section class="panel overview">
+      <section class="panel overview" id="section-overview">
         <div class="panel-header">
           <h2>{{ data().labels.overview }}</h2>
         </div>
@@ -203,7 +237,7 @@
     }
 
     @if (isSectionVisible('experience')) {
-      <section class="panel experience">
+      <section class="panel experience" id="section-experience">
         <div class="panel-header">
           <h2>{{ data().labels.experience }}</h2>
         </div>
@@ -247,7 +281,7 @@
     }
 
     @if (isSectionVisible('skills')) {
-      <section class="panel skills">
+      <section class="panel skills" id="section-skills">
         <div class="panel-header">
           <h2>{{ data().labels.skills }}</h2>
         </div>
@@ -267,7 +301,7 @@
     }
 
     @if (isSectionVisible('courses')) {
-      <section class="panel courses">
+      <section class="panel courses" id="section-courses">
         <div class="panel-header">
           <h2>{{ data().labels.courses }}</h2>
         </div>
@@ -279,6 +313,37 @@
           </div>
         </div>
       </section>
+    }
+    </section>
+    @if (!adsHidden()) {
+      <aside class="ad-column right">
+        <div class="ad-panel">
+          <expandable-tile theme="hyperlane">
+            <tile-hyperlane tile></tile-hyperlane>
+            <cinematic-loader dialog></cinematic-loader>
+          </expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <expandable-tile theme="glitch">
+            <tile-glitch-collapse tile></tile-glitch-collapse>
+            <div dialog class="tile-dialog glitch">
+              <div class="tile-dialog-title">GLITCH.IO</div>
+              <div class="tile-dialog-subtitle">Signal stabilized. Visual noise contained.</div>
+            </div>
+          </expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <expandable-tile theme="quantum">
+            <tile-quantum-rift tile></tile-quantum-rift>
+            <div dialog class="tile-dialog quantum">
+              <div class="tile-dialog-title">QUANTUM RIFT</div>
+              <div class="tile-dialog-subtitle">Reality threads aligned.</div>
+            </div>
+          </expandable-tile>
+        </div>
+      </aside>
+    } @else {
+      <div class="ad-spacer" aria-hidden="true"></div>
     }
   </main>
 </div>

@@ -1,12 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { Language, resumeData } from './resume-data';
+import { TileCandyOverload } from './tiles/candy-overload.component';
+import { TileGlitchCollapse } from './tiles/glitch-collapse.component';
+import { TileHyperlane } from './tiles/hyperlane-racer.component';
+import { TileManaBloom } from './tiles/mana-boom-rpg.component';
+import { TileQuantumRift } from './tiles/quantum-rift.component';
+import { TileSentientOS } from './tiles/sentient-os.component';
+import { ExpandableTileComponent } from './tiles/expandable-tile.component';
+import { CandyPreloaderComponent } from './tiles/candy-preloader.component';
+import { CinematicLoaderComponent } from './tiles/cinematic-loader.component';
 
 type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    TileCandyOverload,
+    TileGlitchCollapse,
+    TileHyperlane,
+    TileManaBloom,
+    TileQuantumRift,
+    TileSentientOS,
+    ExpandableTileComponent,
+    CandyPreloaderComponent,
+    CinematicLoaderComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -16,6 +36,7 @@ export class AppComponent {
   readonly expandedId = signal<string | null>(null);
   readonly searchQuery = signal('');
   readonly filtersOpen = signal(false);
+  readonly adsHidden = signal(false);
   readonly sectionFilters = signal<Record<SectionKey, boolean>>({
     overview: true,
     experience: true,
@@ -105,14 +126,20 @@ export class AppComponent {
 
   setSearch(value: string): void {
     this.searchQuery.set(value);
+    this.scrollToRelevantSection();
   }
 
   toggleFiltersOpen(): void {
     this.filtersOpen.update((value) => !value);
   }
 
+  toggleAds(): void {
+    this.adsHidden.update((value) => !value);
+  }
+
   toggleSection(key: SectionKey): void {
     this.sectionFilters.update((current) => ({ ...current, [key]: !current[key] }));
+    this.scrollToRelevantSection();
   }
 
   isSectionVisible(key: SectionKey): boolean {
@@ -133,6 +160,30 @@ export class AppComponent {
 
   private matches(query: string, ...values: string[]): boolean {
     return values.some((value) => value.toLowerCase().includes(query));
+  }
+
+  private scrollToRelevantSection(): void {
+    const order: Array<{ key: SectionKey; id: string; hasResults: boolean }> = [
+      { key: 'overview', id: 'section-overview', hasResults: this.filteredOverview().length > 0 },
+      { key: 'experience', id: 'section-experience', hasResults: this.filteredExperience().length > 0 },
+      { key: 'skills', id: 'section-skills', hasResults: this.filteredSkills().length > 0 },
+      { key: 'courses', id: 'section-courses', hasResults: this.filteredCourses().length > 0 }
+    ];
+
+    const target = order.find(
+      (entry) => this.isSectionVisible(entry.key) && entry.hasResults
+    );
+
+    if (!target) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      const element = document.getElementById(target.id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   }
 
   private getFileName(extension: string): string {

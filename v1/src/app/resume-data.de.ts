@@ -20,6 +20,8 @@ export const resumeDataDe: ResumeData = {
       downloadTxt: 'TXT',
       downloadMd: 'MD',
       downloadDocx: 'DOCX',
+      adsHide: 'werbefrei',
+      adsShow: 'anzeigen',
       expand: 'Details',
       collapse: 'Ausblenden',
       facts: {

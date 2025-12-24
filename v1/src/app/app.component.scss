@@ -182,6 +182,7 @@
 .resume {
   min-width: 0;
   transition: opacity 0.2s ease;
+  grid-column: 2;
 }
 
 .app.filters-open .resume-layout {
@@ -601,6 +602,10 @@
 
   .ad-column {
     display: none;
+  }
+
+  .resume {
+    grid-column: 1;
   }
 
   .hero-header {

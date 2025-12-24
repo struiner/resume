@@ -44,6 +44,10 @@ export class AppComponent {
     courses: true
   });
 
+  constructor() {
+    document.body.classList.remove('tiles-expanded');
+  }
+
   readonly filteredOverview = computed(() => {
     const query = this.normalize(this.searchQuery());
     const items = this.data().overview.items;

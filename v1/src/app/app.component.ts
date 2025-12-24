@@ -37,6 +37,7 @@ export class AppComponent {
   readonly searchQuery = signal('');
   readonly filtersOpen = signal(false);
   readonly adsHidden = signal(false);
+  readonly adsBypass = signal(false);
   readonly sectionFilters = signal<Record<SectionKey, boolean>>({
     overview: true,
     experience: true,
@@ -139,6 +140,13 @@ export class AppComponent {
 
   toggleAds(): void {
     this.adsHidden.update((value) => !value);
+    if (this.adsHidden()) {
+      this.adsBypass.set(false);
+    }
+  }
+
+  toggleAdsBypass(): void {
+    this.adsBypass.update((value) => !value);
   }
 
   toggleSection(key: SectionKey): void {

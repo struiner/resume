@@ -22,6 +22,7 @@ export const resumeDataNl: ResumeData = {
       downloadDocx: 'DOCX',
       adsHide: 'ga advertentievrij',
       adsShow: 'toon advertenties',
+      adsReveal: 'Welke advertenties?',
       expand: 'Details',
       collapse: 'Verbergen',
       facts: {

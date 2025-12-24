@@ -22,6 +22,7 @@ export type ResumeData = {
     downloadDocx: string;
     adsHide: string;
     adsShow: string;
+    adsReveal: string;
     expand: string;
     collapse: string;
     facts: {

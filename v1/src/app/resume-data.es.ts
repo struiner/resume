@@ -22,6 +22,7 @@ export const resumeDataEs: ResumeData = {
     downloadDocx: 'DOCX',
     adsHide: 'sin anuncios',
     adsShow: 'mostrar anuncios',
+    adsReveal: 'Que anuncios?',
     expand: 'Detalles',
     collapse: 'Ocultar',
     facts: {

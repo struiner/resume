@@ -22,6 +22,7 @@ export const resumeDataFr: ResumeData = {
       downloadDocx: 'DOCX',
       adsHide: 'aller sans pub',
       adsShow: 'afficher les pubs',
+      adsReveal: 'Quelles pubs ?',
       expand: 'Details',
       collapse: 'Masquer',
       facts: {

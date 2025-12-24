@@ -203,7 +203,7 @@ export class ExpandableTileComponent implements OnDestroy {
     const tileEl = this.host.nativeElement
       .querySelector('.tile-shell')
       .firstElementChild as HTMLElement;
-    this.activePanel = this.host.nativeElement.closest('.ad-panel');
+    this.activePanel = this.host.nativeElement.closest('.ad-panel, .tile-panel');
     if (this.activePanel) {
       this.activePanel.classList.add('tile-active');
     }

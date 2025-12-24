@@ -29,6 +29,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "candy-sheet.svg",
+                "input": "src/app/tiles",
+                "output": "assets/tiles"
               }
             ],
             "styles": [
@@ -88,6 +93,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "candy-sheet.svg",
+                "input": "src/app/tiles",
+                "output": "assets/tiles"
               }
             ],
             "styles": [

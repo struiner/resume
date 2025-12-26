@@ -204,7 +204,7 @@
   position: sticky;
   top: 120px;
   display: grid;
-  gap: 16px;
+  gap: 32px;
 }
 
 .ad-spacer {
@@ -231,14 +231,24 @@
 .tile-dialog {
   width: 100%;
   height: 100%;
-  display: grid;
-  align-content: center;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 12px;
   text-align: center;
   padding: 24px;
   color: #f5f0ff;
   text-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+
+.game-wrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
 }
 
 .tile-dialog-title {
@@ -265,16 +275,28 @@
   color: #7ffcff;
 }
 
+.tile-dialog.candy {
+  color: #ffe9fb;
+}
+
 .tile-dialog.quantum {
   color: #ffef9a;
 }
 
+.tile-dialog.factory {
+  color: #b8f7ff;
+}
+
+.game-wrapper.factory {
+  padding: 6px;
+  box-sizing: border-box;
+}
+
 .ad-panel,
 .tile-panel {
-  border-radius: 18px;
-  border: 1px dashed rgba(197, 97, 43, 0.4);
+  border: none;
   padding: 16px;
-  background: rgba(255, 250, 243, 0.85);
+  background: transparent;
   color: var(--muted);
   font-weight: 600;
   min-height: 140px;
@@ -292,7 +314,6 @@
 .hero-card {
   position: relative;
   padding: 32px;
-  border-radius: 28px;
   background: var(--card);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
@@ -375,6 +396,24 @@
   color: #fffaf3;
 }
 
+.comic-test-link {
+  border: 1px solid rgba(197, 97, 43, 0.3);
+  background: #f9e3d2;
+  color: var(--muted-strong);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-left: 12px;
+}
+
+.comic-test-link:hover {
+  background: #f2d2b8;
+  transform: translateY(-1px);
+}
+
 .card-block h2 {
   font-family: var(--font-display);
   margin: 0 0 16px;
@@ -389,7 +428,6 @@
 
 .fact {
   padding: 12px 14px;
-  border-radius: 16px;
   background: #fff6ea;
   border: 1px solid rgba(197, 97, 43, 0.2);
 }
@@ -411,7 +449,6 @@
 .panel {
   margin: 28px 0;
   padding: 24px;
-  border-radius: 24px;
   background: rgba(255, 250, 243, 0.9);
   border: 1px solid var(--border);
   box-shadow: 0 18px 34px rgba(24, 18, 12, 0.12);
@@ -461,7 +498,6 @@
 
 .overview-item {
   padding: 14px 16px;
-  border-radius: 16px;
   background: #fef4e6;
   border: 1px solid rgba(30, 95, 116, 0.2);
 }
@@ -495,7 +531,6 @@
 
 .experience-card {
   padding: 18px;
-  border-radius: 18px;
   border: 1px solid rgba(82, 71, 62, 0.15);
   background: #fffdf7;
 }
@@ -583,7 +618,6 @@
 
 .chip {
   padding: 6px 10px;
-  border-radius: 999px;
   background: rgba(30, 95, 116, 0.1);
   border: 1px solid rgba(30, 95, 116, 0.25);
   font-size: 0.85rem;
@@ -597,7 +631,6 @@
 
 .course-item {
   padding: 10px 12px;
-  border-radius: 14px;
   background: #fef1df;
   border: 1px solid rgba(197, 97, 43, 0.2);
   color: var(--muted-strong);

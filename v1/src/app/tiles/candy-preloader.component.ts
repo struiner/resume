@@ -69,7 +69,6 @@ import { Component, OnInit } from '@angular/core';
       top:-20px;
       width:10px;
       height:10px;
-      border-radius:3px;
       background:
         linear-gradient(135deg,#fff,#ff6);
       animation: candy-fall 1.8s linear infinite;

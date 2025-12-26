@@ -17,9 +17,9 @@ import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
       height:100px;
       position:relative;
       overflow:hidden;
-      border-radius:14px;
       cursor:pointer;
       background:radial-gradient(circle,#220033,#050008);
+      background-size: 400% 400%;
       box-shadow:0 0 40px #000 inset;
       user-select:none;
     }
@@ -31,6 +31,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
         radial-gradient(circle at 40% 60%, #7e22ce44 0%, transparent 40%),
         radial-gradient(circle at 60% 30%, #a855f744 0%, transparent 45%),
         conic-gradient(from 0deg,#2e004f,#5b21b6,#9333ea,#5b21b6,#2e004f);
+      background-size: 400% 400%;
       filter:blur(24px) saturate(160%);
       animation: slow-rotate 20s linear infinite;
       transition: opacity 0.3s ease, filter 0.3s ease;
@@ -49,6 +50,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
           transparent 0 14px,
           rgba(192,132,252,.08) 14px 15px
         );
+      background-size: 400% 400%;
       mix-blend-mode:screen;
       opacity:.4;
     }
@@ -63,6 +65,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
         inset 0 0 12px #c084fc;
       background:
         conic-gradient(from 0deg,transparent,#c084fc,transparent);
+      background-size: 400% 400%;
       opacity:.7;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
@@ -155,3 +158,6 @@ export class TileManaBloom implements AfterViewInit, OnDestroy {
     tick();
   }
 }
+
+
+

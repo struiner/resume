@@ -16,8 +16,8 @@ import { Component } from '@angular/core';
     .tile{
       width:200px; height:100px;
       position:relative; overflow:hidden;
-      border-radius:14px;
       background:#000;
+      background-size: 400% 400%;
       perspective:800px;
       cursor:pointer;
     }
@@ -29,6 +29,7 @@ import { Component } from '@angular/core';
           from 0deg,
           #ff00ff, #00ff00, #0ff, #ff0, #f0f
         );
+      background-size: 400% 400%;
       filter: blur(14px) saturate(180%);
       animation: spin 6s linear infinite;
       transform: scale(.6);
@@ -75,3 +76,6 @@ import { Component } from '@angular/core';
   `]
 })
 export class TileQuantumRift {}
+
+
+

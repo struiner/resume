@@ -92,6 +92,9 @@
             中文
           </button>
         </div>
+        <a href="/comic-test" class="comic-test-link" [attr.aria-label]="'Comic Tile Test'">
+          🎨 Comic Test (Phase 1 & 2)
+        </a>
       </div>
     </div>
     <div class="toolbar-filters" [class.open]="filtersOpen()">
@@ -137,55 +140,55 @@
     @if (!adsHidden() && !adsBypass()) {
       <aside class="ad-column left">
         <div class="ad-panel">
-          <expandable-tile theme="candy">
+          <comic-expandable-tile theme="candy" [tileX]="0" [tileY]="0">
             <tile-candy-overload tile></tile-candy-overload>
             <candy-preloader dialog></candy-preloader>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="ad-panel">
-          <expandable-tile theme="sentient">
+          <comic-expandable-tile theme="sentient" [tileX]="0" [tileY]="1">
             <tile-sentient-os tile></tile-sentient-os>
             <div dialog class="tile-dialog sentient">
               <div class="tile-dialog-title">SENTIENT OS</div>
               <div class="tile-dialog-subtitle">Autonomous diagnostics online.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="ad-panel">
-          <expandable-tile theme="mana">
+          <comic-expandable-tile theme="mana" [tileX]="0" [tileY]="2">
             <tile-mana-bloom tile></tile-mana-bloom>
             <div dialog class="tile-dialog mana">
               <div class="tile-dialog-title">MANA BLOOM</div>
               <div class="tile-dialog-subtitle">Arcane core stabilizing.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
       </aside>
     } @else if (!adsHidden() && adsBypass()) {
       <aside class="tile-column left">
         <div class="tile-panel">
-          <expandable-tile theme="candy">
+          <comic-expandable-tile theme="candy" [tileX]="0" [tileY]="0">
             <tile-candy-overload tile></tile-candy-overload>
             <candy-preloader dialog></candy-preloader>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="tile-panel">
-          <expandable-tile theme="sentient">
+          <comic-expandable-tile theme="sentient" [tileX]="0" [tileY]="1">
             <tile-sentient-os tile></tile-sentient-os>
             <div dialog class="tile-dialog sentient">
               <div class="tile-dialog-title">SENTIENT OS</div>
               <div class="tile-dialog-subtitle">Autonomous diagnostics online.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="tile-panel">
-          <expandable-tile theme="mana">
+          <comic-expandable-tile theme="mana" [tileX]="0" [tileY]="2">
             <tile-mana-bloom tile></tile-mana-bloom>
             <div dialog class="tile-dialog mana">
               <div class="tile-dialog-title">MANA BLOOM</div>
               <div class="tile-dialog-subtitle">Arcane core stabilizing.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
       </aside>
     } @else {
@@ -350,55 +353,103 @@
     @if (!adsHidden() && !adsBypass()) {
       <aside class="ad-column right">
         <div class="ad-panel">
-          <expandable-tile theme="hyperlane">
+          <comic-expandable-tile theme="hyperlane" [tileX]="1" [tileY]="0">
             <tile-hyperlane tile></tile-hyperlane>
             <cinematic-loader dialog></cinematic-loader>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="ad-panel">
-          <expandable-tile theme="glitch">
+          <comic-expandable-tile theme="glitch" [tileX]="1" [tileY]="1">
             <tile-glitch-collapse tile></tile-glitch-collapse>
             <div dialog class="tile-dialog glitch">
               <div class="tile-dialog-title">GLITCH.IO</div>
               <div class="tile-dialog-subtitle">Signal stabilized. Visual noise contained.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="ad-panel">
-          <expandable-tile theme="quantum">
+          <comic-expandable-tile theme="candy" [tileX]="1" [tileY]="2">
+            <tile-candy-runner tile></tile-candy-runner>
+            <div dialog class="tile-dialog candy">
+              <div class="tile-dialog-title">CANDY RUNNER</div>
+              <div class="tile-dialog-subtitle">Jump over obstacles and collect candy!</div>
+              <div class="game-wrapper">
+                <embedded-game theme="candy"></embedded-game>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="factory" [tileX]="1" [tileY]="3">
+            <tile-factory-universe tile></tile-factory-universe>
+            <div dialog class="tile-dialog factory">
+              <div class="tile-dialog-title">FACTORY UNIVERSE</div>
+              <div class="tile-dialog-subtitle">Automation at cosmic scale.</div>
+              <div class="game-wrapper factory">
+                <factory-universe-demo></factory-universe-demo>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="quantum" [tileX]="1" [tileY]="4">
             <tile-quantum-rift tile></tile-quantum-rift>
             <div dialog class="tile-dialog quantum">
               <div class="tile-dialog-title">QUANTUM RIFT</div>
               <div class="tile-dialog-subtitle">Reality threads aligned.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
       </aside>
     } @else if (!adsHidden() && adsBypass()) {
       <aside class="tile-column right">
         <div class="tile-panel">
-          <expandable-tile theme="hyperlane">
+          <comic-expandable-tile theme="hyperlane" [tileX]="1" [tileY]="0">
             <tile-hyperlane tile></tile-hyperlane>
             <cinematic-loader dialog></cinematic-loader>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="tile-panel">
-          <expandable-tile theme="glitch">
+          <comic-expandable-tile theme="glitch" [tileX]="1" [tileY]="1">
             <tile-glitch-collapse tile></tile-glitch-collapse>
             <div dialog class="tile-dialog glitch">
               <div class="tile-dialog-title">GLITCH.IO</div>
               <div class="tile-dialog-subtitle">Signal stabilized. Visual noise contained.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
         <div class="tile-panel">
-          <expandable-tile theme="quantum">
+          <comic-expandable-tile theme="candy" [tileX]="1" [tileY]="2">
+            <tile-candy-runner tile></tile-candy-runner>
+            <div dialog class="tile-dialog candy">
+              <div class="tile-dialog-title">CANDY RUNNER</div>
+              <div class="tile-dialog-subtitle">Jump over obstacles and collect candy!</div>
+              <div class="game-wrapper">
+                <embedded-game theme="candy"></embedded-game>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="factory" [tileX]="1" [tileY]="3">
+            <tile-factory-universe tile></tile-factory-universe>
+            <div dialog class="tile-dialog factory">
+              <div class="tile-dialog-title">FACTORY UNIVERSE</div>
+              <div class="tile-dialog-subtitle">Automation at cosmic scale.</div>
+              <div class="game-wrapper factory">
+                <factory-universe-demo></factory-universe-demo>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="quantum" [tileX]="1" [tileY]="4">
             <tile-quantum-rift tile></tile-quantum-rift>
             <div dialog class="tile-dialog quantum">
               <div class="tile-dialog-title">QUANTUM RIFT</div>
               <div class="tile-dialog-subtitle">Reality threads aligned.</div>
             </div>
-          </expandable-tile>
+          </comic-expandable-tile>
         </div>
       </aside>
     } @else {

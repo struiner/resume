@@ -66,7 +66,6 @@ import { Component, OnInit } from '@angular/core';
       width:320px;
       height:6px;
       background:#022;
-      border-radius:4px;
       overflow:hidden;
       box-shadow:0 0 12px #0ff inset;
       margin:0 auto 10px;

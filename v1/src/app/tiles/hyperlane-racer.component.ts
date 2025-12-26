@@ -21,9 +21,9 @@ import { Component } from '@angular/core';
       height:100px;
       position:relative;
       overflow:hidden;
-      border-radius:16px;
       cursor:pointer;
       background:#020814;
+      background-size: 400% 400%;
       box-shadow:
         inset 0 0 30px #000,
         0 6px 14px rgba(0,0,0,.5);
@@ -46,6 +46,7 @@ import { Component } from '@angular/core';
           rgba(0,255,255,.18) 0 1px,
           transparent 1px 14px
         );
+      background-size: 400% 400%;
       transform-origin:center bottom;
       transform:
         perspective(300px)
@@ -140,9 +141,13 @@ import { Component } from '@angular/core';
         radial-gradient(circle at center,
           rgba(0,255,255,.15),
           transparent 65%);
+      background-size: 400% 400%;
       opacity:.4;
       pointer-events:none;
     }
   `]
 })
 export class TileHyperlane {}
+
+
+

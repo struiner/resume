@@ -7,7 +7,13 @@ import { TileHyperlane } from './tiles/hyperlane-racer.component';
 import { TileManaBloom } from './tiles/mana-boom-rpg.component';
 import { TileQuantumRift } from './tiles/quantum-rift.component';
 import { TileSentientOS } from './tiles/sentient-os.component';
+import { TileCandyRunner } from './tiles/candy-runner-tile.component';
+import { EmbeddedGameComponent } from './tiles/embedded-game.component';
+import { FactoryUniverseDemoComponent } from './tiles/factory-universe-demo.component';
+import { TileFactoryUniverse } from './tiles/factory-universe-tile.component';
 import { ExpandableTileComponent } from './tiles/expandable-tile.component';
+import { ComicExpandableTileComponent } from './tiles/comic-expandable-tile.component';
+import { ComicBorderComponent } from './tiles/comic-border.component';
 import { CandyPreloaderComponent } from './tiles/candy-preloader.component';
 import { CinematicLoaderComponent } from './tiles/cinematic-loader.component';
 
@@ -23,7 +29,13 @@ type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
     TileManaBloom,
     TileQuantumRift,
     TileSentientOS,
+    TileCandyRunner,
+    EmbeddedGameComponent,
+    FactoryUniverseDemoComponent,
+    TileFactoryUniverse,
     ExpandableTileComponent,
+    ComicExpandableTileComponent,
+    ComicBorderComponent,
     CandyPreloaderComponent,
     CinematicLoaderComponent,
   ],

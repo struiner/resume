@@ -34,14 +34,14 @@ import { Component } from '@angular/core';
       width:200px;
       height:100px;
       position:relative;
-      overflow:hidden;
-      border-radius:18px;
+      overflow:visible;
+      border-radius:0;
       cursor:pointer;
       background:
         radial-gradient(circle at 30% 20%, #fff6 0%, transparent 40%),
         linear-gradient(135deg,#ff4fd8,#ffb347);
+      background-size: 400% 400%;
       box-shadow:
-        inset 0 0 0 2px #fff3,
         0 6px 16px rgba(0,0,0,.35);
       transform-origin:center;
     }
@@ -58,6 +58,7 @@ import { Component } from '@angular/core';
           #fff 0 6px,
           transparent 6px 18px
         );
+      background-size: 400% 400%;
       opacity:0;
       transform:scale(.4);
       transition:.4s;
@@ -81,8 +82,8 @@ import { Component } from '@angular/core';
       width:var(--tile);
       height:var(--tile);
       background-image:url('/assets/tiles/candy-sheet.svg');
-      background-size:calc(var(--tile) * 13) calc(var(--tile) * 7);
-      background-position:var(--sx) var(--sy);
+      background-size:calc(var(--tile) * 26) calc(var(--tile) * 14);
+      background-position:calc(var(--sx) * 2) calc(var(--sy) * 2);
       opacity:0;
       transform:rotate(var(--rot));
     }
@@ -186,3 +187,6 @@ export class TileCandyOverload {
     sy: -(Math.floor(4 + Math.random() * 2) * 20)
   }));
 }
+
+
+

@@ -184,6 +184,15 @@ import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
       --tile-glow: rgba(255,239,85,.5);
       --tile-accent: #ffef55;
     }
+
+    .theme-factory{
+      --tile-bg: radial-gradient(circle at 20% 20%, rgba(61,255,191,.3) 0%, transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(120,140,255,.3) 0%, transparent 60%),
+        #0a101e;
+      --tile-border: #5ce0ff;
+      --tile-glow: rgba(92,224,255,.55);
+      --tile-accent: #b8f7ff;
+    }
   `]
 })
 export class ExpandableTileComponent implements OnDestroy {

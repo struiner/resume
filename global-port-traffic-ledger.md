@@ -1,88 +1,99 @@
-# Global Port Traffic Tile Ledger
+# Global Pinball Map Tile Ledger
 
-This file instantiates the ledger-driven protocol for the Global Port Traffic tile.
+This file instantiates the ledger-driven protocol for the Global Pinball Map tile.
 
 ---
 
-## Task:ROOT_PORT_TRAFFIC
-- **Goal**: Produce a Global Port Traffic tile with a static world map and port activity overlays.
+## Task:ROOT_PINBALL_MAP
+- **Goal**: Produce a Global Pinball Map tile with a static world map and location density overlays.
 - **Inputs**: None
 - **Outputs**:
   - Tile UI component
   - Map rendering layer
-  - Port data integration
+  - Pinball Map data integration
 - **Subtasks**:
-  - TASK:DATA_PORTS
-  - TASK:VISUAL_PORTS
-  - TASK:IMPLEMENTATION_PORTS
+  - TASK:DATA_PINBALL
+  - TASK:VISUAL_PINBALL
+  - TASK:IMPLEMENTATION_PINBALL
 - **Status**: DONE
 
-## Task:DATA_PORTS
-- **Goal**: Define the authoritative EconDB data source and snapshot strategy.
+## Task:DATA_PINBALL
+- **Goal**: Define the authoritative Pinball Map data source and snapshot strategy.
 - **Inputs**: None
 - **Outputs**:
-  - API endpoint and auth requirements
-  - Snapshot refresh cadence
-  - Top-N port selection rule
+  - API endpoint paths
+  - Snapshot strategy
+  - Top-N location selection rule
 - **Blocked By**: None
 - **Status**: DONE
 
-## Task:VISUAL_PORTS
+## Task:VISUAL_PINBALL
 - **Goal**: Apply the neon/CRT visual direction from the epic.
 - **Inputs**: None
 - **Outputs**:
   - Dark basemap styling
   - Cyan marker palette
   - Static map behavior
+  - Required attribution overlay
 - **Status**: DONE
 
-## Task:IMPLEMENTATION_PORTS
-- **Goal**: Implement the tile and hook data into the map view.
+## Task:IMPLEMENTATION_PINBALL
+- **Goal**: Implement the tile and hook snapshot data into the map view.
 - **Inputs**:
-  - Ledger:PORTS_API_ENDPOINT
-  - Ledger:PORTS_API_AUTH
-  - Ledger:PORTS_SNAPSHOT_STRATEGY
-  - Ledger:PORTS_TOP_N
+  - Ledger:PINBALL_ENDPOINT_LOCATIONS
+  - Ledger:PINBALL_ENDPOINT_MACHINE_DETAILS
+  - Ledger:PINBALL_SNAPSHOT_STRATEGY
+  - Ledger:PINBALL_TOP_N
 - **Outputs**:
   - Angular standalone tile component
   - Map rendering with markers and tooltips
+  - Snapshot build script
 - **Blocked By**: None
 - **Status**: DONE
 
 ---
 
-### Ledger:PORTS_API_ENDPOINT
+### Ledger:PINBALL_ENDPOINT_LOCATIONS
 - **Status**: RESOLVED
 - **Type**: Dependency
 - **Scope**: Tech
-- **Statement**: What is the exact EconDB Ports API base URL and endpoint path?
+- **Statement**: What is the exact Pinball Map endpoint for global locations?
 - **Reason**: The tile must fetch real data without inventing URLs.
-- **Resolution**: Base URL `https://api.econdb.com`, primary endpoint `GET /ports/vessel-schedule`.
-- **Introduced By**: Task:DATA_PORTS
+- **Resolution**: `GET https://pinballmap.com/api/v1/locations.json`
+- **Introduced By**: Task:DATA_PINBALL
 
-### Ledger:PORTS_API_AUTH
+### Ledger:PINBALL_ENDPOINT_MACHINE_DETAILS
 - **Status**: RESOLVED
 - **Type**: Dependency
 - **Scope**: Tech
-- **Statement**: What authentication (API key, headers, or tokens) is required by EconDB?
-- **Reason**: Auth requirements cannot be assumed.
-- **Resolution**: API key via `Authorization: Bearer <YOUR_API_KEY>` or `X-API-Key: <YOUR_API_KEY>`. Keys must not be shipped in the client.
-- **Introduced By**: Task:DATA_PORTS
+- **Statement**: What is the endpoint for machine details at a location?
+- **Reason**: Machine list data must be explicit.
+- **Resolution**: `GET https://pinballmap.com/api/v1/locations/:id/machine_details.json`
+- **Introduced By**: Task:DATA_PINBALL
 
-### Ledger:PORTS_SNAPSHOT_STRATEGY
+### Ledger:PINBALL_SNAPSHOT_STRATEGY
 - **Status**: RESOLVED
 - **Type**: Decision
 - **Scope**: Tech
-- **Statement**: Should the port snapshot be baked into the build or fetched live at runtime?
+- **Statement**: Should the snapshot be baked into the build or fetched live at runtime?
 - **Reason**: Snapshot strategy affects caching, availability, and build flow.
-- **Resolution**: Baked snapshot asset at `/assets/data/port-snapshot.json`; no live API calls in the client.
-- **Introduced By**: Task:DATA_PORTS
+- **Resolution**: Baked JSON asset at `/assets/data/pinball-snapshot.json`; no live API calls in the client.
+- **Introduced By**: Task:DATA_PINBALL
 
-### Ledger:PORTS_TOP_N
+### Ledger:PINBALL_TOP_N
 - **Status**: RESOLVED
 - **Type**: Decision
 - **Scope**: Content
-- **Statement**: How many top ports should be displayed in the tile?
+- **Statement**: How many top locations should be displayed in the tile?
 - **Reason**: Marker density and readability depend on a fixed cap.
-- **Resolution**: Top 50 ports by total throughput (importTEU + exportTEU).
-- **Introduced By**: Task:DATA_PORTS
+- **Resolution**: Top 50 locations by machine count.
+- **Introduced By**: Task:DATA_PINBALL
+
+### Ledger:PINBALL_REGIONS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Content
+- **Statement**: Which region slugs should be sampled for the global snapshot?
+- **Reason**: The locations endpoint requires a region filter.
+- **Resolution**: Auto-select regions where location country is in OECD Western Europe list (AT, BE, CH, DE, DK, ES, FI, FR, GB, GR, IE, IS, IT, LU, NL, NO, PT, SE, UK).
+- **Introduced By**: Task:DATA_PINBALL

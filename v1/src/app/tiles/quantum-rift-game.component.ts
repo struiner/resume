@@ -1,5 +1,6 @@
-﻿import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { QuantumRiftStateService, SimulationState } from './quantum-rift-state.service';
 
 type ScreenId =
@@ -121,18 +122,64 @@ const SCREEN_DEFINITIONS: ScreenDefinition[] = [
 ];
 
 const QUANTUM_NODES: QuantumNode[] = [
-  { id: 'node-core', label: 'CORE', classId: 'CORE', x: 20, y: 32 },
-  { id: 'node-ind', label: 'INDUSTRIAL', classId: 'INDUSTRIAL', x: 52, y: 22 },
-  { id: 'node-res', label: 'RESEARCH', classId: 'RESEARCH', x: 76, y: 40 },
-  { id: 'node-front', label: 'FRONTIER', classId: 'FRONTIER', x: 30, y: 68 },
-  { id: 'node-rift', label: 'RIFT_EDGE', classId: 'RIFT_EDGE', x: 68, y: 72 }
+  { id: 'node-core-helix', label: 'CORE HELIX', classId: 'CORE', x: 50, y: 32 },
+  { id: 'node-core-axial', label: 'CORE AXIAL', classId: 'CORE', x: 62, y: 44 },
+  { id: 'node-ind-forge', label: 'IND FORGE', classId: 'INDUSTRIAL', x: 38, y: 44 },
+  { id: 'node-ind-foundry', label: 'IND FOUNDRY', classId: 'INDUSTRIAL', x: 50, y: 56 },
+  { id: 'node-ind-lattice', label: 'IND LATTICE', classId: 'INDUSTRIAL', x: 62, y: 56 },
+  { id: 'node-ind-basin', label: 'IND BASIN', classId: 'INDUSTRIAL', x: 38, y: 56 },
+  { id: 'node-ind-atelier', label: 'IND ATELIER', classId: 'INDUSTRIAL', x: 50, y: 68 },
+  { id: 'node-res-singularity', label: 'RES SINGULARITY', classId: 'RESEARCH', x: 75, y: 35 },
+  { id: 'node-res-parallax', label: 'RES PARALLAX', classId: 'RESEARCH', x: 25, y: 35 },
+  { id: 'node-res-spectrum', label: 'RES SPECTRUM', classId: 'RESEARCH', x: 75, y: 65 },
+  { id: 'node-res-axiom', label: 'RES AXIOM', classId: 'RESEARCH', x: 25, y: 65 },
+  { id: 'node-front-delta', label: 'FRONTIER DELTA', classId: 'FRONTIER', x: 12, y: 50 },
+  { id: 'node-front-echo', label: 'FRONTIER ECHO', classId: 'FRONTIER', x: 22, y: 80 },
+  { id: 'node-front-vega', label: 'FRONTIER VEGA', classId: 'FRONTIER', x: 78, y: 20 },
+  { id: 'node-front-nadir', label: 'FRONTIER NADIR', classId: 'FRONTIER', x: 90, y: 50 },
+  { id: 'node-front-halo', label: 'FRONTIER HALO', classId: 'FRONTIER', x: 78, y: 80 },
+  { id: 'node-front-rim', label: 'FRONTIER RIM', classId: 'FRONTIER', x: 22, y: 20 },
+  { id: 'node-rift-null', label: 'RIFT NULL', classId: 'RIFT_EDGE', x: 4, y: 35 },
+  { id: 'node-rift-scar', label: 'RIFT SCAR', classId: 'RIFT_EDGE', x: 96, y: 35 },
+  { id: 'node-rift-abyss', label: 'RIFT ABYSS', classId: 'RIFT_EDGE', x: 85, y: 92 }
 ];
 
 const NODE_LINKS = [
-  { from: 'node-core', to: 'node-ind' },
-  { from: 'node-ind', to: 'node-res' },
-  { from: 'node-core', to: 'node-front' },
-  { from: 'node-front', to: 'node-rift' }
+  { from: 'node-core-helix', to: 'node-core-axial' },
+  { from: 'node-core-helix', to: 'node-ind-forge' },
+  { from: 'node-core-helix', to: 'node-ind-foundry' },
+  { from: 'node-core-axial', to: 'node-ind-lattice' },
+  { from: 'node-core-axial', to: 'node-ind-foundry' },
+  { from: 'node-ind-forge', to: 'node-ind-basin' },
+  { from: 'node-ind-basin', to: 'node-ind-foundry' },
+  { from: 'node-ind-lattice', to: 'node-ind-foundry' },
+  { from: 'node-ind-foundry', to: 'node-ind-atelier' },
+  { from: 'node-ind-atelier', to: 'node-res-spectrum' },
+  { from: 'node-ind-atelier', to: 'node-res-axiom' },
+  { from: 'node-ind-lattice', to: 'node-res-singularity' },
+  { from: 'node-ind-forge', to: 'node-res-parallax' },
+  { from: 'node-res-singularity', to: 'node-res-spectrum' },
+  { from: 'node-res-parallax', to: 'node-res-axiom' },
+  { from: 'node-res-spectrum', to: 'node-res-axiom' },
+  { from: 'node-res-singularity', to: 'node-res-parallax' },
+  { from: 'node-res-parallax', to: 'node-front-rim' },
+  { from: 'node-res-parallax', to: 'node-front-delta' },
+  { from: 'node-res-axiom', to: 'node-front-echo' },
+  { from: 'node-res-axiom', to: 'node-front-delta' },
+  { from: 'node-res-spectrum', to: 'node-front-halo' },
+  { from: 'node-res-spectrum', to: 'node-front-nadir' },
+  { from: 'node-res-singularity', to: 'node-front-vega' },
+  { from: 'node-res-singularity', to: 'node-front-nadir' },
+  { from: 'node-front-rim', to: 'node-front-delta' },
+  { from: 'node-front-delta', to: 'node-front-echo' },
+  { from: 'node-front-vega', to: 'node-front-nadir' },
+  { from: 'node-front-nadir', to: 'node-front-halo' },
+  { from: 'node-front-rim', to: 'node-front-vega' },
+  { from: 'node-front-echo', to: 'node-front-halo' },
+  { from: 'node-front-rim', to: 'node-rift-null' },
+  { from: 'node-front-vega', to: 'node-rift-scar' },
+  { from: 'node-front-halo', to: 'node-rift-abyss' },
+  { from: 'node-front-nadir', to: 'node-rift-scar' }
 ];
 
 const COMMODITIES: Commodity[] = [
@@ -357,10 +404,20 @@ const VESSEL_CAPACITY: Record<string, number> = {
   CONSENSUS_FLAGSHIP: 80
 };
 
+const REVERSAL_STRUCTURES: Record<'cargo' | 'fleet' | 'observer', string> = {
+  cargo: 'CARGO_STABILIZATION_FACILITY',
+  fleet: 'FLEET_RECALIBRATION_FACILITY',
+  observer: 'OBSERVER_RECONDITIONING_FACILITY'
+};
+
+const CARGO_ENTROPY_FACTOR = 0.1;
+const FLEET_ENTROPY_FACTOR = 0.1;
+const OBSERVER_ENTROPY_FACTOR = 0.1;
+
 @Component({
   selector: 'quantum-rift-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="rift-game">
       <header class="top-bar">
@@ -572,9 +629,47 @@ const VESSEL_CAPACITY: Record<string, number> = {
             </div>
 
             <div *ngSwitchCase="'logs'" class="list-view">
-              <div class="list-title">Event Categories</div>
-              <div class="log-category" *ngFor="let category of logCategories">{{ category }}</div>
-              <div class="log-note">Event stream appears in the bottom log panel.</div>
+              <div class="list-title">Events</div>
+              <div class="event-filters">
+                <label>
+                  <span>Type</span>
+                  <select [(ngModel)]="eventTypeFilter">
+                    <option *ngFor="let type of eventTypes" [value]="type">{{ type }}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Tick Min</span>
+                  <input type="number" [(ngModel)]="eventTickMin" />
+                </label>
+                <label>
+                  <span>Tick Max</span>
+                  <input type="number" [(ngModel)]="eventTickMax" />
+                </label>
+                <label>
+                  <span>Node</span>
+                  <input type="text" [(ngModel)]="eventNodeFilter" />
+                </label>
+                <label>
+                  <span>Fleet</span>
+                  <input type="text" [(ngModel)]="eventFleetFilter" />
+                </label>
+                <label>
+                  <span>Commodity</span>
+                  <input type="text" [(ngModel)]="eventCommodityFilter" />
+                </label>
+              </div>
+              <div class="event-list">
+                <button
+                  type="button"
+                  class="list-row"
+                  *ngFor="let entry of filteredEvents"
+                  [class.selected]="entry.id === selectedEventId"
+                  (click)="selectEvent(entry.id)">
+                  <span>#{{ entry.tick }}</span>
+                  <span>{{ entry.type }}</span>
+                </button>
+              </div>
+              <div class="log-note">Full session events are listed here. Bottom log remains short-form.</div>
             </div>
           </ng-container>
         </section>
@@ -619,6 +714,42 @@ const VESSEL_CAPACITY: Record<string, number> = {
               <div class="inspector-line">Route: {{ selectedFleetRoute }}</div>
               <div class="inspector-line">Observer: --</div>
               <div class="inspector-line">Cargo: {{ getCargoDetail(selectedFleet?.cargo) }}</div>
+              <div class="inspector-line">Entropy: {{ formatEntropy(selectedFleet?.entropy) }}</div>
+              <div class="inspector-line">Entropy Rate: {{ formatEntropy(selectedFleet?.entropyRate) }}</div>
+              <div class="inspector-line">
+                Mitigation: {{ formatMitigation(selectedFleet?.mitigation) }}
+              </div>
+              <div class="inspector-line">
+                Cargo Efficiency: {{ formatPercent(selectedFleet?.entropyConsequences?.cargoEfficiencyDelta) }}
+              </div>
+              <div class="inspector-line">
+                Fleet Efficiency: {{ formatPercent(selectedFleet?.entropyConsequences?.fleetEfficiencyDelta) }}
+              </div>
+              <div class="inspector-line">
+                Observer Modifier: {{ formatPercent(selectedFleet?.entropyConsequences?.observerModifierDelta) }}
+              </div>
+              <div class="inspector-actions">
+                <button
+                  type="button"
+                  class="action-button"
+                  [disabled]="!canReverseCargo().allowed"
+                  (click)="applyCargoReversal()">
+                  Stabilize Cargo
+                </button>
+                <div class="inspector-hint" *ngIf="canReverseCargo().reason">
+                  {{ canReverseCargo().reason }}
+                </div>
+                <button
+                  type="button"
+                  class="action-button"
+                  [disabled]="!canReverseFleet().allowed"
+                  (click)="applyFleetReversal()">
+                  Recalibrate Fleet
+                </button>
+                <div class="inspector-hint" *ngIf="canReverseFleet().reason">
+                  {{ canReverseFleet().reason }}
+                </div>
+              </div>
               <div class="inspector-line">Route Risk: --</div>
               <div class="inspector-line">ETA (ticks): {{ selectedFleet?.eta ?? '--' }}</div>
             </div>
@@ -630,6 +761,21 @@ const VESSEL_CAPACITY: Record<string, number> = {
               <div class="inspector-line">Efficiency Bias: {{ selectedObserver?.efficiencyBias || '--' }}</div>
               <div class="inspector-line">Political Alignment: {{ selectedObserver?.politicalAlignment || '--' }}</div>
               <div class="inspector-line">Active Assignment: {{ selectedObserver?.assignment || '--' }}</div>
+              <div class="inspector-line">
+                Entropy Modifier: {{ formatPercent(selectedObserver?.entropyModifierDelta) }}
+              </div>
+              <div class="inspector-actions">
+                <button
+                  type="button"
+                  class="action-button"
+                  [disabled]="!canReverseObserver().allowed"
+                  (click)="applyObserverReversal()">
+                  Recondition Observer
+                </button>
+                <div class="inspector-hint" *ngIf="canReverseObserver().reason">
+                  {{ canReverseObserver().reason }}
+                </div>
+              </div>
             </div>
 
             <div *ngSwitchCase="'tech'" class="inspector-block">
@@ -650,9 +796,16 @@ const VESSEL_CAPACITY: Record<string, number> = {
             </div>
 
             <div *ngSwitchCase="'logs'" class="inspector-block">
-              <div class="inspector-title">Logs</div>
-              <div class="inspector-line">Filters: event type, node, time range</div>
-              <div class="inspector-line">Output: read-only</div>
+              <div class="inspector-title">Event Detail</div>
+              <ng-container *ngIf="selectedEvent; else noEvent">
+                <div class="inspector-line">Tick: {{ selectedEvent.tick }}</div>
+                <div class="inspector-line">Type: {{ selectedEvent.type }}</div>
+                <div class="inspector-note">Payload</div>
+                <pre class="event-payload">{{ formatEventPayload(selectedEvent.payload) }}</pre>
+              </ng-container>
+              <ng-template #noEvent>
+                <div class="inspector-line">Select an event to inspect.</div>
+              </ng-template>
             </div>
           </ng-container>
         </aside>
@@ -1075,6 +1228,55 @@ const VESSEL_CAPACITY: Record<string, number> = {
       margin-top: 8px;
     }
 
+    .event-filters {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      font-size: 10px;
+    }
+
+    .event-filters label {
+      display: grid;
+      gap: 4px;
+    }
+
+    .event-filters span {
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      opacity: 0.6;
+      font-size: 9px;
+    }
+
+    .event-filters input,
+    .event-filters select {
+      background: rgba(12, 18, 28, 0.75);
+      border: 1px solid rgba(120, 150, 180, 0.25);
+      color: inherit;
+      border-radius: 8px;
+      padding: 4px 6px;
+      font-size: 10px;
+    }
+
+    .event-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+      overflow: auto;
+      padding-right: 4px;
+      max-height: 260px;
+    }
+
+    .event-payload {
+      background: rgba(10, 14, 22, 0.75);
+      border: 1px solid rgba(120, 150, 180, 0.2);
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 10px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+    }
+
     .right-panel {
       gap: 12px;
     }
@@ -1100,6 +1302,22 @@ const VESSEL_CAPACITY: Record<string, number> = {
       margin-top: 4px;
       font-size: 10px;
       opacity: 0.7;
+    }
+
+    .inspector-actions {
+      display: grid;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .inspector-actions .action-button[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .inspector-hint {
+      font-size: 10px;
+      opacity: 0.65;
     }
 
     .bottom-log {
@@ -1181,8 +1399,16 @@ export class QuantumRiftGameComponent {
     techTree: TECH_TREES[0] ?? ''
   };
 
+  eventTypeFilter = 'All';
+  eventTickMin: number | null = null;
+  eventTickMax: number | null = null;
+  eventNodeFilter = '';
+  eventFleetFilter = '';
+  eventCommodityFilter = '';
+  selectedEventId: string | null = null;
+
   alertState = 'None';
-  private readonly defaultMarketNodeId = 'node-core';
+  private readonly defaultMarketNodeId = 'node-core-helix';
 
   constructor(private readonly simulation: QuantumRiftStateService) {}
 
@@ -1260,6 +1486,65 @@ export class QuantumRiftGameComponent {
     return this.state.governance[this.selection.seatId];
   }
 
+  get eventTypes(): string[] {
+    const types = new Set<string>();
+    for (const entry of this.state.events) {
+      types.add(entry.type);
+    }
+    return ['All', ...Array.from(types).sort()];
+  }
+
+  get filteredEvents(): SimulationState['events'] {
+    const typeFilter = this.eventTypeFilter.trim();
+    const nodeFilter = this.eventNodeFilter.trim().toLowerCase();
+    const fleetFilter = this.eventFleetFilter.trim().toLowerCase();
+    const commodityFilter = this.eventCommodityFilter.trim().toLowerCase();
+    const minTick = this.normalizeTick(this.eventTickMin);
+    const maxTick = this.normalizeTick(this.eventTickMax);
+
+    return this.state.events.filter((entry) => {
+      if (typeFilter && typeFilter !== 'All' && entry.type !== typeFilter) {
+        return false;
+      }
+      if (minTick !== null && entry.tick < minTick) {
+        return false;
+      }
+      if (maxTick !== null && entry.tick > maxTick) {
+        return false;
+      }
+      if (nodeFilter) {
+        const nodeMatch = [
+          entry.refs?.nodeId,
+          entry.refs?.originNodeId,
+          entry.refs?.destinationNodeId
+        ]
+          .filter(Boolean)
+          .some((ref) => ref?.toLowerCase().includes(nodeFilter));
+        if (!nodeMatch) {
+          return false;
+        }
+      }
+      if (fleetFilter) {
+        if (!entry.refs?.fleetId?.toLowerCase().includes(fleetFilter)) {
+          return false;
+        }
+      }
+      if (commodityFilter) {
+        if (!entry.refs?.commodityId?.toLowerCase().includes(commodityFilter)) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
+
+  get selectedEvent(): SimulationState['events'][number] | undefined {
+    if (!this.selectedEventId) {
+      return undefined;
+    }
+    return this.state.events.find((entry) => entry.id === this.selectedEventId);
+  }
+
   setScreen(id: ScreenId): void {
     this.simulation.dispatch({ type: 'SCREEN_CHANGED', screen: id });
   }
@@ -1308,6 +1593,10 @@ export class QuantumRiftGameComponent {
   selectTech(tree: string): void {
     this.selection.techTree = tree;
     this.simulation.dispatch({ type: 'TECH_RESEARCH_SELECTED', techId: tree });
+  }
+
+  selectEvent(eventId: string): void {
+    this.selectedEventId = eventId;
   }
 
   getNode(id: string): QuantumNode | undefined {
@@ -1364,6 +1653,201 @@ export class QuantumRiftGameComponent {
       return 'NO CARGO';
     }
     return `${this.getCommodityName(cargo.commodityId)} x${cargo.quantity}`;
+  }
+
+  formatEventPayload(payload: Record<string, unknown>): string {
+    try {
+      return JSON.stringify(payload, null, 2);
+    } catch {
+      return String(payload);
+    }
+  }
+
+  formatEntropy(value?: number | null): string {
+    if (value === null || value === undefined) {
+      return '--';
+    }
+    return value.toFixed(3);
+  }
+
+  formatMitigation(
+    mitigation?: { vessel: number; observer: number; total: number } | null
+  ): string {
+    if (!mitigation) {
+      return '--';
+    }
+    return `V${mitigation.vessel.toFixed(2)} O${mitigation.observer.toFixed(2)} T${mitigation.total.toFixed(2)}`;
+  }
+
+  formatPercent(value?: number | null): string {
+    if (value === null || value === undefined) {
+      return '--';
+    }
+    return `${(value * 100).toFixed(0)}%`;
+  }
+
+  applyCargoReversal(): void {
+    const fleet = this.selectedFleet;
+    const nodeId = this.getFleetLocationNodeId(fleet);
+    if (!fleet || !nodeId) {
+      return;
+    }
+    this.simulation.dispatch({
+      type: 'REVERSAL_APPLIED_CARGO',
+      targetType: 'cargo',
+      targetId: this.selection.fleetId,
+      nodeId,
+      structureType: REVERSAL_STRUCTURES.cargo
+    });
+  }
+
+  applyFleetReversal(): void {
+    const fleet = this.selectedFleet;
+    const nodeId = this.getFleetLocationNodeId(fleet);
+    if (!fleet || !nodeId) {
+      return;
+    }
+    this.simulation.dispatch({
+      type: 'REVERSAL_APPLIED_FLEET',
+      targetType: 'fleet',
+      targetId: this.selection.fleetId,
+      nodeId,
+      structureType: REVERSAL_STRUCTURES.fleet
+    });
+  }
+
+  applyObserverReversal(): void {
+    const observer = this.selectedObserver;
+    const nodeId = this.getObserverLocationNodeId(observer);
+    if (!observer || !nodeId) {
+      return;
+    }
+    this.simulation.dispatch({
+      type: 'REVERSAL_APPLIED_OBSERVER',
+      targetType: 'observer',
+      targetId: this.selection.observerId,
+      nodeId,
+      structureType: REVERSAL_STRUCTURES.observer
+    });
+  }
+
+  canReverseCargo(): { allowed: boolean; reason?: string } {
+    const fleet = this.selectedFleet;
+    const nodeId = this.getFleetLocationNodeId(fleet);
+    if (!fleet || !nodeId) {
+      return { allowed: false, reason: 'No fleet at node.' };
+    }
+    if (!this.hasStructure(nodeId, REVERSAL_STRUCTURES.cargo)) {
+      return { allowed: false, reason: 'Missing cargo stabilization facility.' };
+    }
+    const entropy = this.getEntropyFromDelta(
+      fleet.entropyConsequences?.cargoEfficiencyDelta,
+      CARGO_ENTROPY_FACTOR
+    );
+    if (entropy <= 0) {
+      return { allowed: false, reason: 'No cargo entropy to reverse.' };
+    }
+    const cost = this.getReversalCost(entropy);
+    if (this.state.credits < cost) {
+      return { allowed: false, reason: 'Insufficient credits.' };
+    }
+    return { allowed: true };
+  }
+
+  canReverseFleet(): { allowed: boolean; reason?: string } {
+    const fleet = this.selectedFleet;
+    const nodeId = this.getFleetLocationNodeId(fleet);
+    if (!fleet || !nodeId) {
+      return { allowed: false, reason: 'No fleet at node.' };
+    }
+    if (!this.hasStructure(nodeId, REVERSAL_STRUCTURES.fleet)) {
+      return { allowed: false, reason: 'Missing fleet recalibration facility.' };
+    }
+    const entropy = this.getEntropyFromDelta(
+      fleet.entropyConsequences?.fleetEfficiencyDelta,
+      FLEET_ENTROPY_FACTOR
+    );
+    if (entropy <= 0) {
+      return { allowed: false, reason: 'No fleet entropy to reverse.' };
+    }
+    const cost = this.getReversalCost(entropy);
+    if (this.state.credits < cost) {
+      return { allowed: false, reason: 'Insufficient credits.' };
+    }
+    return { allowed: true };
+  }
+
+  canReverseObserver(): { allowed: boolean; reason?: string } {
+    const observer = this.selectedObserver;
+    const nodeId = this.getObserverLocationNodeId(observer);
+    if (!observer || !nodeId) {
+      return { allowed: false, reason: 'No observer at node.' };
+    }
+    if (!this.hasStructure(nodeId, REVERSAL_STRUCTURES.observer)) {
+      return { allowed: false, reason: 'Missing observer reconditioning facility.' };
+    }
+    const entropy = this.getEntropyFromDelta(
+      observer.entropyModifierDelta,
+      OBSERVER_ENTROPY_FACTOR
+    );
+    if (entropy <= 0) {
+      return { allowed: false, reason: 'No observer entropy to reverse.' };
+    }
+    const cost = this.getReversalCost(entropy);
+    if (this.state.credits < cost) {
+      return { allowed: false, reason: 'Insufficient credits.' };
+    }
+    return { allowed: true };
+  }
+
+  private getFleetLocationNodeId(fleet?: SimulationState['fleets'][string]): string | null {
+    if (!fleet) {
+      return null;
+    }
+    return fleet.nodeFrom || null;
+  }
+
+  private getObserverLocationNodeId(observer?: SimulationState['observers'][string]): string | null {
+    if (!observer) {
+      return null;
+    }
+    const assignment = observer.assignment;
+    if (this.state.nodes[assignment]) {
+      return assignment;
+    }
+    const fleet = this.state.fleets[assignment];
+    return fleet?.nodeFrom ?? null;
+  }
+
+  private hasStructure(nodeId: string, structureType: string): boolean {
+    const node = this.state.nodes[nodeId];
+    if (!node) {
+      return false;
+    }
+    return node.structures.some((structure) => structure.type === structureType);
+  }
+
+  private getEntropyFromDelta(delta: number | undefined, factor: number): number {
+    if (!delta || factor <= 0) {
+      return 0;
+    }
+    const magnitude = Math.min(Math.abs(delta) / factor, 1);
+    return magnitude * magnitude;
+  }
+
+  private getReversalCost(entropy: number): number {
+    const baseCost = this.state.entropyReversalConfig.baseCost;
+    return baseCost * (1 + entropy);
+  }
+
+  private normalizeTick(value: number | null): number | null {
+    if (value === null || value === undefined) {
+      return null;
+    }
+    if (Number.isNaN(value)) {
+      return null;
+    }
+    return value;
   }
 
   getVesselCapacity(vesselClass: string): number {
@@ -1443,3 +1927,4 @@ export class QuantumRiftGameComponent {
     });
   }
 }
+

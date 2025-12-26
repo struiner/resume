@@ -1,0 +1,846 @@
+[
+  {
+    "id": 24241,
+    "name": "Pinball Republic",
+    "city": "Greater London",
+    "country": "GB",
+    "latitude": 51.376142,
+    "longitude": -0.1026035,
+    "machineCount": 77,
+    "topMachines": [
+      "Quicksilver",
+      "Evil Dead (CE)",
+      "The Addams Family",
+      "Cleopatra",
+      "Earthshaker",
+      "Diamond Lady"
+    ]
+  },
+  {
+    "id": 16099,
+    "name": "Flipperikellari",
+    "city": "Helsinki",
+    "country": "FI",
+    "latitude": 60.2164037,
+    "longitude": 24.9534746,
+    "machineCount": 72,
+    "topMachines": [
+      "World Cup Soccer",
+      "White Water",
+      "The Uncanny X-Men (Pro)",
+      "The Addams Family",
+      "Space Time",
+      "Bad Girls"
+    ]
+  },
+  {
+    "id": 23862,
+    "name": "Pinball Union",
+    "city": "Tampere",
+    "country": "FI",
+    "latitude": 61.5011483,
+    "longitude": 23.7762104,
+    "machineCount": 64,
+    "topMachines": [
+      "The Mandalorian (Pro)",
+      "Bad Cats",
+      "NBA Fastbreak",
+      "Bram Stoker's Dracula",
+      "Flash Gordon",
+      "Airborne Avenger"
+    ]
+  },
+  {
+    "id": 11570,
+    "name": "Mikamar Games",
+    "city": "Mikkeli",
+    "country": "FI",
+    "latitude": 61.6924217,
+    "longitude": 27.2749663,
+    "machineCount": 50,
+    "topMachines": [
+      "Dirty Harry",
+      "Playboy",
+      "Attack From Mars",
+      "Cactus Canyon",
+      "Game of Thrones (Pro)",
+      "Bram Stoker's Dracula"
+    ]
+  },
+  {
+    "id": 25427,
+    "name": "Flipperiparkki",
+    "city": "Lahti",
+    "country": "FI",
+    "latitude": 60.9821126,
+    "longitude": 25.6542331,
+    "machineCount": 40,
+    "topMachines": [
+      "Rob Zombie's Spookshow International",
+      "Demolition Man",
+      "Judge Dredd",
+      "Pinball Magic",
+      "Rollergames",
+      "Elvira and the Party Monsters"
+    ]
+  },
+  {
+    "id": 14915,
+    "name": "TILT flipperihalli",
+    "city": "Riihimäki",
+    "country": "FI",
+    "latitude": 60.7343795,
+    "longitude": 24.7703372,
+    "machineCount": 35,
+    "topMachines": [
+      "Judge Dredd",
+      "White Water",
+      "Taxi",
+      "The Addams Family",
+      "The Shadow",
+      "Foo Fighters (Pro)"
+    ]
+  },
+  {
+    "id": 11572,
+    "name": "Extraball",
+    "city": "Helsinki",
+    "country": "FI",
+    "latitude": 60.1761875,
+    "longitude": 24.9262581,
+    "machineCount": 34,
+    "topMachines": [
+      "The Big Lebowski",
+      "JAWS (Pro)",
+      "300",
+      "Banzai Run",
+      "Doctor Who",
+      "Dungeons and Dragons"
+    ]
+  },
+  {
+    "id": 11622,
+    "name": "Ikuri Arcade",
+    "city": "Tampere",
+    "country": "FI",
+    "latitude": 61.4941382,
+    "longitude": 23.5911377,
+    "machineCount": 34,
+    "topMachines": [
+      "Avengers: Infinity Quest (Pro)",
+      "Circus",
+      "Black Knight: Sword of Rage (Premium)",
+      "Gilligan's Island",
+      "The Shadow",
+      "Kiss"
+    ]
+  },
+  {
+    "id": 11571,
+    "name": "Hopeakuula Arcade",
+    "city": "Kouvola",
+    "country": "FI",
+    "latitude": 60.8677278,
+    "longitude": 26.6681243,
+    "machineCount": 33,
+    "topMachines": [
+      "Bram Stoker's Dracula",
+      "Guardians of the Galaxy (Pro)",
+      "Red & Ted's Road Show",
+      "JAWS (Pro)",
+      "Top Score",
+      "Gay 90's"
+    ]
+  },
+  {
+    "id": 18515,
+    "name": "Medway Pinball",
+    "city": "Medway",
+    "country": "GB",
+    "latitude": 51.3983613,
+    "longitude": 0.5152999,
+    "machineCount": 30,
+    "topMachines": [
+      "Avatar",
+      "The Hobbit",
+      "The Shadow",
+      "Indianapolis 500",
+      "WHO Dunnit",
+      "Deadpool (Pro)"
+    ]
+  },
+  {
+    "id": 26304,
+    "name": "Skillshot Pinball",
+    "city": "Llanharan",
+    "country": "GB",
+    "latitude": 51.537204973978,
+    "longitude": -3.439501898954,
+    "machineCount": 29,
+    "topMachines": [
+      "ABBA (LE)",
+      "The Mandalorian (Pro)",
+      "PIN-BOT",
+      "Medieval Madness (Remake LE)",
+      "Star Trek",
+      "Xenon"
+    ]
+  },
+  {
+    "id": 16646,
+    "name": "Special When Lit",
+    "city": "Wiltshire",
+    "country": "GB",
+    "latitude": 51.0688648,
+    "longitude": -1.8117338,
+    "machineCount": 29,
+    "topMachines": [
+      "Star Trek: The Next Generation",
+      "The Addams Family",
+      "Seawitch",
+      "Rocky",
+      "Doctor Who",
+      "Deadpool (Premium)"
+    ]
+  },
+  {
+    "id": 11776,
+    "name": "Etelä-Pohjanmaan Flipperiklubi ry",
+    "city": "Kurikka",
+    "country": "FI",
+    "latitude": 62.6192654,
+    "longitude": 22.3996398,
+    "machineCount": 24,
+    "topMachines": [
+      "Batman 66 (Premium)",
+      "Kiss (LE)",
+      "Deadpool (Pro)",
+      "Foo Fighters (Pro)",
+      "Fish Tales",
+      "The Uncanny X-Men (Pro)"
+    ]
+  },
+  {
+    "id": 10680,
+    "name": "Arcade Club",
+    "city": "Bury",
+    "country": "GB",
+    "latitude": 53.5947683,
+    "longitude": -2.2834803,
+    "machineCount": 23,
+    "topMachines": [
+      "South Park",
+      "The Wizard of Oz (Standard Edition)",
+      "White Water",
+      "Scared Stiff",
+      "Batman: The Dark Knight",
+      "Junk Yard"
+    ]
+  },
+  {
+    "id": 16588,
+    "name": "The Pinball Office",
+    "city": "Sawbridgeworth",
+    "country": "GB",
+    "latitude": 51.8120417,
+    "longitude": 0.1589564,
+    "machineCount": 21,
+    "topMachines": [
+      "The Getaway: High Speed II",
+      "Teenage Mutant Ninja Turtles (Pro)",
+      "Flash",
+      "Corvette",
+      "Indianapolis 500",
+      "Popeye Saves the Earth"
+    ]
+  },
+  {
+    "id": 27310,
+    "name": "Flipper Haus Nokia",
+    "city": "Nokia",
+    "country": "FI",
+    "latitude": 61.4730558,
+    "longitude": 23.5010148,
+    "machineCount": 19,
+    "topMachines": [
+      "AC/DC (Premium)",
+      "Blackwater 100",
+      "Bugs Bunny's Birthday Ball",
+      "Casino",
+      "Dealer's Choice",
+      "Family Guy"
+    ]
+  },
+  {
+    "id": 11580,
+    "name": "Pelihelvetti",
+    "city": "Orivesi",
+    "country": "FI",
+    "latitude": 61.677121,
+    "longitude": 24.355604,
+    "machineCount": 18,
+    "topMachines": [
+      "Jack-Bot",
+      "White Water",
+      "Game of Thrones (Pro)",
+      "Foo Fighters (Pro)",
+      "Houdini: Master of Mystery",
+      "Iron Maiden: Legacy of the Beast (Pro)"
+    ]
+  },
+  {
+    "id": 21180,
+    "name": "Playback Arcade",
+    "city": "Bristol",
+    "country": "GB",
+    "latitude": 51.456924093772,
+    "longitude": -2.590232017442,
+    "machineCount": 17,
+    "topMachines": [
+      "Dungeons and Dragons",
+      "Lethal Weapon 3",
+      "Truck Stop",
+      "Demolition Man",
+      "Buck Rogers",
+      "Avengers: Infinity Quest (Pro)"
+    ]
+  },
+  {
+    "id": 27781,
+    "name": "The Pinball Factory",
+    "city": "Birmingham",
+    "country": "GB",
+    "latitude": 52.474976468085,
+    "longitude": -1.884599598492,
+    "machineCount": 14,
+    "topMachines": [
+      "The Avengers (Pro)",
+      "Congo",
+      "Fish Tales",
+      "Game of Thrones (Premium)",
+      "Godzilla (Premium)",
+      "Houdini: Master of Mystery (Deluxe)"
+    ]
+  },
+  {
+    "id": 21834,
+    "name": "Retroids Arcade Bar",
+    "city": "Worcestershire",
+    "country": "GB",
+    "latitude": 52.1892313,
+    "longitude": -2.2193435,
+    "machineCount": 13,
+    "topMachines": [
+      "Metallica Remastered (Premium)",
+      "The Addams Family",
+      "The Uncanny X-Men (Pro)",
+      "Iron Man",
+      "Godzilla (Pro)",
+      "Star Wars (Pro)"
+    ]
+  },
+  {
+    "id": 24382,
+    "name": "The Arkade",
+    "city": "Minehead",
+    "country": "GB",
+    "latitude": 51.207171058489,
+    "longitude": -3.468513288915,
+    "machineCount": 13,
+    "topMachines": [
+      "Star Trek: The Next Generation",
+      "Red & Ted's Road Show",
+      "The Getaway: High Speed II",
+      "Twilight Zone",
+      "The Machine: Bride of Pin-Bot",
+      "Demolition Man"
+    ]
+  },
+  {
+    "id": 16111,
+    "name": "Arcade Club Leeds",
+    "city": "Kirkstall",
+    "country": "GB",
+    "latitude": 53.8157686,
+    "longitude": -1.6033713,
+    "machineCount": 11,
+    "topMachines": [
+      "Street Fighter II",
+      "Twilight Zone",
+      "Judge Dredd",
+      "Creature from the Black Lagoon",
+      "White Water",
+      "Bram Stoker's Dracula"
+    ]
+  },
+  {
+    "id": 26216,
+    "name": "Oh, Flip!",
+    "city": "York",
+    "country": "GB",
+    "latitude": 53.9589148,
+    "longitude": -1.0818575,
+    "machineCount": 11,
+    "topMachines": [
+      "Melody",
+      "ABBA (LE)",
+      "Bad Cats",
+      "Dungeons & Dragons: The Tyrant's Eye (Pro)",
+      "Eight Ball",
+      "Operation Thunder"
+    ]
+  },
+  {
+    "id": 25546,
+    "name": "Haarajoen Pelihalli",
+    "city": "Järvenpää",
+    "country": "FI",
+    "latitude": 60.49766,
+    "longitude": 25.1447669,
+    "machineCount": 11,
+    "topMachines": [
+      "The Simpsons",
+      "Paragon",
+      "Congo",
+      "Casanova",
+      "Cleopatra",
+      "Dirty Harry"
+    ]
+  },
+  {
+    "id": 20166,
+    "name": "Base Arcade Belfast",
+    "city": "Belfast",
+    "country": "GB",
+    "latitude": 54.599042893036,
+    "longitude": -5.895071054551,
+    "machineCount": 10,
+    "topMachines": [
+      "Tales from the Crypt",
+      "Guns N' Roses (SE)",
+      "Revenge from Mars",
+      "Batman: The Dark Knight",
+      "Doctor Who",
+      "Baywatch"
+    ]
+  },
+  {
+    "id": 25949,
+    "name": "SpaceBar Cocktails & Arcades",
+    "city": "Sunderland",
+    "country": "GB",
+    "latitude": 54.9048299,
+    "longitude": -1.3828331,
+    "machineCount": 10,
+    "topMachines": [
+      "JAWS (Pro)",
+      "Star Wars (Pro)",
+      "King Kong: Myth of Terror Island (Pro)",
+      "Foo Fighters (Pro)",
+      "Street Fighter II",
+      "Dungeons & Dragons: The Tyrant's Eye (Pro)"
+    ]
+  },
+  {
+    "id": 22459,
+    "name": "The Regal",
+    "city": "Grimsby",
+    "country": "GB",
+    "latitude": 53.5699752,
+    "longitude": -0.0740503,
+    "machineCount": 10,
+    "topMachines": [
+      "Big Guns",
+      "Secret Service",
+      "Black Knight",
+      "Kings of Steel",
+      "Star Trek",
+      "Mr. & Mrs. Pac-Man"
+    ]
+  },
+  {
+    "id": 27962,
+    "name": "Token",
+    "city": "Dublin 1",
+    "country": "IE",
+    "latitude": 53.349619294155,
+    "longitude": -6.243136359852,
+    "machineCount": 10,
+    "topMachines": [
+      "Medieval Madness",
+      "Red & Ted's Road Show",
+      "Dialed In!",
+      "The Addams Family",
+      "Funhouse",
+      "Theatre of Magic"
+    ]
+  },
+  {
+    "id": 12180,
+    "name": "Chief Coffee",
+    "city": "London",
+    "country": "GB",
+    "latitude": 51.493745,
+    "longitude": -0.2553073,
+    "machineCount": 9,
+    "topMachines": [
+      "Theatre of Magic",
+      "James Bond 007 (Premium)",
+      "King Kong: Myth of Terror Island (Premium)",
+      "Godzilla (Pro)",
+      "Elvira's House of Horrors (Premium)",
+      "Monster Bash"
+    ]
+  },
+  {
+    "id": 22336,
+    "name": "Retrodome",
+    "city": "South Yorkshire",
+    "country": "GB",
+    "latitude": 53.548959667454,
+    "longitude": -1.480465344639,
+    "machineCount": 9,
+    "topMachines": [
+      "Revenge from Mars",
+      "Star Trek (Pro)",
+      "The Addams Family",
+      "Super Mario Bros.",
+      "Thunderbirds",
+      "Avengers: Infinity Quest (Pro)"
+    ]
+  },
+  {
+    "id": 11781,
+    "name": "Pincade.fi",
+    "city": "Lahti",
+    "country": "FI",
+    "latitude": 60.9816495,
+    "longitude": 25.6671756,
+    "machineCount": 9,
+    "topMachines": [
+      "Foo Fighters (Premium)",
+      "James Bond 007 (Pro)",
+      "Apollo 13",
+      "Jurassic Park (Pro)",
+      "Dialed In! (LE)",
+      "Medieval Madness (Remake)"
+    ]
+  },
+  {
+    "id": 22052,
+    "name": "LeVel",
+    "city": "Preston",
+    "country": "GB",
+    "latitude": 53.760091536218,
+    "longitude": -2.696764588806,
+    "machineCount": 8,
+    "topMachines": [
+      "Pulp Fiction (SE)",
+      "John Wick (Pro)",
+      "Foo Fighters (Pro)",
+      "White Water",
+      "The Addams Family",
+      "Godzilla (Pro)"
+    ]
+  },
+  {
+    "id": 17815,
+    "name": "Arcade Club Blackpool",
+    "city": "Blackpool",
+    "country": "GB",
+    "latitude": 53.8041514,
+    "longitude": -3.046583,
+    "machineCount": 7,
+    "topMachines": [
+      "Super Mario Bros.",
+      "Twilight Zone",
+      "James Bond 007 (Pro)",
+      "Guns 'N Roses",
+      "The Mandalorian (Pro)",
+      "The Addams Family"
+    ]
+  },
+  {
+    "id": 19520,
+    "name": "Mortal Kocktail",
+    "city": "Edinburgh",
+    "country": "GB",
+    "latitude": 55.9507061,
+    "longitude": -3.1899847,
+    "machineCount": 7,
+    "topMachines": [
+      "The Addams Family",
+      "Ghostbusters (Pro)",
+      "The Uncanny X-Men (Pro)",
+      "Game of Thrones (LE)",
+      "Playboy",
+      "Wheel of Fortune"
+    ]
+  },
+  {
+    "id": 18982,
+    "name": "Super Bario",
+    "city": "Glasgow",
+    "country": "GB",
+    "latitude": 55.8568546,
+    "longitude": -4.2462143,
+    "machineCount": 7,
+    "topMachines": [
+      "Star Wars (Pro)",
+      "Goldeneye",
+      "24",
+      "Demolition Man",
+      "Tales from the Crypt",
+      "Baywatch"
+    ]
+  },
+  {
+    "id": 25381,
+    "name": "The Vault Arcade",
+    "city": "Wadebridge",
+    "country": "GB",
+    "latitude": 50.5167688,
+    "longitude": -4.8367204,
+    "machineCount": 7,
+    "topMachines": [
+      "The Uncanny X-Men (Pro)",
+      "Godzilla (Pro)",
+      "Deadpool (Pro)",
+      "The Mandalorian (Pro)",
+      "Teenage Mutant Ninja Turtles (LE)",
+      "Venom (Pro)"
+    ]
+  },
+  {
+    "id": 11621,
+    "name": "Bar Chaplin",
+    "city": "Helsinki",
+    "country": "FI",
+    "latitude": 60.17165,
+    "longitude": 24.9463,
+    "machineCount": 7,
+    "topMachines": [
+      "John Wick (Pro)",
+      "Star Wars (Pro)",
+      "Corvette",
+      "Last Action Hero",
+      "Avengers: Infinity Quest (Pro)",
+      "Ghostbusters (Pro)"
+    ]
+  },
+  {
+    "id": 18151,
+    "name": "Laukaanhovi",
+    "city": "Lievestuore",
+    "country": "FI",
+    "latitude": 62.2460086,
+    "longitude": 26.1356582,
+    "machineCount": 7,
+    "topMachines": [
+      "Campus Queen",
+      "4 Roses",
+      "James Bond 007",
+      "Mousin' Around!",
+      "Totem",
+      "Bugs Bunny's Birthday Ball"
+    ]
+  },
+  {
+    "id": 19084,
+    "name": "Blast from the Past Arcade",
+    "city": "Halifax",
+    "country": "GB",
+    "latitude": 53.72274897793,
+    "longitude": -1.857339260688,
+    "machineCount": 6,
+    "topMachines": [
+      "Black Knight",
+      "Gorgar",
+      "Humpty Dumpty",
+      "Apollo",
+      "Captain Fantastic and The Brown Dirt Cowboy",
+      "Blackout"
+    ]
+  },
+  {
+    "id": 22256,
+    "name": "Fretwells",
+    "city": "Hull",
+    "country": "GB",
+    "latitude": 53.742666,
+    "longitude": -0.3313147,
+    "machineCount": 6,
+    "topMachines": [
+      "Pirates of the Caribbean",
+      "Star Trek: The Next Generation",
+      "Star Trek",
+      "Shrek",
+      "The Addams Family",
+      "The Lost World Jurassic Park"
+    ]
+  },
+  {
+    "id": 15803,
+    "name": "NOOB Bar & Arcade",
+    "city": "Tampere",
+    "country": "FI",
+    "latitude": 61.498603,
+    "longitude": 23.7755061,
+    "machineCount": 6,
+    "topMachines": [
+      "Demolition Man",
+      "Swords Of Fury",
+      "Fireball II",
+      "Star Wars Episode 1",
+      "Magic Castle",
+      "Stranger Things (Pro)"
+    ]
+  },
+  {
+    "id": 11644,
+    "name": "Oldi",
+    "city": "Lahti",
+    "country": "FI",
+    "latitude": 60.9830468,
+    "longitude": 25.6548225,
+    "machineCount": 6,
+    "topMachines": [
+      "James Bond 007 (Pro)",
+      "Rush (Pro)",
+      "Game of Thrones (Pro)",
+      "Iron Man (Vault Edition)",
+      "Mary Shelley's Frankenstein",
+      "Star Trek (Pro)"
+    ]
+  },
+  {
+    "id": 26857,
+    "name": "PuuhaPark",
+    "city": "Ojakkala",
+    "country": "FI",
+    "latitude": 60.3813426,
+    "longitude": 24.3690534,
+    "machineCount": 6,
+    "topMachines": [
+      "Baywatch",
+      "Heavy Metal",
+      "James Bond 007 (Pro)",
+      "Monopoly",
+      "Oktoberfest",
+      "Star Wars (Pro)"
+    ]
+  },
+  {
+    "id": 17412,
+    "name": "Viiskulma",
+    "city": "Helsinki",
+    "country": "FI",
+    "latitude": 60.1606992,
+    "longitude": 24.9422553,
+    "machineCount": 6,
+    "topMachines": [
+      "The Uncanny X-Men (Pro)",
+      "Dirty Harry",
+      "Rush (Pro)",
+      "The Mandalorian (Pro)",
+      "Dungeons & Dragons: The Tyrant's Eye (Pro)",
+      "Black Knight: Sword of Rage (Pro)"
+    ]
+  },
+  {
+    "id": 21420,
+    "name": "Caesars Palace",
+    "city": "Norfolk",
+    "country": "GB",
+    "latitude": 52.6045891,
+    "longitude": 1.7363294,
+    "machineCount": 5,
+    "topMachines": [
+      "Demolition Man",
+      "ABBA (LE)",
+      "Funhouse (Remake LE)",
+      "The Shadow",
+      "CSI"
+    ]
+  },
+  {
+    "id": 24341,
+    "name": "hmv",
+    "city": "Belfast",
+    "country": "GB",
+    "latitude": 54.5990662,
+    "longitude": -5.9301637,
+    "machineCount": 5,
+    "topMachines": [
+      "The Mandalorian (Pro)",
+      "Wrestlemania (LE)",
+      "Game of Thrones (Pro)",
+      "Ghostbusters (Pro)",
+      "The Walking Dead (Premium)"
+    ]
+  },
+  {
+    "id": 25896,
+    "name": "Shredenhams",
+    "city": "Broadmead",
+    "country": "GB",
+    "latitude": 51.458509,
+    "longitude": -2.5905036,
+    "machineCount": 5,
+    "topMachines": [
+      "Street Fighter II",
+      "World Cup Soccer",
+      "AC/DC (Pro)",
+      "The Flintstones",
+      "Fish Tales"
+    ]
+  },
+  {
+    "id": 21888,
+    "name": "The Pixel Bunker",
+    "city": "Milton Keynes",
+    "country": "GB",
+    "latitude": 52.0450426,
+    "longitude": -0.7573975,
+    "machineCount": 5,
+    "topMachines": [
+      "Jurassic Park (Pro)",
+      "Teenage Mutant Ninja Turtles (Pro)",
+      "Iron Maiden: Legacy of the Beast (Pro)",
+      "Stranger Things (Pro)",
+      "Godzilla (Pro)"
+    ]
+  },
+  {
+    "id": 21909,
+    "name": "Waveney Inn, Norfolk",
+    "city": "Norfolk",
+    "country": "GB",
+    "latitude": 52.4795016,
+    "longitude": 1.6635048,
+    "machineCount": 5,
+    "topMachines": [
+      "Maverick",
+      "This is Spinal Tap",
+      "Theatre of Magic",
+      "Twister",
+      "The Adventures of Rocky and Bullwinkle and Friends"
+    ]
+  },
+  {
+    "id": 19804,
+    "name": "Classic Garage Jämsä",
+    "city": "Jämsä",
+    "country": "FI",
+    "latitude": 61.8605674,
+    "longitude": 25.1761285,
+    "machineCount": 5,
+    "topMachines": [
+      "Flash",
+      "Joker Poker",
+      "Count-Down",
+      "Kiss",
+      "Solar Ride"
+    ]
+  }
+]

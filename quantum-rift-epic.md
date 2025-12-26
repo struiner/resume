@@ -990,4 +990,1177 @@ Implementation may proceed with no invention.
 - **Reason**: Saturating accumulation prevents runaway degradation, preserves recoverability, aligns with physical entropy intuition, and rewards mitigation without introducing thresholds or randomness.
 - **Introduced By**: Phase F-4.2
 
+### Ledger:ENTROPY_INPUT_WEIGHTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How are normalized entropy input factors combined?
+- **Resolution**: Normalized entropy input factors are combined using a weighted sum to produce a raw entropy pressure value. Mitigating factors are applied afterward as explicit modifiers, not as negative inputs.
+- **Reason**: A weighted sum preserves independent contribution of each risk factor, avoids hidden amplification or cancellation, supports transparent tuning, and maintains clear causal separation between risk sources and mitigation.
+- **Introduced By**: Phase F-4.2
+
+### Ledger:ENTROPY_WEIGHT_CONSTANTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What are the numeric weights for each entropy input factor?
+- **Resolution**:
+  - Route duration (ETA fraction): 0.30
+  - Commodity volatility: 0.30
+  - Cargo quantity (normalized): 0.20
+  - Origin instability (1 − stability): 0.20
+- **Reason**: This weighting balances distance, inherent state instability, scale effects, and environmental conditions without allowing any single factor to dominate entropy accumulation.
+- **Introduced By**: Phase F-4.2
+
+### Ledger:ENTROPY_MITIGATION_ORDER
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: When are mitigation effects applied?
+- **Resolution**: Mitigation effects are applied before entropy accumulation by reducing effective entropy pressure; mitigation does not retroactively reduce accumulated entropy.
+- **Reason**: Applying mitigation preventatively aligns with physical intuition, preserves causal clarity, ensures entropy remains monotonic during transit, and keeps mitigation effects legible and predictable.
+- **Introduced By**: Phase F-4.2
+
+### Ledger:ENTROPY_CAP_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How is the entropy upper bound enforced?
+- **Resolution**: Entropy approaches its upper bound asymptotically and never reaches a hard cap of 1.0.
+- **Reason**: An asymptotic cap avoids implicit failure thresholds, preserves the effectiveness of mitigation at all entropy levels, and aligns with saturating accumulation and physical intuition.
+- **Introduced By**: Phase F-4.2
+
+### Ledger:ENTROPY_FLOOR_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: Can entropy ever decrease during transit?
+- **Resolution**: No. Entropy is monotonic during active route transit and may only increase; mitigation affects future accumulation only and cannot reduce already accumulated entropy.
+- **Reason**: This preserves causal consistency, simplifies reasoning and logging, reinforces preventative planning, and aligns entropy with accumulated exposure rather than a reversible condition.
+- **Introduced By**: Phase F-4.2
+
+### Ledger:ENTROPY_LOGGING_GRANULARITY
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: UI / Systems
+- **Statement**: At what granularity is entropy exposed and logged?
+- **Resolution**: Entropy is logged at semantic boundaries only. It is visible live in the fleet inspector during transit, and summarized once at route arrival in the event log. No per-tick entropy logs are produced.
+- **Reason**: This preserves transparency and determinism while avoiding log noise, supports planning and inspection, and aligns entropy with player decisions rather than mechanical churn.
+- **Introduced By**: Phase F-4.2
+
+---
+
+# PHASE F-4.3 - ENTROPY CONSEQUENCES
+
+### Ledger:ENTROPY_HAS_CONSEQUENCES
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Does accumulated entropy have gameplay consequences beyond being informational?
+- **Resolution**: Yes. Accumulated entropy produces deterministic, explicitly surfaced gameplay consequences that affect system efficiency and outcomes without introducing randomness, irreversible failure, or hidden penalties.
+- **Reason**: Without consequences, entropy would be a non-operative metric. Constrained, deterministic consequences preserve planning depth, justify mitigation investment, and align with the game’s systemic strategy pillars.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_AFFECTED_SYSTEMS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Which systems are eligible to be affected by entropy?
+- **Resolution**: Entropy may affect only systems causally downstream of route transit: (1) Cargo carried by the fleet, (2) Fleet/route efficiency or classification, and (3) Observers via soft, explicit modifier degradation. Entropy does not directly affect markets, governance, node stability, or other macro systems.
+- **Reason**: This preserves causal clarity, prevents systemic bleed-through, avoids double-counting market effects, and keeps entropy effects local, deterministic, and inspectable.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_EFFECT_TIMING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: When are entropy consequences evaluated?
+- **Resolution**: Entropy consequences are evaluated only once, at route arrival. Entropy may accumulate during transit, but no gameplay consequences are applied mid-route.
+- **Reason**: Arrival-only evaluation preserves strategic predictability, prevents surprise penalties, aligns entropy with planned exposure, and supports clear inspection and logging.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_THRESHOLD_MODEL
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Are entropy consequences triggered continuously or via thresholds?
+- **Resolution**: Entropy consequences are applied via continuous, gradient-based scaling. There are no hard thresholds, discrete bands, or binary trigger points.
+- **Reason**: Continuous scaling preserves predictability, avoids cliff effects, aligns with asymptotic entropy accumulation, and supports proportional planning and mitigation.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_EFFECT_SCALING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How does consequence magnitude scale with entropy?
+- **Resolution**: Entropy consequences scale continuously with diminishing marginal impact as entropy increases (sublinear scaling). Early entropy has proportionally greater effect than later entropy.
+- **Reason**: Sublinear scaling preserves forgiveness, avoids punitive escalation, aligns with asymptotic entropy accumulation, and keeps entropy a strategic pressure rather than a fail state.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_CONSEQUENCE_REVERSIBILITY
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: Can entropy consequences be reversed after arrival?
+- **Resolution**: Yes. Entropy consequences are reversible through explicit, player-driven systems after arrival. Entropy itself is not reduced; only its downstream effects may be mitigated, repaired, or absorbed.
+- **Reason**: This preserves player agency, avoids irreversible failure, encourages experimentation, and maintains entropy as a meaningful but manageable cost rather than a permanent punishment.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_STACKING_RULE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How do entropy consequences interact with other modifiers?
+- **Resolution**: Entropy consequences stack additively with other modifiers and are bounded. Entropy effects never multiply, override, or suppress other system modifiers.
+- **Reason**: Additive bounded stacking preserves predictability, avoids runaway interactions, supports UI explainability, and ensures entropy remains one pressure among many rather than a dominant force.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_CONSEQUENCE_VISIBILITY
+- **Status**: OPEN
+- **Type**: Decision
+- **Scope**: UI
+- **Statement**: How explicitly are entropy consequences communicated to the player?
+- **Reason**: Invisible penalties violate the “information is power” pillar.
+- **Introduced By**: Phase F-4.3
+
+### Ledger:ENTROPY_CONSEQUENCE_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What effects are explicitly forbidden in Phase F-4.3?
+- **Resolution**: Entropy consequences explicitly exclude: cargo loss or destruction; fleet, observer, or route destruction; random or probabilistic events; irreversible or permanent state changes; direct manipulation of market prices, node stability, or governance outcomes; mid-route penalties; and any invisible or unexplained effects.
+- **Reason**: These exclusions prevent entropy from becoming punitive, opaque, or systemic beyond its intended scope, preserving player agency, predictability, and the integrity of the trade-focused simulation.
+- **Introduced By**: Phase F-4.3
+
+---
+
+# PHASE F-4.4 - REVERSAL AND MITIGATION SYSTEMS
+
+### Ledger:REVERSAL_ACTION_SET
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What explicit post-arrival actions exist to reverse entropy consequences?
+- **Resolution**: Three explicit reversal actions exist: (1) Cargo Stabilization, which reverses cargo efficiency penalties; (2) Fleet Recalibration, which reverses fleet or route efficiency penalties; and (3) Observer Reconditioning, which reverses observer modifier penalties. Each action targets only its respective system.
+- **Reason**: A minimal, orthogonal action set preserves clarity, avoids overpowered global fixes, keeps entropy manageable rather than punitive, and aligns each consequence with a single, explicit player action.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_LOCATION_RULE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: World / Systems
+- **Statement**: Where can reversal actions be performed?
+- **Resolution**: Reversal actions may be performed only at nodes that possess the required stabilization structures for the targeted domain. Reversal is not available globally, mid-route, or at nodes lacking appropriate infrastructure.
+- **Reason**: Location-gated reversal preserves logistical planning, gives strategic value to node infrastructure, prevents trivial cleanup, and reinforces the trade- and geography-driven nature of the simulation.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_COST_RESOURCE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What resource pays for reversal?
+- **Resolution**: Reversal actions are paid for exclusively with credits. No additional abstract resources or commodity costs are required in Phase F-4.4.
+- **Reason**: Credits integrate naturally with the trade economy, preserve determinism and clarity, avoid unnecessary system proliferation, and allow reversal costs to be directly compared against trade profit.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_COST_SCALING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How does reversal cost scale?
+- **Resolution**: Reversal cost scales proportionally with the absolute magnitude of the entropy consequence delta being reversed. Larger consequence penalties cost more credits to reverse than smaller ones.
+- **Reason**: Scaling costs by consequence magnitude preserves transparency, aligns cost with impact, prevents degenerate spam behavior, and allows players to make clear cost–benefit decisions when managing entropy.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_TIME_REQUIREMENT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Do reversal actions consume simulation steps/ticks?
+- **Resolution**: Reversal actions are instantaneous and do not consume simulation steps or advance time. Their cost is purely economic and location-gated.
+- **Reason**: Instant reversal avoids hidden temporal penalties, preserves clarity, keeps entropy management focused on economic decision-making, and prevents unnecessary throughput friction.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_EFFECT_TARGETING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Are reversal actions targeted (cargo vs fleet vs observer), or a single “stabilize all” action?
+- **Resolution**: Reversal actions are single-target and domain-specific. Each action targets exactly one entity (cargo, fleet, or observer) and affects only its associated entropy consequence domain. No global or multi-target reversal actions exist.
+- **Reason**: Single-target targeting preserves player agency, maintains clear cause-and-effect, avoids trivializing entropy management, and supports inspectable cost/benefit decisions.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_EFFECT_AMOUNT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How much entropy consequence is reversed by a single reversal action?
+- **Resolution**: A reversal action removes a fixed percentage of accumulated entropy consequences from the targeted entity.
+- **Reason**: Partial reversal preserves entropy as a meaningful long-term pressure while allowing strategic recovery without trivializing risk.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_LIMITS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: Are there limits on how often reversal actions may be applied?
+- **Resolution**: Reversal actions may be applied repeatedly, but each application has diminishing effectiveness due to remaining entropy asymptotically approaching zero.
+- **Reason**: Prevents infinite cleansing while avoiding hard caps or cooldown mechanics.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_UI_SURFACE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: UI
+- **Statement**: Where is reversal performed in the UI?
+- **Resolution**: Reversal actions are exposed as explicit buttons in the inspector panel when a valid target is selected at a valid location.
+- **Reason**: Inspector-based actions maintain contextual clarity and avoid global UI clutter.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_EVENT_IDS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Tech / UI
+- **Statement**: What are the canonical event IDs for reversal actions?
+- **Resolution**: Each reversal action dispatches a single explicit event ID of the form REVERSAL_APPLIED_<TARGET_TYPE>.
+- **Reason**: Explicit event IDs preserve deterministic logging, replay, and inspection.
+- **Introduced By**: Phase F-4.4
+
+### Ledger:REVERSAL_LOGGING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What information must be logged when a reversal action is executed?
+- **Resolution**: Logs must include target identifier, entropy before, entropy removed, entropy remaining, credit cost paid, and location of execution.
+- **Reason**: Full transparency is required to validate entropy mitigation behavior and support deterministic debugging.
+- **Introduced By**: Phase F-4.4
+
+---
+
+# PHASE W-1 - WORLD LAYER: ENTROPY STRUCTURES
+
+### Ledger:ENTROPY_STRUCTURE_EXISTENCE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: World
+- **Statement**: Do dedicated world structures exist to manage entropy?
+- **Resolution**: Yes. Entropy management requires explicit node-level structures.
+- **Reason**: Infrastructure grounding is required to prevent entropy control from becoming abstract or global.
+- **Introduced By**: Phase W-1
+
+### Ledger:ENTROPY_STRUCTURE_SET
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: World
+- **Statement**: What entropy-related structures exist?
+- **Resolution**:
+  1. Entropy Sink
+  2. Stabilization Array
+  3. Reversal Chamber
+- **Reason**: Separating mitigation, stabilization, and reversal preserves progression and avoids a single dominant structure.
+- **Introduced By**: Phase W-1
+
+### Ledger:ENTROPY_STRUCTURE_ROLES
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What is the functional role of each entropy structure?
+- **Resolution**:
+  - Entropy Sink: Passively reduces entropy accumulation rate for fleets interacting with the node.
+  - Stabilization Array: Reduces arrival-time entropy consequences.
+  - Reversal Chamber: Enables entropy reversal actions.
+- **Reason**: Distinct roles prevent stacking abuse and clarify player intent.
+- **Introduced By**: Phase W-1
+
+### Ledger:ENTROPY_STRUCTURE_LOCATION
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: World
+- **Statement**: Where may entropy structures be built?
+- **Resolution**: Entropy structures may only be built at Reality Nodes.
+- **Reason**: Prevents mobile or route-based entropy nullification.
+- **Introduced By**: Phase W-1
+
+### Ledger:ENTROPY_STRUCTURE_STACKING
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: Can multiple entropy structures stack at a single node?
+- **Resolution**: Each entropy structure type may exist at most once per node.
+- **Reason**: Prevents brute-force entropy nullification and preserves strategic geography.
+- **Introduced By**: Phase W-1
+
+### Ledger:ENTROPY_STRUCTURE_PREREQUISITES
+- **Status**: RESOLVED
+- **Type**: Dependency
+- **Scope**: Systems
+- **Statement**: What is required to construct entropy structures?
+- **Resolution**: Construction requires credits, specific quantum commodities, and node stability above a minimum threshold.
+- **Reason**: Entropy control should require economic strength and political coherence.
+- **Introduced By**: Phase W-1
+
+### Ledger:ENTROPY_STRUCTURE_VISIBILITY
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: UI
+- **Statement**: How does the player see entropy structures and their effects?
+- **Resolution**: Structures are visible in node inspectors with clear effect summaries and numeric modifiers.
+- **Reason**: Entropy is a numeric system and must remain inspectable.
+- **Introduced By**: Phase W-1
+
+### Ledger:ENTROPY_STRUCTURE_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: World
+- **Statement**: What entropy structure behaviors are explicitly excluded?
+- **Resolution**:
+  - No global entropy suppression
+  - No mobile entropy structures
+  - No automatic reversals
+  - No free mitigation
+- **Reason**: Prevents erosion of risk and preserves systemic tension.
+- **Introduced By**: Phase W-1
+
+---
+
+# PHASE W-2 - STRUCTURE COSTS AND COMMODITY REQUIREMENTS
+
+### Ledger:ENTROPY_STRUCTURE_COST_MODEL
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How are entropy structure construction costs defined?
+- **Resolution**: Each entropy structure has a fixed, explicit construction cost composed of credits and specific quantum commodities.
+- **Reason**: Fixed costs preserve determinism, enable planning, and avoid hidden scaling effects.
+- **Introduced By**: Phase W-2
+
+### Ledger:ENTROPY_SINK_COST
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What is the construction cost of an Entropy Sink?
+- **Resolution**:
+  - Credits: 500
+  - Commodities:
+    - QG12_ENTROPY_SINK x 5
+    - QG05_PROBABILITY_LATTICE x 3
+- **Reason**: Early-game accessible mitigation that requires direct investment in entropy-handling materials.
+- **Introduced By**: Phase W-2
+
+### Ledger:STABILIZATION_ARRAY_COST
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What is the construction cost of a Stabilization Array?
+- **Resolution**:
+  - Credits: 900
+  - Commodities:
+    - QG03_DECOHERENCE_FIELD x 4
+    - QG13_REALITY_CEMENT x 2
+    - QG15_SIGNAL_NOISE_CRYSTAL x 3
+- **Reason**: Mid-tier structure requiring both physical and informational stabilization resources.
+- **Introduced By**: Phase W-2
+
+### Ledger:REVERSAL_CHAMBER_COST
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What is the construction cost of a Reversal Chamber?
+- **Resolution**:
+  - Credits: 1500
+  - Commodities:
+    - QG18_STATE_VECTOR_CORE x 2
+    - QG06_OBSERVER_ANCHOR x 4
+    - QG08_EVENT_HORIZON_FIBER x 2
+- **Reason**: High-tier infrastructure reflecting deep control over state collapse and observation.
+- **Introduced By**: Phase W-2
+
+### Ledger:ENTROPY_STRUCTURE_STABILITY_REQUIREMENT
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: World
+- **Statement**: What node stability is required to construct entropy structures?
+- **Resolution**:
+  - Entropy Sink: Minimum Stability = Medium
+  - Stabilization Array: Minimum Stability = High
+  - Reversal Chamber: Minimum Stability = High
+- **Reason**: Advanced entropy control requires coherent political and physical conditions.
+- **Introduced By**: Phase W-2
+
+### Ledger:ENTROPY_STRUCTURE_BUILD_TIME
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Do entropy structures require build time?
+- **Resolution**: No. Construction is instantaneous once costs and requirements are met.
+- **Reason**: Avoids introducing construction queues or temporal coupling outside the trade loop.
+- **Introduced By**: Phase W-2
+
+### Ledger:ENTROPY_STRUCTURE_CONSUMPTION_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How are construction resources consumed?
+- **Resolution**: All required credits and commodities are consumed immediately and atomically at construction time.
+- **Reason**: Prevents partial builds and maintains deterministic state transitions.
+- **Introduced By**: Phase W-2
+
+### Ledger:ENTROPY_STRUCTURE_COST_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What cost behaviors are explicitly excluded?
+- **Resolution**:
+  - No cost scaling with usage
+  - No upkeep costs
+  - No refunds on destruction
+  - No shared or global cost pools
+- **Reason**: Keeps entropy infrastructure as a deliberate, sunk strategic investment.
+- **Introduced By**: Phase W-2
+
+---
+
+# PHASE F-5.0 - AI SCOPE AND AUTHORITY
+
+### Ledger:AI_TRADER_EXISTENCE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Do non-player AI trading entities exist?
+- **Resolution**: Yes. Autonomous AI traders operate within the same economic rules as the player.
+- **Reason**: A living market requires competing participants to generate price movement and pressure.
+- **Introduced By**: Phase F-5
+
+### Ledger:AI_TRADER_IDENTITY
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: World
+- **Statement**: What form do AI traders take?
+- **Resolution**: AI traders are abstract economic actors, not characters, factions, or corporations.
+- **Reason**: Avoids narrative overhead and keeps focus on systems, not personalities.
+- **Introduced By**: Phase F-5
+
+### Ledger:AI_RULE_PARITY
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: Do AI traders follow the same rules as the player?
+- **Resolution**: Yes. AI traders are subject to the same pricing, entropy, capacity, and cost rules as the player.
+- **Reason**: Prevents hidden advantages and preserves systemic fairness.
+- **Introduced By**: Phase F-5
+
+### Ledger:AI_ACTION_SET
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What actions may AI traders perform?
+- **Resolution**:
+  - Buy and sell commodities
+  - Dispatch fleets
+  - Choose routes
+  - Select cargo quantities
+  - Pay entropy reversal costs
+- **Reason**: AI must participate meaningfully in the core trade loop.
+- **Introduced By**: Phase F-5
+
+### Ledger:AI_ENTROPY_AWARENESS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Are AI traders aware of entropy and its consequences?
+- **Resolution**: Yes. AI traders perceive entropy as numeric signals and factor it into decisions.
+- **Reason**: Entropy is a primary systemic pressure and must affect all participants.
+- **Introduced By**: Phase F-5
+
+### Ledger:AI_ENTROPY_CAPABILITY
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: May AI traders mitigate or reverse entropy?
+- **Resolution**: Yes. AI traders may construct entropy structures and perform entropy reversal actions.
+- **Reason**: Prevents entropy from becoming a player-only burden.
+- **Introduced By**: Phase F-5
+
+### Ledger:AI_INFORMATION_ACCESS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What information may AI traders access?
+- **Resolution**: AI traders access only public market data, node attributes, and their own state.
+- **Reason**: Prevents omniscient behavior and preserves discoverability.
+- **Introduced By**: Phase F-5
+
+### Ledger:AI_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What behaviors are explicitly forbidden for AI traders?
+- **Resolution**:
+  - No cheating or hidden modifiers
+  - No foreknowledge of future prices
+  - No instant global actions
+  - No narrative or diplomatic actions
+  - No reaction outside tick boundaries
+- **Reason**: Keeps AI deterministic, inspectable, and system-bound.
+- **Introduced By**: Phase F-5
+
+---
+
+# PHASE F-5.1 - AI DECISION INPUTS
+
+### Ledger:AI_DECISION_INPUT_SCOPE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What categories of information may AI traders use for decisions?
+- **Resolution**: AI traders may use market, route, node, fleet, observer, entropy, and credit state information.
+- **Reason**: AI must operate using the same systemic signals available to the player.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_MARKET_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What market-related data may AI traders consider?
+- **Resolution**:
+  - Current commodity prices
+  - Price history (limited to past values)
+  - Volatility class
+  - Supply and demand pressure values
+- **Reason**: Market participation requires awareness of present and past price conditions.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_ROUTE_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What route-related data may AI traders consider?
+- **Resolution**:
+  - Route distance
+  - Estimated travel time (ETA)
+  - Route entropy rate
+  - Destination node attributes
+- **Reason**: Route selection must balance time, entropy accumulation, and destination quality.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_NODE_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What node-level data may AI traders consider?
+- **Resolution**:
+  - Node stability
+  - Node class
+  - Installed structures (including entropy structures)
+  - Governance modifiers
+- **Reason**: Nodes impose economic and entropy effects that materially affect trade outcomes.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_FLEET_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What fleet-specific data may AI traders consider?
+- **Resolution**:
+  - Vessel class and capacity
+  - Current cargo (commodity and quantity)
+  - Current entropy and entropy rate
+  - Fleet availability (idle vs in transit)
+- **Reason**: Fleet capabilities constrain feasible actions.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_OBSERVER_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What observer-related data may AI traders consider?
+- **Resolution**:
+  - Observer traits
+  - Observer entropy
+  - Active assignment status
+- **Reason**: Observers influence entropy accumulation and arrival outcomes.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_ENTROPY_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How may AI traders perceive entropy?
+- **Resolution**: AI traders perceive entropy as numeric values and consequence deltas, identical to player-visible values.
+- **Reason**: Prevents hidden entropy handling advantages.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_CREDIT_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What financial information may AI traders consider?
+- **Resolution**:
+  - Current credit balance
+  - Recent profit and loss history
+  - Known costs of actions and structures
+- **Reason**: Economic planning requires awareness of available capital.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_TEMPORAL_INPUTS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How do AI traders perceive time?
+- **Resolution**: AI traders perceive time only through discrete simulation ticks and historical records; no foresight is permitted.
+- **Reason**: Preserves determinism and fairness.
+- **Introduced By**: Phase F-5.1
+
+### Ledger:AI_INPUT_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What information is explicitly hidden from AI traders?
+- **Resolution**:
+  - Future prices or entropy
+  - Player intent or queued actions
+  - Hidden formulas or tuning constants
+  - Global state summaries unavailable to the player
+- **Reason**: Prevents omniscient or meta-level behavior.
+- **Introduced By**: Phase F-5.1
+
+---
+
+# PHASE F-5.2 - AI DECISION MODEL TYPE
+
+### Ledger:AI_DECISION_MODEL_TYPE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What overall decision-making model do AI traders use?
+- **Resolution**: AI traders use a deterministic, score-based utility evaluation model.
+- **Reason**: A score-based model is inspectable, tunable, deterministic, and compatible with ledger-driven systems without introducing stochastic behavior.
+- **Introduced By**: Phase F-5.2
+
+### Ledger:AI_DECISION_EVALUATION_FREQUENCY
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How often do AI traders evaluate decisions?
+- **Resolution**: AI traders evaluate decisions only on discrete simulation ticks and only when idle or at decision points.
+- **Reason**: Prevents continuous reevaluation and preserves performance and determinism.
+- **Introduced By**: Phase F-5.2
+
+### Ledger:AI_DECISION_ACTION_SELECTION
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How do AI traders select an action from evaluated options?
+- **Resolution**: AI traders select the highest-scoring valid action; ties are broken deterministically by stable ordering.
+- **Reason**: Eliminates randomness while ensuring predictable behavior.
+- **Introduced By**: Phase F-5.2
+
+### Ledger:AI_DECISION_ACTION_SET_SCOPE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What actions are considered during AI decision evaluation?
+- **Resolution**: Only actions that are immediately valid, affordable, and permitted by current state are evaluated.
+- **Reason**: Prevents speculative planning and invalid action selection.
+- **Introduced By**: Phase F-5.2
+
+### Ledger:AI_DECISION_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What decision-making approaches are explicitly excluded?
+- **Resolution**:
+  - No randomness
+  - No machine learning
+  - No probabilistic policies
+  - No multi-turn planning
+  - No hidden state
+- **Reason**: Keeps AI behavior transparent, replayable, and consistent with deterministic simulation goals.
+- **Introduced By**: Phase F-5.2
+
+---
+
+# PHASE F-5.3 - AI UTILITY FUNCTION INPUTS AND WEIGHTS
+
+### Ledger:AI_UTILITY_INPUT_SET
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What inputs contribute to an AI trader’s utility score for an action?
+- **Resolution**:
+  - Expected profit (credits)
+  - Travel time (ETA)
+  - Entropy accumulation
+  - Entropy consequences at arrival
+  - Credit cost of action
+  - Fleet utilization (idle vs committed)
+- **Reason**: These inputs fully describe the economic, temporal, and entropy tradeoffs of an action.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_PROFIT_WEIGHT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How is expected profit weighted in the AI utility function?
+- **Resolution**: Expected profit contributes positively with a linear weight of +1.0.
+- **Reason**: Profit maximization is the primary driver of trade behavior.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_TIME_WEIGHT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How is travel time weighted in the AI utility function?
+- **Resolution**: Travel time contributes negatively with a linear weight of -0.5.
+- **Reason**: Longer routes delay capital turnover and increase exposure to entropy.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_ENTROPY_WEIGHT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How is entropy accumulation weighted in the AI utility function?
+- **Resolution**: Entropy accumulation contributes negatively with a linear weight of -1.0.
+- **Reason**: Entropy directly reduces efficiency and increases future costs.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_ENTROPY_CONSEQUENCE_WEIGHT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How are entropy consequences weighted in the AI utility function?
+- **Resolution**: Expected entropy consequences contribute negatively with a linear weight of -1.5.
+- **Reason**: Consequences represent realized damage rather than risk.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_COST_WEIGHT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How are credit costs weighted in the AI utility function?
+- **Resolution**: Credit costs contribute negatively with a linear weight of -1.0.
+- **Reason**: Costs directly reduce available capital.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_UTILIZATION_WEIGHT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How is fleet utilization weighted in the AI utility function?
+- **Resolution**: Using idle fleets contributes positively with a weight of +0.5; committing already-busy fleets is disallowed.
+- **Reason**: Encourages efficient use of idle capacity without overcommitment.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_NORMALIZATION_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How are heterogeneous utility inputs normalized?
+- **Resolution**: All inputs are normalized to comparable scalar ranges before weighting; normalization rules are explicit and deterministic.
+- **Reason**: Prevents any single input from dominating due to scale differences.
+- **Introduced By**: Phase F-5.3
+
+### Ledger:AI_UTILITY_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What factors are explicitly excluded from AI utility evaluation?
+- **Resolution**:
+  - Player-specific behavior
+  - Narrative state
+  - Random variation
+  - Future predictions
+- **Reason**: Maintains fairness, determinism, and system transparency.
+- **Introduced By**: Phase F-5.3
+
+---
+
+# PHASE F-5.4 - AI ACTION GENERATION AND EVALUATION
+
+### Ledger:AI_ACTION_GENERATION_SCOPE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What actions are generated as candidates for AI evaluation?
+- **Resolution**: AI traders generate candidate actions for all immediately valid trade, routing, mitigation, and construction actions available in the current state.
+- **Reason**: Ensures the AI considers the full set of feasible economic actions without speculation.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_GENERATION_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How are candidate actions generated?
+- **Resolution**: Candidate actions are generated deterministically from current state using explicit enumeration; no sampling or pruning is performed at generation time.
+- **Reason**: Deterministic enumeration preserves reproducibility and debuggability.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_VALIDATION_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: When is an AI action considered valid for evaluation?
+- **Resolution**: An action is valid only if it is legal, affordable, and executable immediately without advancing time.
+- **Reason**: Prevents speculative or deferred actions from entering evaluation.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_EVALUATION_PIPELINE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What is the evaluation order for AI actions?
+- **Resolution**: For each candidate action, the AI computes normalized utility inputs, applies fixed weights, sums the result into a single scalar score, and records the score.
+- **Reason**: Establishes a transparent and consistent evaluation pipeline.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_SIDE_EFFECT_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: May AI action evaluation mutate game state?
+- **Resolution**: No. Evaluation is strictly read-only; state mutation occurs only after the highest-scoring action is selected.
+- **Reason**: Prevents evaluation-order artifacts and preserves determinism.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_SELECTION_RULE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How is the final AI action selected?
+- **Resolution**: The AI selects the single highest-scoring valid action; if all scores are non-positive, the AI takes no action this tick.
+- **Reason**: Prevents forced or harmful actions and allows inactivity when conditions are unfavorable.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_EXECUTION_BOUNDARY
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: When is the selected AI action executed?
+- **Resolution**: The selected action is executed immediately after evaluation within the same simulation tick.
+- **Reason**: Avoids queued intent and preserves synchronous, inspectable behavior.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_LOGGING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What AI decision information must be logged?
+- **Resolution**: Logs must include evaluated action type, target identifiers, computed utility score, and whether the action was executed or skipped.
+- **Reason**: Enables debugging, analysis, and replay of AI behavior.
+- **Introduced By**: Phase F-5.4
+
+### Ledger:AI_ACTION_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What action behaviors are explicitly excluded?
+- **Resolution**:
+  - No batching of actions
+  - No partial execution
+  - No speculative reservations
+  - No rollback or re-evaluation mid-tick
+- **Reason**: Keeps AI behavior simple, deterministic, and phase-aligned.
+- **Introduced By**: Phase F-5.4
+
+---
+
+# PHASE F-5.5 - AI TRADE ACTION DEFINITIONS
+
+### Ledger:AI_TRADE_ACTION_EXISTENCE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Do AI traders perform explicit trade actions distinct from routing and construction?
+- **Resolution**: Yes. AI traders perform explicit buy and sell actions as part of trade execution.
+- **Reason**: Trade must be an inspectable, first-class action to mirror player behavior.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_ACTION_SET
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What trade actions may AI traders perform?
+- **Resolution**:
+  - BUY_COMMODITY
+  - SELL_COMMODITY
+- **Reason**: Minimal trade action set preserves clarity and avoids redundant abstractions.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_ACTION_TARGETING
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How are trade actions targeted?
+- **Resolution**: Trade actions target a specific commodity at a specific node.
+- **Reason**: Prices, pressure, and availability are node-specific.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_QUANTITY_RULE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How is trade quantity determined for AI actions?
+- **Resolution**: AI trade quantities are chosen explicitly and must not exceed available credits (buy) or available cargo capacity (sell).
+- **Reason**: Enforces economic realism and parity with player constraints.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_PRICE_REFERENCE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What price reference is used for AI trade actions?
+- **Resolution**: AI trade actions use the current node price at execution time.
+- **Reason**: Prevents price prediction or arbitrage via stale data.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_PRESSURE_EFFECT
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Do AI trade actions affect market pressure?
+- **Resolution**: Yes. AI buy and sell actions modify supply and demand pressure identically to player actions.
+- **Reason**: Preserves a unified market model.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_ACTION_COSTS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What costs are applied to AI trade actions?
+- **Resolution**: AI trade actions incur only commodity price costs or proceeds; no additional fees or modifiers apply.
+- **Reason**: Avoids hidden economic distortions.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_FAILURE_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How are invalid or unaffordable trade actions handled?
+- **Resolution**: Invalid or unaffordable trade actions are excluded from candidate generation and never evaluated.
+- **Reason**: Prevents no-op execution paths.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_LOGGING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What information is logged for AI trade actions?
+- **Resolution**: Logs include action type, commodity, quantity, node, execution price, and resulting pressure change.
+- **Reason**: Maintains transparency and replayability.
+- **Introduced By**: Phase F-5.5
+
+### Ledger:AI_TRADE_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What trade behaviors are explicitly excluded for AI traders?
+- **Resolution**:
+  - No speculative pre-buying
+  - No multi-node arbitrage in a single action
+  - No partial fills
+  - No hidden inventory buffers
+- **Reason**: Keeps trade behavior simple and deterministic.
+- **Introduced By**: Phase F-5.5
+
+---
+
+# PHASE F-5.6 - AI ROUTING AND FLEET DISPATCH
+
+### Ledger:AI_ROUTE_ACTION_EXISTENCE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Do AI traders explicitly dispatch fleets as an action?
+- **Resolution**: Yes. AI traders dispatch fleets as explicit, first-class actions.
+- **Reason**: Fleet dispatch is central to trade execution and must mirror player agency.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_ROUTE_ACTION_SET
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What routing actions may AI traders perform?
+- **Resolution**:
+  - DISPATCH_FLEET
+  - ASSIGN_ROUTE
+- **Reason**: Separating fleet selection from route assignment preserves clarity and composability.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_ROUTE_TARGETING
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How are routes targeted by AI traders?
+- **Resolution**: Routes are defined as ordered pairs of origin node and destination node.
+- **Reason**: Route structure must remain explicit and inspectable.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_ROUTE_SELECTION_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What inputs may AI traders use to evaluate routes?
+- **Resolution**:
+  - Distance
+  - ETA
+  - Entropy accumulation rate
+  - Destination market prices
+  - Destination node stability
+- **Reason**: These inputs capture profitability, delay, and entropy exposure.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_FLEET_SELECTION_RULE
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How do AI traders select fleets for dispatch?
+- **Resolution**: AI traders may dispatch only idle fleets whose vessel capacity can fully accommodate the intended cargo quantity.
+- **Reason**: Prevents illegal or partial fleet usage.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_CARGO_ASSIGNMENT_RULE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How is cargo assigned during AI fleet dispatch?
+- **Resolution**: Cargo commodity and quantity are explicitly assigned at dispatch and must respect vessel capacity limits.
+- **Reason**: Ensures parity with player dispatch mechanics.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_ROUTE_DISPATCH_VALIDATION
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: When is an AI routing action considered valid?
+- **Resolution**: A routing action is valid only if origin and destination nodes are connected, the fleet is idle, cargo is assigned, and all costs are affordable.
+- **Reason**: Prevents speculative or incomplete dispatch actions.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_ROUTE_EXECUTION_RULE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: When are AI fleet dispatch actions executed?
+- **Resolution**: AI fleet dispatch actions are executed immediately within the same simulation tick as selection.
+- **Reason**: Maintains synchronous, deterministic behavior.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_ROUTE_LOGGING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What information is logged for AI routing actions?
+- **Resolution**: Logs include fleet identifier, origin node, destination node, cargo commodity, cargo quantity, ETA, and expected entropy accumulation.
+- **Reason**: Supports debugging and replay of AI logistics decisions.
+- **Introduced By**: Phase F-5.6
+
+### Ledger:AI_ROUTE_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What routing behaviors are explicitly excluded for AI traders?
+- **Resolution**:
+  - No mid-route rerouting
+  - No partial cargo dispatch
+  - No multi-stop routes
+  - No speculative pre-dispatch reservations
+- **Reason**: Keeps routing logic simple and deterministic.
+- **Introduced By**: Phase F-5.6
+
+---
+
+# PHASE F-5.7 - AI ENTROPY MITIGATION AND REVERSAL USAGE
+
+### Ledger:AI_ENTROPY_MITIGATION_EXISTENCE
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: Do AI traders actively mitigate entropy during play?
+- **Resolution**: Yes. AI traders may take explicit actions to mitigate or reverse entropy.
+- **Reason**: Entropy must apply symmetrically to all market participants.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_MITIGATION_ACTION_SET
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What entropy-related actions may AI traders perform?
+- **Resolution**:
+  - Construct entropy-related structures
+  - Execute entropy reversal actions
+- **Reason**: AI must have access to the same mitigation mechanisms as the player.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_MITIGATION_DECISION_INPUTS
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What inputs inform AI entropy mitigation decisions?
+- **Resolution**:
+  - Current entropy level
+  - Expected entropy consequences
+  - Cost of mitigation or reversal
+  - Available credits
+  - Presence of mitigation structures
+- **Reason**: These inputs allow cost–benefit analysis without foresight.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_REVERSAL_THRESHOLD
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: When does an AI trader consider entropy reversal?
+- **Resolution**: AI traders consider reversal only when expected entropy consequences exceed a fixed threshold.
+- **Reason**: Prevents overuse of costly reversal actions.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_REVERSAL_COST_SENSITIVITY
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How does cost affect AI entropy reversal decisions?
+- **Resolution**: AI traders will not perform entropy reversal if the credit cost exceeds the expected avoided loss.
+- **Reason**: Ensures economically rational behavior.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_MITIGATION_PRIORITY
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: How do entropy mitigation actions rank relative to trade actions?
+- **Resolution**: Entropy mitigation actions are evaluated alongside trade actions within the same utility framework.
+- **Reason**: Prevents special-casing and preserves unified decision logic.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_MITIGATION_FREQUENCY
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: How often may AI traders perform entropy mitigation actions?
+- **Resolution**: AI traders may perform at most one entropy mitigation or reversal action per decision tick.
+- **Reason**: Prevents burst mitigation and preserves pacing.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_MITIGATION_LOGGING
+- **Status**: RESOLVED
+- **Type**: Decision
+- **Scope**: Systems
+- **Statement**: What must be logged for AI entropy mitigation actions?
+- **Resolution**: Logs include action type, target, entropy before and after, credit cost, and decision score.
+- **Reason**: Maintains transparency and replayability.
+- **Introduced By**: Phase F-5.7
+
+### Ledger:AI_ENTROPY_MITIGATION_EXCLUSIONS
+- **Status**: RESOLVED
+- **Type**: Constraint
+- **Scope**: Systems
+- **Statement**: What entropy mitigation behaviors are explicitly excluded for AI traders?
+- **Resolution**:
+  - No preemptive mitigation without entropy
+  - No free or discounted reversals
+  - No mitigation without required structures
+  - No multi-target mitigation
+- **Reason**: Prevents AI abuse of entropy systems.
+- **Introduced By**: Phase F-5.7
+
 

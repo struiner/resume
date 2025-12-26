@@ -313,6 +313,14 @@
 .game-wrapper.port {
   padding: 8px;
   box-sizing: border-box;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.game-wrapper.port tile-global-port-traffic {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .ad-panel,

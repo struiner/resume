@@ -204,11 +204,6 @@
   position: sticky;
   top: 120px;
   display: grid;
-  gap: 32px;
-}
-
-.ad-spacer {
-  min-height: 1px;
 }
 
 :host-context(.tiles-expanded) .resume {
@@ -296,6 +291,8 @@
 .tile-panel {
   border: none;
   padding: 16px;
+  margin-top:-8px;
+  margin-bottom:-8px;
   background: transparent;
   color: var(--muted);
   font-weight: 600;

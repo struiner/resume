@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
         linear-gradient(180deg, rgba(9, 12, 18, 0.95), rgba(7, 10, 16, 0.98)),
         radial-gradient(circle at 15% 20%, rgba(86, 214, 214, 0.18), transparent 45%),
         radial-gradient(circle at 90% 15%, rgba(190, 88, 164, 0.14), transparent 50%);
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       border: 1px solid rgba(130, 150, 170, 0.35);
       box-shadow:
         inset 0 0 0 1px rgba(255, 255, 255, 0.05),
@@ -69,13 +69,13 @@ import { Component } from '@angular/core';
     }
 
     .title {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 800;
       letter-spacing: 1.6px;
     }
 
     .subtitle {
-      font-size: 10px;
+      font-size: 5px;
       letter-spacing: 1px;
       opacity: 0.65;
       text-transform: uppercase;
@@ -84,6 +84,7 @@ import { Component } from '@angular/core';
   ]
 })
 export class TileFactoryUniverse {}
+
 
 
 

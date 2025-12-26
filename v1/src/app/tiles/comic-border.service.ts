@@ -32,7 +32,8 @@ export class ComicBorderService {
     const rng = this.makeRng(edgeSeed);
     const effectiveStyle = style || this.getEdgeStyleFromSeed(edgeSeed);
     const orientation = position === 'top' || position === 'bottom' ? 'h' : 'v';
-    const points = this.buildEdgePoints(width, height, position, orientation, effectiveStyle, rng);
+    const tileSpan = Math.max(width, height);
+    const points = this.buildEdgePoints(width, height, tileSpan, position, orientation, effectiveStyle, rng, true);
     return this.pointsToPath(points);
   }
 
@@ -89,7 +90,8 @@ export class ComicBorderService {
     y: number,
     width: number,
     height: number,
-    position: 'top' | 'right' | 'bottom' | 'left'
+    position: 'top' | 'right' | 'bottom' | 'left',
+    tileHeight?: number
   ): string {
     const edgeKey = this.getSharedEdgeKeyForTile(x, y, position);
     const styleSeed = this.hashInts(
@@ -102,7 +104,8 @@ export class ComicBorderService {
     const style = this.getEdgeStyleFromSeed(styleSeed);
     const rng = this.makeRng(rngSeed);
     const orientation = position === 'top' || position === 'bottom' ? 'h' : 'v';
-    const points = this.buildEdgePoints(width, height, position, orientation, style, rng);
+    const tileSpan = tileHeight ?? Math.max(width, height);
+    const points = this.buildEdgePoints(width, height, tileSpan, position, orientation, style, rng, true);
     return this.pointsToPath(points);
   }
 
@@ -111,7 +114,9 @@ export class ComicBorderService {
     y: number,
     length: number,
     depth: number,
-    position: 'top' | 'right' | 'bottom' | 'left'
+    position: 'top' | 'right' | 'bottom' | 'left',
+    includeTicks: boolean = true,
+    tileHeight?: number
   ): Array<{ x: number; y: number }> {
     const edgeKey = this.getSharedEdgeKeyForTile(x, y, position);
     const styleSeed = this.hashInts(
@@ -123,7 +128,8 @@ export class ComicBorderService {
     const rngSeed = this.hashInts(styleSeed, length, depth);
     const style = this.getEdgeStyleFromSeed(styleSeed);
     const rng = this.makeRng(rngSeed);
-    return this.buildEdgePoints(length, depth, position, edgeKey.orientation, style, rng);
+    const tileSpan = tileHeight ?? length;
+    return this.buildEdgePoints(length, depth, tileSpan, position, edgeKey.orientation, style, rng, includeTicks);
   }
 
   generateTileMaskPathForTile(
@@ -134,35 +140,45 @@ export class ComicBorderService {
     depth: number,
     offset: number = 0
   ): string {
-    const top = this.generateEdgePointsForTile(x, y, width, depth, 'top')
+    const top = this.generateEdgePointsForTile(x, y, width, depth, 'top', false, height)
       .map((point) => ({ x: point.x + offset, y: point.y + offset }));
-    const right = this.generateEdgePointsForTile(x, y, height, depth, 'right')
+    const right = this.generateEdgePointsForTile(x, y, height, depth, 'right', false, height)
       .map((point) => ({ x: width + point.x + offset, y: point.y + offset }));
-    const bottom = this.generateEdgePointsForTile(x, y, width, depth, 'bottom')
+    const bottom = this.generateEdgePointsForTile(x, y, width, depth, 'bottom', false, height)
       .map((point) => ({ x: point.x + offset, y: height + point.y + offset }))
       .reverse();
-    const left = this.generateEdgePointsForTile(x, y, height, depth, 'left')
+    const left = this.generateEdgePointsForTile(x, y, height, depth, 'left', false, height)
       .map((point) => ({ x: point.x + offset, y: point.y + offset }))
       .reverse();
 
-    const points = [top, right, bottom, left].flat();
+    const points: Array<{ x: number; y: number }> = [...top];
+    this.bridgeEdges(points, right);
+    points.push(...right);
+    this.bridgeEdges(points, bottom);
+    points.push(...bottom);
+    this.bridgeEdges(points, left);
+    points.push(...left);
+    this.bridgeToStart(points);
     return this.pointsToPath(points, true);
   }
 
   private buildEdgePoints(
     length: number,
     depth: number,
+    tileHeight: number,
     position: 'top' | 'right' | 'bottom' | 'left',
     orientation: 'h' | 'v',
     style: string,
-    rng: () => number
+    rng: () => number,
+    includeTicks: boolean
   ): Array<{ x: number; y: number }> {
-    const minSegmentLength = 100;
+    const minSegmentLength = Math.max(50, Math.floor(length / 2));
     const segmentCount = Math.max(1, Math.floor(length / minSegmentLength));
     const segmentLength = length / segmentCount;
     const offsets = this.buildOffsets(segmentCount + 1, depth, style, rng);
-    const tickLength = this.getTickLength(depth);
+    const tickLength = this.getTickLength(tileHeight);
     const tickDirection = this.getTickDirection(position);
+    const edgeOffset = this.getEdgeOffset(depth) * tickDirection;
 
     if (orientation === 'h') {
       const points: Array<{ x: number; y: number }> = [{ x: 0, y: offsets[0] ?? 0 }];
@@ -175,7 +191,11 @@ export class ComicBorderService {
           points.push({ x, y: nextY });
         }
       }
-      return this.addPerpendicularTicks(points, 'h', tickLength, tickDirection);
+      const shifted = points.map((point) => ({ x: point.x, y: point.y + edgeOffset }));
+      if (!includeTicks) {
+        return shifted;
+      }
+      return this.addPerpendicularTicks(shifted, 'h', tickLength, tickDirection);
     }
 
     const points: Array<{ x: number; y: number }> = [{ x: offsets[0] ?? 0, y: 0 }];
@@ -188,15 +208,21 @@ export class ComicBorderService {
         points.push({ x: nextX, y });
       }
     }
-    return this.addPerpendicularTicks(points, 'v', tickLength, tickDirection);
+    const shifted = points.map((point) => ({ x: point.x + edgeOffset, y: point.y }));
+    if (!includeTicks) {
+      return shifted;
+    }
+    return this.addPerpendicularTicks(shifted, 'v', tickLength, tickDirection);
   }
 
   private buildOffsets(count: number, depth: number, style: string, rng: () => number): number[] {
     const offsets: number[] = new Array(count).fill(0);
-    const amplitude = depth * (0.35 + rng() * 0.35);
+    const dentScale = 1.5;
+    const scaledDepth = depth * dentScale;
+    const amplitude = scaledDepth * (0.35 + rng() * 0.35);
     const bulgeSign = rng() > 0.5 ? 1 : -1;
     const notchIndex = Math.floor((0.2 + rng() * 0.6) * (count - 1));
-    const zigAmp = depth * (0.4 + rng() * 0.4) * (rng() > 0.5 ? 1 : -1);
+    const zigAmp = scaledDepth * (0.4 + rng() * 0.4) * (rng() > 0.5 ? 1 : -1);
 
     for (let i = 1; i < count - 1; i += 1) {
       let offset = 0;
@@ -212,7 +238,7 @@ export class ComicBorderService {
         }
         case 'notch':
           if (i === notchIndex) {
-            offset = depth * (0.6 + rng() * 0.4) * (rng() > 0.5 ? 1 : -1);
+            offset = scaledDepth * (0.6 + rng() * 0.4) * (rng() > 0.5 ? 1 : -1);
           }
           break;
         case 'zigzag':
@@ -225,7 +251,7 @@ export class ComicBorderService {
       }
 
       if (style !== 'straight') {
-        offset += (rng() - 0.5) * depth * 0.15;
+        offset += (rng() - 0.5) * scaledDepth * 0.15;
       }
 
       offsets[i] = offset;
@@ -271,6 +297,31 @@ export class ComicBorderService {
     return result;
   }
 
+  private bridgeEdges(
+    points: Array<{ x: number; y: number }>,
+    next: Array<{ x: number; y: number }>
+  ): void {
+    if (!points.length || !next.length) {
+      return;
+    }
+    const last = points[points.length - 1];
+    const first = next[0];
+    if (last.x !== first.x && last.y !== first.y) {
+      points.push({ x: first.x, y: last.y });
+    }
+  }
+
+  private bridgeToStart(points: Array<{ x: number; y: number }>): void {
+    if (points.length < 2) {
+      return;
+    }
+    const first = points[0];
+    const last = points[points.length - 1];
+    if (last.x !== first.x && last.y !== first.y) {
+      points.push({ x: first.x, y: last.y });
+    }
+  }
+
   private getTickDirection(position: 'top' | 'right' | 'bottom' | 'left'): number {
     if (position === 'top') {
       return -1;
@@ -284,8 +335,12 @@ export class ComicBorderService {
     return 1;
   }
 
-  private getTickLength(depth: number): number {
-    return depth * 1.6;
+  private getTickLength(tileHeight: number): number {
+    return tileHeight / 2;
+  }
+
+  private getEdgeOffset(depth: number): number {
+    return depth * 1.1;
   }
 
   private pointsToPath(points: Array<{ x: number; y: number }>, closePath = false): string {

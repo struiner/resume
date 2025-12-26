@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ComicBorderService } from './comic-border.service';
 
 @Component({
@@ -202,11 +202,6 @@ export class ComicBorderComponent implements OnInit {
   bottomRightCorner = '';
 
   constructor(private comicBorderService: ComicBorderService) {}
-
-  @HostBinding('class')
-  get hostClass(): string {
-    return `theme-${this.theme}`;
-  }
 
   ngOnInit(): void {
     this.updateBorderPaths();

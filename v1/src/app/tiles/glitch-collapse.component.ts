@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
     .tile{
       width:200px; height:100px;
       background:#111;
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       position:relative;
       overflow:hidden;
       cursor:pointer;
@@ -44,6 +44,7 @@ import { Component } from '@angular/core';
   `]
 })
 export class TileGlitchCollapse {}
+
 
 
 

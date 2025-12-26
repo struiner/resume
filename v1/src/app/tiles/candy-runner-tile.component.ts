@@ -41,7 +41,7 @@ import { EmbeddedGameComponent } from './embedded-game.component';
       background:
         radial-gradient(circle at 30% 20%, #fff6 0%, transparent 40%),
         linear-gradient(135deg,#ff4fd8,#ffb347);
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       box-shadow:
         inset 0 0 0 2px #fff3,
         0 6px 16px rgba(0,0,0,.35);
@@ -60,7 +60,7 @@ import { EmbeddedGameComponent } from './embedded-game.component';
           #fff 0 6px,
           transparent 6px 18px
         );
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       opacity:0;
       transform:scale(.4);
       transition:.4s;
@@ -107,7 +107,7 @@ import { EmbeddedGameComponent } from './embedded-game.component';
     }
 
     .slogan{
-      font-size:20px;
+      font-size:18px;
       font-weight:900;
       letter-spacing:1px;
       color:#fffc;
@@ -125,7 +125,7 @@ import { EmbeddedGameComponent } from './embedded-game.component';
     }
 
     .subtitle{
-      font-size:11px;
+      font-size:10px;
       font-weight:800;
       color:#fff;
       opacity:.85;
@@ -191,6 +191,7 @@ export class TileCandyRunner {
     sy: -(Math.floor(4 + Math.random() * 2) * 20)
   }));
 }
+
 
 
 

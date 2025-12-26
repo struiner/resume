@@ -40,7 +40,7 @@ import { Component } from '@angular/core';
       background:
         radial-gradient(circle at 30% 20%, #fff6 0%, transparent 40%),
         linear-gradient(135deg,#ff4fd8,#ffb347);
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       box-shadow:
         0 6px 16px rgba(0,0,0,.35);
       transform-origin:center;
@@ -58,7 +58,7 @@ import { Component } from '@angular/core';
           #fff 0 6px,
           transparent 6px 18px
         );
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       opacity:0;
       transform:scale(.4);
       transition:.4s;
@@ -187,6 +187,7 @@ export class TileCandyOverload {
     sy: -(Math.floor(4 + Math.random() * 2) * 20)
   }));
 }
+
 
 
 

@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
     .tile{
       width:200px;height:100px;
       background:#000;
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       position:relative;
       overflow:hidden;
       display:flex;
@@ -32,7 +32,7 @@ import { Component } from '@angular/core';
       position:absolute;
       width:140px;height:40px;
       background:radial-gradient(circle,#0f0 10%,transparent 11%);
-      background-size: 400% 400%;
+      background-size: calc(400% + 50px) calc(400% + 50px);
       filter:blur(8px);
       transition:.4s;
     }
@@ -43,6 +43,7 @@ import { Component } from '@angular/core';
   `]
 })
 export class TileSentientOS {}
+
 
 
 

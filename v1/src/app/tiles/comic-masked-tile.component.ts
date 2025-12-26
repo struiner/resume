@@ -25,8 +25,8 @@ import { ComicBorderService } from './comic-border.service';
         class="tile-content"
         [style.width.px]="expandedWidth"
         [style.height.px]="expandedHeight"
-        [style.left.px]="-borderDepth"
-        [style.top.px]="-borderDepth"
+        [style.left.px]="-maskPadding"
+        [style.top.px]="-maskPadding"
         [style.clip-path]="'url(#' + clipPathId + ')'">
         <div
           class="tile-content-inner"
@@ -40,8 +40,8 @@ import { ComicBorderService } from './comic-border.service';
         class="border-overlays"
         [style.width.px]="expandedWidth"
         [style.height.px]="expandedHeight"
-        [style.left.px]="-borderDepth"
-        [style.top.px]="-borderDepth">
+        [style.left.px]="-maskPadding"
+        [style.top.px]="-maskPadding">
         <svg class="border-outline" [attr.viewBox]="viewBox" preserveAspectRatio="none">
           <path [attr.d]="tileMaskPath" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
         </svg>
@@ -217,16 +217,20 @@ export class ComicMaskedTileComponent implements OnInit {
       this.width,
       this.height,
       this.borderDepth,
-      this.borderDepth
+      this.maskPadding
     );
   }
 
   get expandedWidth(): number {
-    return this.width + this.borderDepth * 2;
+    return this.width + this.maskPadding * 2;
   }
 
   get expandedHeight(): number {
-    return this.height + this.borderDepth * 2;
+    return this.height + this.maskPadding * 2;
+  }
+
+  get maskPadding(): number {
+    return this.borderDepth * 3.6;
   }
 
   get tileScaleX(): number {

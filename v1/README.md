@@ -2,6 +2,10 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.2.
 
+## Factory Universe demo
+
+The resume portal includes a sci-fi factory automation demo as a technical showcase. The prototype focuses on world-view and room-view switching, diagnostic panels, logs, and a lightweight simulation stub implemented in Angular without external game engines.
+
 ## Development server
 
 To start a local development server, run:

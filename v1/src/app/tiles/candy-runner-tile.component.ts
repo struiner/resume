@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { EmbeddedGameComponent } from './embedded-game.component';
 
 @Component({
   selector: 'tile-candy-runner',
   standalone: true,
-  imports: [CommonModule, EmbeddedGameComponent],
+  imports: [CommonModule],
   template: `
   <div class="tile">
     <div class="burst"></div>
@@ -149,7 +148,7 @@ import { EmbeddedGameComponent } from './embedded-game.component';
       transform:scale(1.15) rotate(-2deg);
     }
 
-    .tile:hover .candy{     
+    .tile:hover .candy{
       opacity:1;
       animation:
         candy-fall var(--duration) linear infinite,
@@ -176,7 +175,7 @@ import { EmbeddedGameComponent } from './embedded-game.component';
     @keyframes candy-spin{
       to{ filter:hue-rotate(360deg); }
     }
-    
+     
     `
   ]
 })
@@ -191,7 +190,3 @@ export class TileCandyRunner {
     sy: -(Math.floor(4 + Math.random() * 2) * 20)
   }));
 }
-
-
-
-

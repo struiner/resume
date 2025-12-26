@@ -202,6 +202,15 @@ import { ComicMaskedTileComponent } from './comic-masked-tile.component';
       --tile-glow: rgba(92,224,255,.55);
       --tile-accent: #b8f7ff;
     }
+
+    .theme-port{
+      --tile-bg: radial-gradient(circle at 20% 30%, rgba(0,255,255,.25) 0%, transparent 55%),
+        radial-gradient(circle at 75% 20%, rgba(0,150,255,.2) 0%, transparent 60%),
+        #050a12;
+      --tile-border: #2ef2ff;
+      --tile-glow: rgba(46, 242, 255, .55);
+      --tile-accent: #b8f7ff;
+    }
   `]
 })
 export class ComicExpandableTileComponent implements OnInit, OnDestroy {
@@ -210,7 +219,7 @@ export class ComicExpandableTileComponent implements OnInit, OnDestroy {
   dialogVisible = false;
   private activePanel: HTMLElement | null = null;
 
-  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'default' = 'default';
+  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'default' = 'default';
   @Input() tileWidth = 200;
   @Input() tileHeight = 100;
   @Input() tileX = 0;

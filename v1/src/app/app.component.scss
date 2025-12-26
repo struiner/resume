@@ -278,12 +278,40 @@
   color: #ffef9a;
 }
 
+.tile-dialog.hyperlane {
+  color: #9af6ff;
+}
+
 .tile-dialog.factory {
+  color: #b8f7ff;
+}
+
+.tile-dialog.port {
   color: #b8f7ff;
 }
 
 .game-wrapper.factory {
   padding: 6px;
+  box-sizing: border-box;
+}
+
+.game-wrapper.hyperlane {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.game-wrapper.mana {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.game-wrapper.quantum {
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.game-wrapper.port {
+  padding: 8px;
   box-sizing: border-box;
 }
 
@@ -360,6 +388,13 @@
   font-weight: 600;
   color: var(--accent);
   margin: 0;
+}
+
+@media (max-width: 720px) {
+  .ad-toggle,
+  .ad-reveal {
+    display: none;
+  }
 }
 
 .location {

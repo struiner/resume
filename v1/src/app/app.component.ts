@@ -7,15 +7,15 @@ import { TileHyperlane } from './tiles/hyperlane-racer.component';
 import { TileManaBloom } from './tiles/mana-boom-rpg.component';
 import { TileQuantumRift } from './tiles/quantum-rift.component';
 import { TileSentientOS } from './tiles/sentient-os.component';
+import { TileGlobalPortTraffic } from './tiles/global-port-traffic.component';
 import { TileCandyRunner } from './tiles/candy-runner-tile.component';
 import { EmbeddedGameComponent } from './tiles/embedded-game.component';
 import { FactoryUniverseDemoComponent } from './tiles/factory-universe-demo.component';
 import { TileFactoryUniverse } from './tiles/factory-universe-tile.component';
-import { ExpandableTileComponent } from './tiles/expandable-tile.component';
+import { ManaBloomGameComponent } from './tiles/mana-bloom-game.component';
+import { QuantumRiftGameComponent } from './tiles/quantum-rift-game.component';
 import { ComicExpandableTileComponent } from './tiles/comic-expandable-tile.component';
-import { ComicBorderComponent } from './tiles/comic-border.component';
 import { CandyPreloaderComponent } from './tiles/candy-preloader.component';
-import { CinematicLoaderComponent } from './tiles/cinematic-loader.component';
 
 type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
 
@@ -29,15 +29,15 @@ type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
     TileManaBloom,
     TileQuantumRift,
     TileSentientOS,
+    TileGlobalPortTraffic,
     TileCandyRunner,
     EmbeddedGameComponent,
     FactoryUniverseDemoComponent,
     TileFactoryUniverse,
-    ExpandableTileComponent,
+    ManaBloomGameComponent,
+    QuantumRiftGameComponent,
     ComicExpandableTileComponent,
-    ComicBorderComponent,
     CandyPreloaderComponent,
-    CinematicLoaderComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -344,8 +344,16 @@ export class AppComponent {
     data.courses.items.forEach((course) => lines.push(course));
 
     const docXml = this.buildDocxDocument(lines);
-    const contentTypes = `<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>\n  <Default Extension="xml" ContentType="application/xml"/>\n  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>\n</Types>`;
-    const rels = `<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">\n  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>\n</Relationships>`;
+    const contentTypes = `<?xml version="1.0" encoding="UTF-8"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+</Types>`;
+    const rels = `<?xml version="1.0" encoding="UTF-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`;
 
     const files = [
       { name: '[Content_Types].xml', data: new TextEncoder().encode(contentTypes) },
@@ -360,7 +368,8 @@ export class AppComponent {
     const paragraphs = lines
       .map((line) => `<w:p><w:r><w:t>${this.escapeXml(line)}</w:t></w:r></w:p>`)
       .join('');
-    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${paragraphs}</w:body></w:document>`;
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${paragraphs}</w:body></w:document>`;
   }
 
   private escapeXml(value: string): string {

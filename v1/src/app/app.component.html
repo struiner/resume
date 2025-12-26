@@ -157,6 +157,9 @@
             <div dialog class="tile-dialog mana">
               <div class="tile-dialog-title">MANA BLOOM</div>
               <div class="tile-dialog-subtitle">Arcane core stabilizing.</div>
+              <div class="game-wrapper mana">
+                <mana-bloom-game></mana-bloom-game>
+              </div>
             </div>
           </comic-expandable-tile>
         </div>
@@ -184,6 +187,9 @@
             <div dialog class="tile-dialog mana">
               <div class="tile-dialog-title">MANA BLOOM</div>
               <div class="tile-dialog-subtitle">Arcane core stabilizing.</div>
+              <div class="game-wrapper mana">
+                <mana-bloom-game></mana-bloom-game>
+              </div>
             </div>
           </comic-expandable-tile>
         </div>
@@ -352,7 +358,13 @@
         <div class="ad-panel">
           <comic-expandable-tile theme="hyperlane" [tileX]="1" [tileY]="0">
             <tile-hyperlane tile></tile-hyperlane>
-            <cinematic-loader dialog></cinematic-loader>
+            <div dialog class="tile-dialog hyperlane">
+              <div class="tile-dialog-title">HYPERLANE</div>
+              <div class="tile-dialog-subtitle">Thread the lanes. Survive the run.</div>
+              <div class="game-wrapper hyperlane">
+                <embedded-game theme="hyperlane"></embedded-game>
+              </div>
+            </div>
           </comic-expandable-tile>
         </div>
         <div class="ad-panel">
@@ -394,6 +406,21 @@
             <div dialog class="tile-dialog quantum">
               <div class="tile-dialog-title">QUANTUM RIFT</div>
               <div class="tile-dialog-subtitle">Reality threads aligned.</div>
+              <div class="game-wrapper quantum">
+                <quantum-rift-game></quantum-rift-game>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="port" [tileX]="1" [tileY]="5">
+            <tile-global-port-traffic tile></tile-global-port-traffic>
+            <div dialog class="tile-dialog port">
+              <div class="tile-dialog-title">GLOBAL PORT TRAFFIC</div>
+              <div class="tile-dialog-subtitle">Static trade snapshot.</div>
+              <div class="game-wrapper port">
+                <tile-global-port-traffic mode="dialog"></tile-global-port-traffic>
+              </div>
             </div>
           </comic-expandable-tile>
         </div>
@@ -403,7 +430,13 @@
         <div class="tile-panel">
           <comic-expandable-tile theme="hyperlane" [tileX]="1" [tileY]="0">
             <tile-hyperlane tile></tile-hyperlane>
-            <cinematic-loader dialog></cinematic-loader>
+            <div dialog class="tile-dialog hyperlane">
+              <div class="tile-dialog-title">HYPERLANE</div>
+              <div class="tile-dialog-subtitle">Thread the lanes. Survive the run.</div>
+              <div class="game-wrapper hyperlane">
+                <embedded-game theme="hyperlane"></embedded-game>
+              </div>
+            </div>
           </comic-expandable-tile>
         </div>
         <div class="tile-panel">
@@ -445,6 +478,21 @@
             <div dialog class="tile-dialog quantum">
               <div class="tile-dialog-title">QUANTUM RIFT</div>
               <div class="tile-dialog-subtitle">Reality threads aligned.</div>
+              <div class="game-wrapper quantum">
+                <quantum-rift-game></quantum-rift-game>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="port" [tileX]="1" [tileY]="5">
+            <tile-global-port-traffic tile></tile-global-port-traffic>
+            <div dialog class="tile-dialog port">
+              <div class="tile-dialog-title">GLOBAL PORT TRAFFIC</div>
+              <div class="tile-dialog-subtitle">Static trade snapshot.</div>
+              <div class="game-wrapper port">
+                <tile-global-port-traffic mode="dialog"></tile-global-port-traffic>
+              </div>
             </div>
           </comic-expandable-tile>
         </div>

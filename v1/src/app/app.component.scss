@@ -223,6 +223,16 @@
   pointer-events: auto;
 }
 
+:host-context(.tiles-expanded) .ad-column,
+:host-context(.tiles-expanded) .tile-column {
+  pointer-events: none;
+}
+
+:host-context(.tiles-expanded) .ad-column:has(.tile-active),
+:host-context(.tiles-expanded) .tile-column:has(.tile-active) {
+  pointer-events: auto;
+}
+
 .tile-dialog {
   width: 100%;
   height: 100%;
@@ -262,12 +272,202 @@
   color: #4cff7c;
 }
 
+.tile-dialog.sentient .sentient-extended {
+  width: 100%;
+  text-align: left;
+  font-size: 0.78rem;
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.tile-dialog.sentient .sentient-section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(76, 255, 124, 0.85);
+}
+
+.tile-dialog.sentient .sentient-section-body {
+  color: rgba(233, 255, 240, 0.92);
+  line-height: 1.4;
+}
+
+.tile-dialog.sentient .sentient-list {
+  margin: 4px 0 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  color: rgba(233, 255, 240, 0.92);
+}
+
+.tile-dialog.sentient .sentient-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tile-dialog.sentient .sentient-tags span {
+  border: 1px solid rgba(76, 255, 124, 0.4);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(233, 255, 240, 0.95);
+}
+
 .tile-dialog.mana {
   color: #e9d5ff;
 }
 
+.tile-dialog.cell {
+  color: #d6fff0;
+}
+
+.tile-dialog.cell .cell-extended {
+  width: 100%;
+  text-align: left;
+  font-size: 0.78rem;
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.tile-dialog.cell .cell-section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(150, 255, 220, 0.85);
+}
+
+.tile-dialog.cell .cell-section-body {
+  color: rgba(225, 255, 245, 0.92);
+  line-height: 1.4;
+}
+
+.tile-dialog.cell .cell-canvas-frame {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(150, 255, 220, 0.25);
+  background: rgba(5, 18, 15, 0.5);
+  box-shadow: inset 0 0 24px rgba(5, 18, 15, 0.7);
+  overflow: hidden;
+}
+
+.tile-dialog.hanse {
+  color: #f2e2bf;
+}
+
 .tile-dialog.glitch {
   color: #7ffcff;
+}
+
+.tile-dialog.glitch .glitch-extended {
+  width: 100%;
+  text-align: left;
+  font-size: 0.78rem;
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.tile-dialog.glitch .glitch-section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(127, 252, 255, 0.8);
+}
+
+.tile-dialog.glitch .glitch-section-body {
+  color: rgba(240, 250, 255, 0.9);
+  line-height: 1.4;
+}
+
+.tile-dialog.glitch .glitch-list {
+  margin: 4px 0 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  color: rgba(240, 250, 255, 0.9);
+}
+
+.tile-dialog.glitch .glitch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tile-dialog.glitch .glitch-tags span {
+  border: 1px solid rgba(127, 252, 255, 0.4);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(240, 250, 255, 0.95);
+}
+
+.tile-dialog.glitch .glitch-doc {
+  width: 100%;
+  max-height: 280px;
+  overflow: auto;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(127, 252, 255, 0.2);
+  background: rgba(5, 12, 18, 0.6);
+  box-shadow: inset 0 0 18px rgba(10, 20, 30, 0.55);
+  color: rgba(230, 245, 255, 0.92);
+}
+
+.tile-dialog.glitch .glitch-doc-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tile-dialog.glitch .glitch-doc-meta {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: rgba(205, 230, 245, 0.9);
+  margin-bottom: 10px;
+}
+
+.tile-dialog.glitch .glitch-doc-section {
+  padding-top: 8px;
+  margin-top: 8px;
+  border-top: 1px dashed rgba(127, 252, 255, 0.2);
+}
+
+.tile-dialog.glitch .glitch-doc-heading {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  color: rgba(127, 252, 255, 0.85);
+}
+
+.tile-dialog.glitch .glitch-doc-body {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: rgba(230, 245, 255, 0.9);
+}
+
+.tile-dialog.glitch .glitch-doc ul {
+  margin: 4px 0 0 16px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 0.72rem;
+  line-height: 1.4;
 }
 
 .tile-dialog.candy {
@@ -288,6 +488,23 @@
 
 .tile-dialog.port {
   color: #b8f7ff;
+}
+
+.tile-dialog.json {
+  color: #c8f4ff;
+  align-items: stretch;
+  text-align: left;
+  gap: 14px;
+}
+
+.tile-dialog.json .json-interpreter-host {
+  flex: 1;
+  min-height: 0;
+}
+
+.game-wrapper.hanse {
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 .game-wrapper.factory {
@@ -318,6 +535,19 @@
 }
 
 .game-wrapper.port tile-global-port-traffic {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.game-wrapper.glitch-pinball {
+  padding: 12px;
+  box-sizing: border-box;
+  height: 300px;
+  margin-top: 12px;
+}
+
+.game-wrapper.glitch-pinball glitch-pinball-game {
   width: 100%;
   height: 100%;
   display: block;

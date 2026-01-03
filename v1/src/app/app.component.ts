@@ -8,7 +8,6 @@ import { TileManaBloom } from './tiles/mana-boom-rpg.component';
 import { TileQuantumRift } from './tiles/quantum-rift.component';
 import { TileSentientOS } from './tiles/sentient-os.component';
 import { TileGlobalPortTraffic } from './tiles/global-port-traffic.component';
-import { TileCandyRunner } from './tiles/candy-runner-tile.component';
 import { EmbeddedGameComponent } from './tiles/embedded-game.component';
 import { FactoryUniverseDemoComponent } from './tiles/factory-universe-demo.component';
 import { TileFactoryUniverse } from './tiles/factory-universe-tile.component';
@@ -16,6 +15,13 @@ import { ManaBloomGameComponent } from './tiles/mana-bloom-game.component';
 import { QuantumRiftGameComponent } from './tiles/quantum-rift-game.component';
 import { ComicExpandableTileComponent } from './tiles/comic-expandable-tile.component';
 import { CandyPreloaderComponent } from './tiles/candy-preloader.component';
+import { GlitchPinballGameComponent } from './tiles/glitch-pinball-game.component';
+import { TileCellSlice } from './tiles/cell-slice-tile.component';
+import { CellSliceCanvasComponent } from './tiles/cell-slice-canvas.component';
+import { TileHanse } from './tiles/hanse-tile.component';
+import { HanseaticCityMapComponent } from './tiles/hanseatic-city-map.component';
+import { TileJsonInterpreter } from './tiles/json-interpreter-tile.component';
+import { JsonInterpreterComponent } from './tiles/json-interpreter.component';
 
 type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
 
@@ -30,7 +36,6 @@ type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
     TileQuantumRift,
     TileSentientOS,
     TileGlobalPortTraffic,
-    TileCandyRunner,
     EmbeddedGameComponent,
     FactoryUniverseDemoComponent,
     TileFactoryUniverse,
@@ -38,6 +43,13 @@ type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
     QuantumRiftGameComponent,
     ComicExpandableTileComponent,
     CandyPreloaderComponent,
+    GlitchPinballGameComponent,
+    TileCellSlice,
+    CellSliceCanvasComponent,
+    TileHanse,
+    HanseaticCityMapComponent,
+    TileJsonInterpreter,
+    JsonInterpreterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

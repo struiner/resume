@@ -148,6 +148,57 @@
             <div dialog class="tile-dialog sentient">
               <div class="tile-dialog-title">SENTIENT OS</div>
               <div class="tile-dialog-subtitle">Autonomous diagnostics online.</div>
+              <div class="sentient-extended">
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Concept focus</div>
+                  <div class="sentient-section-body">
+                    Text adventure narrated by a sentient OS. The player types commands and the world
+                    updates through a simple state machine.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Commands</div>
+                  <ul class="sentient-list">
+                    <li>look, take badge, go hallway.</li>
+                    <li>use badge on door, talk to os.</li>
+                  </ul>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">World layout</div>
+                  <div class="sentient-section-body">
+                    Locations: office_desk, hallway, server_room, mainframe_core. Objects: badge,
+                    coffee, terminal_card, flower.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Gates</div>
+                  <div class="sentient-section-body">
+                    Server room requires badge or trust. Mainframe requires terminal_card.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Agents</div>
+                  <div class="sentient-tags">
+                    <span>OS narrator</span>
+                    <span>Security</span>
+                    <span>Facilities</span>
+                    <span>Mainframe</span>
+                    <span>Tutorial</span>
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">OS phases</div>
+                  <div class="sentient-section-body">
+                    Procedural, reflective, symbolic.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Win condition</div>
+                  <div class="sentient-section-body">
+                    Input flower at the mainframe. The OS accepts without converting it to utility.
+                  </div>
+                </div>
+              </div>
             </div>
           </comic-expandable-tile>
         </div>
@@ -160,6 +211,40 @@
               <div class="game-wrapper mana">
                 <mana-bloom-game></mana-bloom-game>
               </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="cell" [tileX]="0" [tileY]="3">
+            <tile-cell-slice tile></tile-cell-slice>
+            <div dialog class="tile-dialog cell">
+              <div class="tile-dialog-title">CELL SLICE</div>
+              <div class="tile-dialog-subtitle">Multi-agent cut-through protocol.</div>
+              <div class="cell-canvas-frame">
+                <cell-slice-canvas></cell-slice-canvas>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="hanse" [tileX]="0" [tileY]="4">
+            <tile-hanse tile></tile-hanse>
+            <div dialog class="tile-dialog hanse">
+              <div class="tile-dialog-title">HANSE</div>
+              <div class="tile-dialog-subtitle">Hanseatic trade routes emerge.</div>
+              <div class="game-wrapper hanse">
+                <hanseatic-city-map></hanseatic-city-map>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="json" [tileX]="0" [tileY]="5">
+            <tile-json-interpreter tile></tile-json-interpreter>
+            <div dialog class="tile-dialog json">
+              <div class="tile-dialog-title">JSON INTERPRETER</div>
+              <div class="tile-dialog-subtitle">Structure-first parsing for any payload.</div>
+              <json-interpreter class="json-interpreter-host"></json-interpreter>
             </div>
           </comic-expandable-tile>
         </div>
@@ -178,6 +263,57 @@
             <div dialog class="tile-dialog sentient">
               <div class="tile-dialog-title">SENTIENT OS</div>
               <div class="tile-dialog-subtitle">Autonomous diagnostics online.</div>
+              <div class="sentient-extended">
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Concept focus</div>
+                  <div class="sentient-section-body">
+                    Text adventure narrated by a sentient OS. The player types commands and the world
+                    updates through a simple state machine.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Commands</div>
+                  <ul class="sentient-list">
+                    <li>look, take badge, go hallway.</li>
+                    <li>use badge on door, talk to os.</li>
+                  </ul>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">World layout</div>
+                  <div class="sentient-section-body">
+                    Locations: office_desk, hallway, server_room, mainframe_core. Objects: badge,
+                    coffee, terminal_card, flower.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Gates</div>
+                  <div class="sentient-section-body">
+                    Server room requires badge or trust. Mainframe requires terminal_card.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Agents</div>
+                  <div class="sentient-tags">
+                    <span>OS narrator</span>
+                    <span>Security</span>
+                    <span>Facilities</span>
+                    <span>Mainframe</span>
+                    <span>Tutorial</span>
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">OS phases</div>
+                  <div class="sentient-section-body">
+                    Procedural, reflective, symbolic.
+                  </div>
+                </div>
+                <div class="sentient-section">
+                  <div class="sentient-section-title">Win condition</div>
+                  <div class="sentient-section-body">
+                    Input flower at the mainframe. The OS accepts without converting it to utility.
+                  </div>
+                </div>
+              </div>
             </div>
           </comic-expandable-tile>
         </div>
@@ -190,6 +326,40 @@
               <div class="game-wrapper mana">
                 <mana-bloom-game></mana-bloom-game>
               </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="cell" [tileX]="0" [tileY]="3">
+            <tile-cell-slice tile></tile-cell-slice>
+            <div dialog class="tile-dialog cell">
+              <div class="tile-dialog-title">CELL SLICE</div>
+              <div class="tile-dialog-subtitle">Multi-agent cut-through protocol.</div>
+              <div class="cell-canvas-frame">
+                <cell-slice-canvas></cell-slice-canvas>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="hanse" [tileX]="0" [tileY]="4">
+            <tile-hanse tile></tile-hanse>
+            <div dialog class="tile-dialog hanse">
+              <div class="tile-dialog-title">HANSE</div>
+              <div class="tile-dialog-subtitle">Hanseatic trade routes emerge.</div>
+              <div class="game-wrapper hanse">
+                <hanseatic-city-map></hanseatic-city-map>
+              </div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="json" [tileX]="0" [tileY]="5">
+            <tile-json-interpreter tile></tile-json-interpreter>
+            <div dialog class="tile-dialog json">
+              <div class="tile-dialog-title">JSON INTERPRETER</div>
+              <div class="tile-dialog-subtitle">Structure-first parsing for any payload.</div>
+              <json-interpreter class="json-interpreter-host"></json-interpreter>
             </div>
           </comic-expandable-tile>
         </div>
@@ -373,17 +543,8 @@
             <div dialog class="tile-dialog glitch">
               <div class="tile-dialog-title">GLITCH.IO</div>
               <div class="tile-dialog-subtitle">Signal stabilized. Visual noise contained.</div>
-            </div>
-          </comic-expandable-tile>
-        </div>
-        <div class="ad-panel">
-          <comic-expandable-tile theme="candy" [tileX]="1" [tileY]="2">
-            <tile-candy-runner tile></tile-candy-runner>
-            <div dialog class="tile-dialog candy">
-              <div class="tile-dialog-title">CANDY RUNNER</div>
-              <div class="tile-dialog-subtitle">Jump over obstacles and collect candy!</div>
-              <div class="game-wrapper">
-                <embedded-game theme="candy"></embedded-game>
+              <div class="game-wrapper glitch-pinball">
+                <glitch-pinball-game></glitch-pinball-game>
               </div>
             </div>
           </comic-expandable-tile>
@@ -445,17 +606,39 @@
             <div dialog class="tile-dialog glitch">
               <div class="tile-dialog-title">GLITCH.IO</div>
               <div class="tile-dialog-subtitle">Signal stabilized. Visual noise contained.</div>
-            </div>
-          </comic-expandable-tile>
-        </div>
-        <div class="tile-panel">
-          <comic-expandable-tile theme="candy" [tileX]="1" [tileY]="2">
-            <tile-candy-runner tile></tile-candy-runner>
-            <div dialog class="tile-dialog candy">
-              <div class="tile-dialog-title">CANDY RUNNER</div>
-              <div class="tile-dialog-subtitle">Jump over obstacles and collect candy!</div>
-              <div class="game-wrapper">
-                <embedded-game theme="candy"></embedded-game>
+              <div class="glitch-extended">
+                <div class="glitch-section">
+                  <div class="glitch-section-title">Concept focus</div>
+                  <div class="glitch-section-body">
+                    Pinball Fantasies-style, single-table pinball with letter-spelling modes and
+                    a retro-future glitch aesthetic.
+                  </div>
+                </div>
+                <div class="glitch-section">
+                  <div class="glitch-section-title">Core loop</div>
+                  <ul class="glitch-list">
+                    <li>Launch, flip, and nudge within tilt limits.</li>
+                    <li>Spell BYTE, CIRCUIT, HACK, GHOST to light modes.</li>
+                    <li>Start modes at the center ramp or captive ball.</li>
+                    <li>Build loop multipliers, chase jackpots, avoid drains.</li>
+                  </ul>
+                </div>
+                <div class="glitch-section">
+                  <div class="glitch-section-title">Modes</div>
+                  <div class="glitch-tags">
+                    <span>Data Multiball</span>
+                    <span>Overclock</span>
+                    <span>Debug Round</span>
+                    <span>Poltergeist</span>
+                  </div>
+                </div>
+                <div class="glitch-section">
+                  <div class="glitch-section-title">Interface</div>
+                  <div class="glitch-section-body">
+                    Top bar for score, balls, multiplier, timers; right panel for letters and
+                    objectives; bottom status for callouts.
+                  </div>
+                </div>
               </div>
             </div>
           </comic-expandable-tile>

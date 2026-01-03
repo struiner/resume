@@ -38,7 +38,16 @@ import { ComicMaskedTileComponent } from './comic-masked-tile.component';
       <button class="close" (click)="close()">✕</button>
 
       <div class="dialog-content">
-        <ng-content select="[dialog]"></ng-content>
+        <div class="loading-mask" *ngIf="isLoading">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">Initializing...</div>
+          <div class="loading-bar">
+            <span></span>
+          </div>
+        </div>
+        <ng-container *ngIf="contentReady">
+          <ng-content select="[dialog]"></ng-content>
+        </ng-container>
       </div>
     </div>
   `,
@@ -151,6 +160,62 @@ import { ComicMaskedTileComponent } from './comic-masked-tile.component';
       position:relative;
     }
 
+    .loading-mask{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      gap:12px;
+      background:rgba(2, 4, 10, 0.7);
+      backdrop-filter:blur(6px);
+      z-index:1;
+    }
+
+    .loading-spinner{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:2px solid rgba(255,255,255,.2);
+      border-top-color:var(--tile-accent, #fff);
+      animation:spin 0.9s linear infinite;
+      box-shadow:0 0 16px var(--tile-glow, rgba(255,255,255,.4));
+    }
+
+    .loading-text{
+      font-size:12px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      color:var(--tile-accent, #fff);
+      opacity:0.8;
+    }
+
+    .loading-bar{
+      width:160px;
+      height:6px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.2);
+      overflow:hidden;
+      background:rgba(0,0,0,.4);
+    }
+
+    .loading-bar span{
+      display:block;
+      width:40%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, var(--tile-accent, #fff), transparent);
+      animation:load-sweep 1.2s ease-in-out infinite;
+    }
+
+    @keyframes spin{
+      to{ transform:rotate(360deg); }
+    }
+
+    @keyframes load-sweep{
+      0%{ transform:translateX(-100%); opacity:0.4; }
+      50%{ transform:translateX(60%); opacity:1; }
+      100%{ transform:translateX(220%); opacity:0.2; }
+    }
+
     .theme-candy{
       --tile-bg: radial-gradient(circle at 30% 20%, #fff4 0%, transparent 50%),
         linear-gradient(135deg,#ff5fd7,#ffb347);
@@ -211,15 +276,44 @@ import { ComicMaskedTileComponent } from './comic-masked-tile.component';
       --tile-glow: rgba(46, 242, 255, .55);
       --tile-accent: #b8f7ff;
     }
+
+    .theme-cell{
+      --tile-bg: radial-gradient(circle at 35% 25%, rgba(120, 255, 210, 0.35) 0%, transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(80, 220, 180, 0.25) 0%, transparent 60%),
+        #06261f;
+      --tile-border: #9affd6;
+      --tile-glow: rgba(120, 255, 210, 0.55);
+      --tile-accent: #d6fff0;
+    }
+
+    .theme-hanse{
+      --tile-bg: radial-gradient(circle at 20% 20%, rgba(214, 182, 120, 0.2) 0%, transparent 55%),
+        linear-gradient(135deg, #0b2433, #1f3b4a 55%, #132833);
+      --tile-border: #d6b678;
+      --tile-glow: rgba(214, 182, 120, 0.45);
+      --tile-accent: #f2e2bf;
+    }
+
+    .theme-json{
+      --tile-bg: radial-gradient(circle at 20% 20%, rgba(80, 210, 255, 0.28) 0%, transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(120, 255, 210, 0.2) 0%, transparent 60%),
+        #050c14;
+      --tile-border: #7bd7ff;
+      --tile-glow: rgba(120, 210, 255, 0.5);
+      --tile-accent: #c8f4ff;
+    }
   `]
 })
 export class ComicExpandableTileComponent implements OnInit, OnDestroy {
   private static expandedCount = 0;
   expanded = false;
   dialogVisible = false;
+  isLoading = false;
+  contentReady = false;
   private activePanel: HTMLElement | null = null;
+  private openTimer: number | null = null;
 
-  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'default' = 'default';
+  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'cell' | 'hanse' | 'json' | 'default' = 'default';
   @Input() tileWidth = 200;
   @Input() tileHeight = 100;
   @Input() tileX = 0;
@@ -236,6 +330,8 @@ export class ComicExpandableTileComponent implements OnInit, OnDestroy {
     if (this.expanded) {
       return;
     }
+    this.isLoading = true;
+    this.contentReady = false;
     const tileEl = this.host.nativeElement
       .querySelector('.tile-shell')
       .firstElementChild as HTMLElement;
@@ -267,13 +363,28 @@ export class ComicExpandableTileComponent implements OnInit, OnDestroy {
     requestAnimationFrame(() => {
       this.dialogVisible = true;
     });
+
+    if (this.openTimer !== null) {
+      window.clearTimeout(this.openTimer);
+    }
+    this.openTimer = window.setTimeout(() => {
+      this.contentReady = true;
+      this.isLoading = false;
+      this.openTimer = null;
+    }, 120);
   }
 
   close() {
     if (!this.expanded) {
       return;
     }
+    if (this.openTimer !== null) {
+      window.clearTimeout(this.openTimer);
+      this.openTimer = null;
+    }
     this.dialogVisible = false;
+    this.isLoading = false;
+    this.contentReady = false;
 
     setTimeout(() => {
       this.expanded = false;
@@ -286,6 +397,10 @@ export class ComicExpandableTileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.openTimer !== null) {
+      window.clearTimeout(this.openTimer);
+      this.openTimer = null;
+    }
     if (this.expanded) {
       if (this.activePanel) {
         this.activePanel.classList.remove('tile-active');

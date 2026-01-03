@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { CandyRunnerEngine, RunnerInput, RunnerState } from './candy-runner.core';
 
 @Component({
   selector: 'embedded-game',
@@ -52,6 +53,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChi
             <!-- Collectibles -->
             <div *ngFor="let collectible of collectibles"
                  class="collectible"
+                 [class.golden]="collectible.kind === 'golden'"
                  [style.left.px]="collectible.x"
                  [style.bottom.px]="collectible.y"
                  [style.width.px]="collectible.width"
@@ -62,18 +64,18 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChi
         </div>
 
         <div class="game-ui">
-          <div class="score">Score {{ score | number:'1.0-0' }}</div>
-          <div class="distance">Distance {{ distance | number:'1.0-0' }}</div>
+          <div class="score">Score {{ runnerState.score | number:'1.0-0' }}</div>
+          <div class="distance">Distance {{ runnerState.distance | number:'1.0-0' }}</div>
         </div>
 
-        <div class="runner-overlay" *ngIf="runnerState !== 'playing'">
-          <div class="overlay-title" *ngIf="runnerState === 'boot'">Candy Runner</div>
-          <div class="overlay-subtitle" *ngIf="runnerState === 'boot'">Press Space to Start</div>
+        <div class="runner-overlay" *ngIf="runnerState.mode !== 'playing'">
+          <div class="overlay-title" *ngIf="runnerState.mode === 'boot'">Candy Runner</div>
+          <div class="overlay-subtitle" *ngIf="runnerState.mode === 'boot'">Press Space to Start</div>
 
-          <ng-container *ngIf="runnerState === 'over'">
+          <ng-container *ngIf="runnerState.mode === 'over'">
             <div class="overlay-title">Run Over</div>
-            <div class="overlay-subtitle">Final Score {{ score | number:'1.0-0' }}</div>
-            <div class="overlay-subtitle">Distance {{ distance | number:'1.0-0' }}</div>
+            <div class="overlay-subtitle">Final Score {{ runnerState.score | number:'1.0-0' }}</div>
+            <div class="overlay-subtitle">Distance {{ runnerState.distance | number:'1.0-0' }}</div>
             <div class="overlay-prompt">Press R to Retry</div>
           </ng-container>
         </div>
@@ -205,6 +207,10 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChi
       image-rendering: pixelated;
       bottom: 100px;
       animation: pulse 1.5s infinite;
+    }
+
+    .collectible.golden {
+      filter: drop-shadow(0 0 6px rgba(255, 214, 102, 0.8));
     }
     
     .game-ui {
@@ -487,10 +493,10 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly onKeyDownBound = (event: KeyboardEvent) => this.handleKeyDown(event);
   private readonly onKeyUpBound = (event: KeyboardEvent) => this.handleKeyUp(event);
   
+  private readonly runnerEngine = new CandyRunnerEngine();
+
   // Game state
-  runnerState: 'boot' | 'playing' | 'over' = 'boot';
-  score = 0;
-  distance = 0;
+  runnerState: RunnerState = this.runnerEngine.state;
 
   readonly spriteTile = 70;
   private readonly spriteColumns = 14;
@@ -582,6 +588,9 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
   private runnerAccumulator = 0;
   private runnerLastTimestamp = 0;
   private runnerRunIndex = 0;
+  private runnerJumpQueued = false;
+  private runnerRestartQueued = false;
+  private runnerResetQueued = false;
   private runnerSeed = 1337;
   private airComboCount = 0;
   private lastGrounded = true;
@@ -644,13 +653,13 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    if (this.runnerState === 'over') {
+    if (this.runnerState.mode === 'over') {
       this.resetGame();
       this.startGame();
       return;
     }
 
-    if (this.runnerState === 'boot') {
+    if (this.runnerState.mode === 'boot') {
       this.startGame();
     }
   }
@@ -686,17 +695,14 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (event.code === 'Escape') {
-      if (this.runnerState !== 'boot') {
-        this.resetGame();
-      }
+      this.runnerResetQueued = true;
+      this.startGame();
       return;
     }
 
     if (event.code === 'KeyR') {
-      if (this.runnerState === 'over') {
-        this.resetGame();
-        this.startGame();
-      }
+      this.runnerRestartQueued = true;
+      this.startGame();
       return;
     }
 
@@ -706,13 +712,8 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
 
     event.preventDefault();
 
-    if (this.runnerState === 'boot') {
-      this.startGame();
-    }
-
-    if (this.canJump()) {
-      this.jump();
-    }
+    this.runnerJumpQueued = true;
+    this.startGame();
   }
   
   private handleKeyUp(event: KeyboardEvent) {
@@ -720,13 +721,13 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
       this.hyperlaneKeyState.delete(event.code);
       return;
     }
-    // Handle key up events if needed
   }
   
   startGame() {
-    if (this.runnerState === 'playing') return;
-    
-    this.runnerState = 'playing';
+    if (this.gameLoopId) {
+      return;
+    }
+    this.runnerAccumulator = Math.max(this.runnerAccumulator, 1 / 60);
     this.runnerLastTimestamp = performance.now();
     this.gameLoopId = requestAnimationFrame(this.gameLoop.bind(this));
   }
@@ -740,47 +741,14 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
   
   resetGame() {
     this.stopGame();
-    this.score = 0;
-    this.distance = 0;
-    this.runnerState = 'boot';
-    this.worldOffset = 0;
-    this.obstacles = [];
-    this.collectibles = [];
-    this.pits = [];
-    this.player.x = 100;
-    this.player.y = this.groundLevel;
-    this.player.velocityY = 0;
-    this.player.isJumping = false;
-    this.spawnTimer = 0;
-    this.gameSpeed = this.baseGameSpeed;
-    this.speedIncreaseTimer = 0;
-    this.elapsedSeconds = 0;
     this.runnerAccumulator = 0;
-    this.airComboCount = 0;
-    this.lastGrounded = true;
-    this.jumpCount = 0;
-    this.spawnIndex = 0;
-    this.candyIndex = 0;
-    this.runnerSeed = 1337 + this.runnerRunIndex;
+    const seed = 1337 + this.runnerRunIndex;
     this.runnerRunIndex += 1;
-    this.groundTiles = this.buildGroundTiles();
-  }
-  
-  jump() {
-    if (!this.canJump()) {
-      return;
-    }
-
-    this.player.velocityY = this.jumpForce;
-    this.player.isJumping = true;
-    this.jumpCount += 1;
+    this.runnerEngine.reset(seed);
+    this.syncRunnerView();
   }
   
   gameLoop(timestamp: number) {
-    if (this.runnerState !== 'playing') {
-      return;
-    }
-
     const deltaSeconds = Math.min(0.05, (timestamp - this.runnerLastTimestamp) / 1000);
     this.runnerLastTimestamp = timestamp;
     this.runnerAccumulator += deltaSeconds;
@@ -791,249 +759,16 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
       this.runnerAccumulator -= step;
     }
 
-    this.gameLoopId = requestAnimationFrame(this.gameLoop.bind(this));
+    if (this.runnerState.mode === 'playing') {
+      this.gameLoopId = requestAnimationFrame(this.gameLoop.bind(this));
+    } else {
+      this.stopGame();
+    }
   }
   
   updateGame(deltaSeconds: number) {
-    // Move world
-    this.worldOffset += this.gameSpeed * deltaSeconds;
-    this.updateGroundTiles(deltaSeconds);
-    this.updatePits(deltaSeconds);
-    this.elapsedSeconds += deltaSeconds;
-    this.distance += this.gameSpeed * deltaSeconds;
-
-    // Difficulty progression
-    this.speedIncreaseTimer += deltaSeconds;
-    while (this.speedIncreaseTimer >= this.speedIncreaseInterval) {
-      this.gameSpeed *= this.speedIncreaseFactor;
-      this.speedIncreaseTimer -= this.speedIncreaseInterval;
-    }
-    
-    // Update player physics
-    this.player.velocityY += this.gravity * deltaSeconds;
-    this.player.y += this.player.velocityY * deltaSeconds;
-    
-    // Ground collision
-    const grounded = this.isPlayerGrounded();
-    if (grounded && this.player.y <= this.groundLevel) {
-      this.player.y = this.groundLevel;
-      this.player.velocityY = 0;
-      this.player.isJumping = false;
-      if (!this.lastGrounded) {
-        this.airComboCount = 0;
-        this.jumpCount = 0;
-      }
-      this.lastGrounded = true;
-    } else {
-      this.lastGrounded = false;
-    }
-
-    if (this.player.y < -this.player.height) {
-      this.endRunner();
-      return;
-    }
-    
-    // Spawn new obstacles and collectibles
-    this.spawnTimer += deltaSeconds;
-    const spawnInterval = this.getSpawnInterval();
-    if (this.spawnTimer >= spawnInterval) {
-      const spawnedObstacle = this.spawnObstacle();
-      this.spawnCollectible();
-      if (spawnedObstacle) {
-        this.spawnTimer = 0;
-      }
-    }
-    
-    // Update obstacle positions
-    this.obstacles.forEach(obstacle => {
-      obstacle.x -= this.gameSpeed * deltaSeconds;
-    });
-    
-    // Update collectible positions
-    this.collectibles.forEach(collectible => {
-      collectible.x -= this.gameSpeed * deltaSeconds;
-    });
-    
-    // Remove off-screen obstacles
-    this.obstacles = this.obstacles.filter(obstacle => obstacle.x > -100);
-    
-    // Remove off-screen collectibles
-    this.collectibles = this.collectibles.filter(collectible => collectible.x > -50);
-    
-    // Check collisions
-    this.checkCollisions();
-    
-    // Score over time
-    this.score += deltaSeconds;
-  }
-  
-  spawnObstacle() {
-    const type = this.obstaclePattern[this.spawnIndex % this.obstaclePattern.length];
-    const spawnX = 800;
-    if (this.obstacles.length > 0 || this.pits.length > 0) {
-      const obstacleMax = this.obstacles.length > 0
-        ? Math.max(...this.obstacles.map(obstacle => obstacle.x + obstacle.width))
-        : -Infinity;
-      const pitMax = this.pits.length > 0
-        ? Math.max(...this.pits.map(pit => pit.x + pit.width))
-        : -Infinity;
-      const furthestX = Math.max(obstacleMax, pitMax);
-      if (spawnX - furthestX < this.minObstacleSpacing) {
-        return false;
-      }
-    }
-
-    if (type === 'pit') {
-      this.pits.push({
-        x: spawnX,
-        width: this.pitWidth
-      });
-      this.spawnIndex += 1;
-      return true;
-    }
-
-    const sprite = this.pickColumnSprite();
-    const isLow = type === 'low';
-    const isBar = type === 'bar';
-    const segments = isLow ? 2 : 1;
-    const obstacleY = isBar ? this.groundLevel + this.spriteTile * 1.4 : this.groundLevel;
-
-    this.obstacles.push({
-      x: spawnX,
-      y: obstacleY,
-      width: this.spriteTile,
-      height: this.spriteTile * segments,
-      segments: Array.from({ length: segments }, (_, index) => index),
-      spriteX: sprite.spriteX,
-      spriteY: sprite.spriteY,
-      type
-    });
-    this.spawnIndex += 1;
-    return true;
-  }
-  
-  spawnCollectible() {
-    const sprite = this.pickCherrySprite();
-    const lane = this.candyPattern[this.candyIndex % this.candyPattern.length];
-    const isGolden = this.candyIndex % this.goldenCandyInterval === 0 && this.candyIndex !== 0;
-    const spawnX = 840;
-    const spawnY = lane === 'air' ? this.airCandyHeight : this.groundCandyHeight;
-
-    this.collectibles.push({
-      x: spawnX,
-      y: spawnY,
-      width: this.spriteTile,
-      height: this.spriteTile,
-      collected: false,
-      spriteX: sprite.spriteX,
-      spriteY: sprite.spriteY,
-      kind: isGolden ? 'golden' : 'standard'
-    });
-    this.candyIndex += 1;
-  }
-  
-  checkCollisions() {
-    // Check obstacle collisions
-    for (const obstacle of this.obstacles) {
-      if (
-        this.player.x < obstacle.x + obstacle.width &&
-        this.player.x + this.player.width > obstacle.x &&
-        this.player.y < obstacle.y + obstacle.height &&
-        this.player.y + this.player.height > obstacle.y
-      ) {
-        this.endRunner();
-        return;
-      }
-    }
-    
-    // Check collectible collisions
-    for (let i = 0; i < this.collectibles.length; i++) {
-      const collectible = this.collectibles[i];
-      if (!collectible.collected &&
-          this.player.x < collectible.x + collectible.width &&
-          this.player.x + this.player.width > collectible.x &&
-          this.player.y < collectible.y + collectible.height &&
-          this.player.y + this.player.height > collectible.y) {
-        collectible.collected = true;
-        const wasAirborne = !this.isPlayerGrounded();
-        this.score += collectible.kind === 'golden' ? 20 : 10;
-        if (wasAirborne) {
-          this.airComboCount += 1;
-          if (this.airComboCount > 1) {
-            this.score += 25;
-          }
-        }
-        this.collectibles.splice(i, 1);
-        i--;
-      }
-    }
-  }
-
-  private canJump() {
-    if (this.isPlayerGrounded()) {
-      return true;
-    }
-    return this.jumpCount < this.maxJumps;
-  }
-
-  private buildGroundTiles() {
-    const tiles: Array<{ x: number; spriteX: number; spriteY: number }> = [];
-    const tileCount = Math.ceil(this.worldWidth / this.spriteTile) + 2;
-
-    for (let i = 0; i < tileCount; i++) {
-      const sprite = this.pickGroundSprite();
-      tiles.push({
-        x: i * this.spriteTile,
-        spriteX: sprite.spriteX,
-        spriteY: sprite.spriteY
-      });
-    }
-
-    return tiles;
-  }
-
-  private updateGroundTiles(deltaSeconds: number) {
-    if (this.groundTiles.length === 0) {
-      return;
-    }
-
-    let maxX = -Infinity;
-    for (const tile of this.groundTiles) {
-      tile.x -= this.gameSpeed * deltaSeconds;
-      if (tile.x > maxX) {
-        maxX = tile.x;
-      }
-    }
-
-    for (const tile of this.groundTiles) {
-      if (tile.x <= -this.spriteTile) {
-        const sprite = this.pickGroundSprite();
-        tile.x = maxX + this.spriteTile;
-        tile.spriteX = sprite.spriteX;
-        tile.spriteY = sprite.spriteY;
-        maxX = tile.x;
-      }
-    }
-  }
-
-  private pickGroundSprite() {
-    const column = this.randomInt(this.groundColumns);
-    const row = this.randomInt(this.groundRows);
-
-    return {
-      spriteX: -column * this.spriteTile,
-      spriteY: -row * this.spriteTile
-    };
-  }
-
-  private pickColumnSprite() {
-    const column = this.randomInt(this.columnColumns);
-    const row = this.columnRow;
-
-    return {
-      spriteX: -column * this.spriteTile,
-      spriteY: -row * this.spriteTile
-    };
+    this.runnerEngine.step(deltaSeconds, this.consumeRunnerInput());
+    this.syncRunnerView();
   }
 
   private pickCherrySprite() {
@@ -1043,48 +778,76 @@ export class EmbeddedGameComponent implements OnInit, AfterViewInit, OnDestroy {
     };
   }
 
-  private updatePits(deltaSeconds: number) {
-    this.pits.forEach(pit => {
-      pit.x -= this.gameSpeed * deltaSeconds;
+  private consumeRunnerInput(): RunnerInput {
+    const input = {
+      jumpPressed: this.runnerJumpQueued,
+      restartPressed: this.runnerRestartQueued,
+      resetPressed: this.runnerResetQueued
+    };
+    this.runnerJumpQueued = false;
+    this.runnerRestartQueued = false;
+    this.runnerResetQueued = false;
+    return input;
+  }
+
+  private syncRunnerView() {
+    const state = this.runnerEngine.state;
+    const cherry = this.pickCherrySprite();
+    const obstacleSprites: Record<RunnerState['obstacles'][number]['type'], { spriteX: number; spriteY: number }> = {
+      spike: { spriteX: -2 * this.spriteTile, spriteY: -this.columnRow * this.spriteTile },
+      low: { spriteX: -4 * this.spriteTile, spriteY: -this.columnRow * this.spriteTile },
+      bar: { spriteX: -6 * this.spriteTile, spriteY: -this.columnRow * this.spriteTile }
+    };
+
+    this.player.x = state.player.x;
+    this.player.y = state.player.y;
+    this.player.width = state.player.width;
+    this.player.height = state.player.height;
+    this.player.isJumping = !state.player.grounded;
+
+    this.obstacles = state.obstacles.map((obstacle: RunnerState['obstacles'][number]) => {
+      const segments = Math.max(1, Math.round(obstacle.height / this.spriteTile));
+      const sprite = obstacleSprites[obstacle.type];
+      return {
+        x: obstacle.x,
+        y: obstacle.y,
+        width: obstacle.width,
+        height: obstacle.height,
+        segments: Array.from({ length: segments }, (_, index) => index),
+        spriteX: sprite.spriteX,
+        spriteY: sprite.spriteY,
+        type: obstacle.type
+      };
     });
-    this.pits = this.pits.filter(pit => pit.x + pit.width > -100);
+
+    this.collectibles = state.pickups.map((pickup: RunnerState['pickups'][number]) => ({
+      x: pickup.x,
+      y: pickup.y,
+      width: pickup.width,
+      height: pickup.height,
+      collected: pickup.collected,
+      spriteX: cherry.spriteX,
+      spriteY: cherry.spriteY,
+      kind: pickup.kind
+    }));
+
+    this.groundTiles = this.buildGroundTiles(state.distance);
   }
 
-  private isPlayerGrounded(): boolean {
-    if (this.player.y > this.groundLevel + this.jumpGroundTolerance) {
-      return false;
+  private buildGroundTiles(distance: number) {
+    const tiles: Array<{ x: number; spriteX: number; spriteY: number }> = [];
+    const tileCount = Math.ceil(this.worldWidth / this.spriteTile) + 2;
+    const offset = distance % this.spriteTile;
+    for (let i = 0; i < tileCount; i += 1) {
+      const column = i % this.groundColumns;
+      const row = Math.floor(i / this.groundColumns) % this.groundRows;
+      tiles.push({
+        x: i * this.spriteTile - offset,
+        spriteX: -column * this.spriteTile,
+        spriteY: -row * this.spriteTile
+      });
     }
-    const playerCenter = this.player.x + this.player.width * 0.5;
-    return !this.isOverPit(playerCenter);
-  }
-
-  private isOverPit(x: number): boolean {
-    return this.pits.some(pit => x >= pit.x && x <= pit.x + pit.width);
-  }
-
-  private getSpawnInterval() {
-    if (this.elapsedSeconds <= this.spawnRampStart) {
-      return this.spawnIntervalEarly;
-    }
-    if (this.elapsedSeconds >= this.spawnRampEnd) {
-      return this.spawnIntervalLate;
-    }
-    const t = (this.elapsedSeconds - this.spawnRampStart) / (this.spawnRampEnd - this.spawnRampStart);
-    return this.spawnIntervalEarly + (this.spawnIntervalLate - this.spawnIntervalEarly) * t;
-  }
-
-  private endRunner() {
-    this.runnerState = 'over';
-    this.stopGame();
-  }
-
-  private randomInt(max: number) {
-    return Math.floor(this.random() * max);
-  }
-
-  private random() {
-    this.runnerSeed = (this.runnerSeed * 1664525 + 1013904223) >>> 0;
-    return this.runnerSeed / 0x100000000;
+    return tiles;
   }
 
   private isHyperlaneControlKey(code: string): boolean {

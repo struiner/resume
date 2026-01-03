@@ -166,6 +166,21 @@ import { ComicBorderService } from './comic-border.service';
       --comic-border-color: rgba(46, 242, 255, 0.9);
       --comic-border-filter: drop-shadow(0 0 2px rgba(46, 242, 255, 0.5));
     }
+
+    :host-context(.theme-cell) {
+      --comic-border-color: rgba(120, 255, 210, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(120, 255, 210, 0.5));
+    }
+
+    :host-context(.theme-hanse) {
+      --comic-border-color: rgba(214, 182, 120, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(214, 182, 120, 0.5));
+    }
+
+    :host-context(.theme-json) {
+      --comic-border-color: rgba(120, 210, 255, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(120, 210, 255, 0.5));
+    }
     
     /* Default theme */
     :host-context(.theme-default) {
@@ -190,7 +205,7 @@ import { ComicBorderService } from './comic-border.service';
   ]
 })
 export class ComicMaskedTileComponent implements OnInit {
-  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'default' = 'default';
+  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'cell' | 'hanse' | 'json' | 'default' = 'default';
   @Input() width = 200;
   @Input() height = 100;
   @Input() tileX = 0;

@@ -302,6 +302,87 @@ import { ComicMaskedTileComponent } from './comic-masked-tile.component';
       --tile-glow: rgba(120, 210, 255, 0.5);
       --tile-accent: #c8f4ff;
     }
+
+    .theme-rainbow-millipedes{
+      --tile-bg: linear-gradient(135deg, #ff5fd7, #ffd86b 30%, #7cffd4 60%, #6aa8ff);
+      --tile-border: #ffe37a;
+      --tile-glow: rgba(255, 205, 120, 0.55);
+      --tile-accent: #fff1c4;
+    }
+
+    .theme-sediment{
+      --tile-bg: linear-gradient(180deg, #3d2b1f, #6a4a36 40%, #96715a 80%, #c3a287);
+      --tile-border: #d2b59c;
+      --tile-glow: rgba(210, 181, 156, 0.45);
+      --tile-accent: #f0e0d4;
+    }
+
+    .theme-zebra-pillbugs{
+      --tile-bg: repeating-linear-gradient(135deg, #1a1a1a 0 10px, #f2f2f2 10px 20px);
+      --tile-border: #e0e0e0;
+      --tile-glow: rgba(240, 240, 240, 0.45);
+      --tile-accent: #f8f8f8;
+    }
+
+    .theme-ants{
+      --tile-bg: radial-gradient(circle at 20% 20%, rgba(255, 140, 90, 0.3) 0%, transparent 45%),
+        linear-gradient(135deg, #2b0a0a, #4b1a12 50%, #1a0a0a);
+      --tile-border: #ff9860;
+      --tile-glow: rgba(255, 152, 96, 0.5);
+      --tile-accent: #ffd1b0;
+    }
+
+    .theme-dogs{
+      --tile-bg: radial-gradient(circle at 25% 30%, rgba(255, 236, 200, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 80% 60%, rgba(255, 200, 150, 0.25) 0%, transparent 60%),
+        #5a3d2b;
+      --tile-border: #f1c59b;
+      --tile-glow: rgba(241, 197, 155, 0.55);
+      --tile-accent: #ffe3c7;
+    }
+
+    .theme-succulent-plants{
+      --tile-bg: radial-gradient(circle at 20% 20%, rgba(150, 255, 200, 0.35) 0%, transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(120, 220, 180, 0.25) 0%, transparent 60%),
+        #0b2a1e;
+      --tile-border: #9cffc9;
+      --tile-glow: rgba(156, 255, 201, 0.5);
+      --tile-accent: #d9ffe9;
+    }
+
+    .theme-water-systems{
+      --tile-bg: radial-gradient(circle at 70% 20%, rgba(64, 210, 255, 0.35) 0%, transparent 55%),
+        radial-gradient(circle at 25% 70%, rgba(80, 160, 255, 0.25) 0%, transparent 60%),
+        #041a2c;
+      --tile-border: #65d5ff;
+      --tile-glow: rgba(101, 213, 255, 0.55);
+      --tile-accent: #c6f2ff;
+    }
+
+    .theme-biosys{
+      --tile-bg: radial-gradient(circle at 25% 20%, rgba(100, 255, 170, 0.35) 0%, transparent 55%),
+        radial-gradient(circle at 75% 70%, rgba(80, 200, 255, 0.25) 0%, transparent 60%),
+        #04261f;
+      --tile-border: #7dffc3;
+      --tile-glow: rgba(125, 255, 195, 0.5);
+      --tile-accent: #d8fff1;
+    }
+
+    .theme-general-relativity{
+      --tile-bg: radial-gradient(circle at 50% 45%, rgba(255, 240, 160, 0.35) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0f1e, #141a2f);
+      --tile-border: #ffe49a;
+      --tile-glow: rgba(255, 228, 154, 0.5);
+      --tile-accent: #fff0c2;
+    }
+
+    .theme-arcane-summoning-circle{
+      --tile-bg: radial-gradient(circle at 50% 50%, rgba(185, 140, 255, 0.35) 0%, transparent 55%),
+        linear-gradient(135deg, #14081f, #2b1035);
+      --tile-border: #cda8ff;
+      --tile-glow: rgba(205, 168, 255, 0.6);
+      --tile-accent: #f1ddff;
+    }
   `]
 })
 export class ComicExpandableTileComponent implements OnInit, OnDestroy {
@@ -313,7 +394,7 @@ export class ComicExpandableTileComponent implements OnInit, OnDestroy {
   private activePanel: HTMLElement | null = null;
   private openTimer: number | null = null;
 
-  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'cell' | 'hanse' | 'json' | 'default' = 'default';
+  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'cell' | 'hanse' | 'json' | 'rainbow-millipedes' | 'sediment' | 'zebra-pillbugs' | 'ants' | 'dogs' | 'succulent-plants' | 'water-systems' | 'biosys' | 'general-relativity' | 'arcane-summoning-circle' | 'default' = 'default';
   @Input() tileWidth = 200;
   @Input() tileHeight = 100;
   @Input() tileX = 0;

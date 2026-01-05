@@ -206,6 +206,12 @@
   display: grid;
 }
 
+.ad-column.extra,
+.tile-column.extra,
+.ad-spacer.extra {
+  display: none;
+}
+
 :host-context(.tiles-expanded) .resume {
   opacity: 0;
   pointer-events: none;
@@ -497,6 +503,46 @@
   gap: 14px;
 }
 
+.tile-dialog.rainbow-millipedes {
+  color: #fff1c4;
+}
+
+.tile-dialog.sediment {
+  color: #f0e0d4;
+}
+
+.tile-dialog.zebra-pillbugs {
+  color: #f8f8f8;
+}
+
+.tile-dialog.ants {
+  color: #ffd1b0;
+}
+
+.tile-dialog.dogs {
+  color: #ffe3c7;
+}
+
+.tile-dialog.succulent-plants {
+  color: #d9ffe9;
+}
+
+.tile-dialog.water-systems {
+  color: #c6f2ff;
+}
+
+.tile-dialog.biosys {
+  color: #d8fff1;
+}
+
+.tile-dialog.general-relativity {
+  color: #fff0c2;
+}
+
+.tile-dialog.arcane-summoning-circle {
+  color: #f1ddff;
+}
+
 .tile-dialog.json .json-interpreter-host {
   flex: 1;
   min-height: 0;
@@ -567,6 +613,570 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.tile-art {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: #0c1016;
+  color: #f5f0ff;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.tile-art .tile-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--tile-title-font, var(--font-display));
+  color: var(--tile-title-color, #f5f0ff);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-shadow: var(--tile-title-shadow, 0 2px 8px rgba(0, 0, 0, 0.45));
+}
+
+.tile-art .tile-subtitle {
+  position: relative;
+  z-index: 1;
+  font-family: var(--tile-subtitle-font, var(--font-body));
+  color: var(--tile-subtitle-color, rgba(245, 240, 255, 0.75));
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.52rem;
+  font-weight: 600;
+  text-shadow: var(--tile-title-shadow, 0 2px 8px rgba(0, 0, 0, 0.45));
+}
+
+.tile-art::before,
+.tile-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.tile-art:hover {
+  transform: translateY(-4px) scale(1.02);
+  filter: saturate(1.2) brightness(1.05);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(255, 255, 255, 0.1);
+}
+
+.tile-art:hover::after {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.tile-art:hover::before,
+.tile-art:hover::after {
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.tile-art.rainbow-millipedes {
+  background: linear-gradient(135deg, #c945a9, #caa44a 30%, #4fb78f 60%, #3e6bb3);
+  --tile-title-font: var(--font-display);
+  --tile-title-color: #fff0ff;
+  --tile-subtitle-color: rgba(255, 244, 210, 0.85);
+}
+
+.tile-art.rainbow-millipedes::before {
+  background: repeating-radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.25) 0 6px, transparent 6px 20px);
+  opacity: 0.7;
+}
+
+.tile-art.rainbow-millipedes::after {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.35), transparent 40%, rgba(255, 255, 255, 0.3));
+  mix-blend-mode: screen;
+  opacity: 0.35;
+}
+
+.tile-art.rainbow-millipedes:hover {
+  filter: saturate(1.35) brightness(1.08);
+}
+
+.tile-art.rainbow-millipedes:hover::after {
+  animation: spectrumBleed 2.4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.tile-art.rainbow-millipedes:hover::before {
+  animation: millipedePulse 2.6s ease-in-out infinite;
+}
+
+.tile-art.rainbow-millipedes:hover::after {
+  animation: spectrumSweep 2.2s linear infinite;
+}
+
+.tile-art.sediment {
+  background: repeating-linear-gradient(180deg, #3d2b1f 0 10px, #6a4a36 10px 20px, #96715a 20px 32px, #c3a287 32px 44px);
+  --tile-title-font: var(--font-display);
+  --tile-title-color: #f3e6d9;
+  --tile-subtitle-color: rgba(243, 230, 217, 0.7);
+}
+
+.tile-art.sediment::before {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 40%, rgba(255, 255, 255, 0.06) 70%, transparent);
+}
+
+.tile-art.sediment::after {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), transparent 55%);
+  opacity: 0.35;
+}
+
+.tile-art.sediment:hover::before {
+  animation: sedimentErode 2.8s ease-in-out infinite;
+}
+
+.tile-art.sediment:hover::after {
+  animation: sedimentFall 2.2s ease-in-out infinite;
+}
+
+.tile-art.sediment:hover::before {
+  animation: sedimentDrift 3.2s ease-in-out infinite;
+}
+
+.tile-art.sediment:hover::after {
+  animation: sedimentShimmer 2.8s ease-in-out infinite;
+}
+
+.tile-art.zebra-pillbugs {
+  background: repeating-linear-gradient(135deg, #111 0 12px, #f2f2f2 12px 24px);
+  background-size: 120% 120%;
+  --tile-title-font: var(--font-body);
+  --tile-title-color: #f8f8f8;
+  --tile-subtitle-color: rgba(255, 255, 255, 0.7);
+  --tile-title-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+}
+
+.tile-art.zebra-pillbugs .tile-title {
+  color: transparent;
+  background-image: repeating-linear-gradient(90deg, #ffffff 0 8px, #0b0b0b 8px 16px);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 1px 0 rgba(40, 40, 40, 0.9),
+    0 -1px 0 rgba(40, 40, 40, 0.9),
+    1px 0 0 rgba(40, 40, 40, 0.9),
+    -1px 0 0 rgba(40, 40, 40, 0.9),
+    0 0 8px rgba(255, 255, 255, 0.55);
+}
+
+.tile-art.zebra-pillbugs::before {
+  background:
+    radial-gradient(ellipse 8px 5px at 12% 55%, rgba(0, 0, 0, 0.25) 0 70%, transparent 72%),
+    radial-gradient(ellipse 9px 5px at 45% 60%, rgba(0, 0, 0, 0.24) 0 70%, transparent 72%),
+    radial-gradient(ellipse 8px 5px at 78% 55%, rgba(0, 0, 0, 0.25) 0 70%, transparent 72%);
+}
+
+.tile-art.zebra-pillbugs::after {
+  background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0 6px, transparent 6px 14px);
+  opacity: 0.25;
+}
+
+.tile-art.zebra-pillbugs:hover {
+  animation: zebraBackgroundDrift 4s linear infinite;
+}
+
+.tile-art.zebra-pillbugs:hover::before {
+  animation: zebraPillbugsLeftRight 2.4s steps(2, end) infinite;
+}
+
+.tile-art.zebra-pillbugs:hover::after {
+  animation: zebraPillbugsAlt 2.2s steps(2, end) infinite;
+}
+
+.tile-art.ants {
+  background: linear-gradient(135deg, #2b0a0a, #4b1a12 50%, #1a0a0a);
+  --tile-title-font: var(--font-body);
+  --tile-title-color: #ffd1b0;
+  --tile-subtitle-color: rgba(255, 209, 176, 0.75);
+}
+
+.tile-art.ants::before {
+  background: radial-gradient(circle, rgba(255, 152, 96, 0.7) 0 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.8;
+}
+
+.tile-art.ants::after {
+  background: radial-gradient(circle at 70% 30%, rgba(255, 152, 96, 0.35) 0 14px, transparent 18px);
+  opacity: 0.4;
+}
+
+.tile-art.ants:hover::before {
+  animation: antDrift 1.4s linear infinite;
+}
+
+.tile-art.ants:hover::after {
+  animation: antSignal 2s ease-in-out infinite;
+}
+
+.tile-art.dogs {
+  background: linear-gradient(135deg, #5a3d2b, #8b5a3c 60%, #5a3d2b);
+  --tile-title-font: var(--font-body);
+  --tile-title-color: #ffe3c7;
+  --tile-subtitle-color: rgba(255, 227, 199, 0.75);
+}
+
+.tile-art.dogs::before {
+  background:
+    radial-gradient(circle at 25% 35%, rgba(255, 236, 200, 0.45) 0 6px, transparent 7px),
+    radial-gradient(circle at 70% 50%, rgba(255, 236, 200, 0.35) 0 7px, transparent 8px);
+  opacity: 0.8;
+}
+
+.tile-art.dogs::after {
+  background:
+    radial-gradient(circle at 20% 70%, rgba(255, 236, 200, 0.35) 0 14px, transparent 18px),
+    radial-gradient(circle at 70% 55%, rgba(255, 236, 200, 0.25) 0 16px, transparent 22px);
+  opacity: 0.45;
+}
+
+.tile-art.dogs:hover::before {
+  animation: pawPrints 2.8s ease-in-out infinite;
+}
+
+.tile-art.dogs:hover::after {
+  animation: scentWhisps 2.6s ease-in-out infinite;
+}
+
+.tile-art.succulent-plants {
+  background: radial-gradient(circle at 30% 50%, #1c5b46 0%, #0b2a1e 60%);
+  --tile-title-font: var(--font-display);
+  --tile-title-color: #d9ffe9;
+  --tile-subtitle-color: rgba(217, 255, 233, 0.7);
+}
+
+.tile-art.succulent-plants::before {
+  background:
+    radial-gradient(circle at 45% 55%, rgba(156, 255, 201, 0.4) 0 18px, transparent 20px),
+    radial-gradient(circle at 55% 45%, rgba(120, 220, 180, 0.35) 0 14px, transparent 16px);
+}
+
+.tile-art.succulent-plants::after {
+  background: radial-gradient(circle at 50% 50%, rgba(156, 255, 201, 0.3) 0 26px, transparent 36px);
+  opacity: 0.4;
+}
+
+.tile-art.succulent-plants:hover::before {
+  animation: succulentBloom 3s ease-in-out infinite;
+}
+
+.tile-art.succulent-plants:hover::after {
+  animation: succulentSpin 4.2s linear infinite;
+}
+
+.tile-art.succulent-plants:hover {
+  animation: succulentSway 3.4s ease-in-out infinite;
+}
+
+.tile-art.water-systems {
+  background: linear-gradient(135deg, #041a2c, #0c2f4a 60%, #041a2c);
+  --tile-title-font: var(--font-body);
+  --tile-title-color: #c6f2ff;
+  --tile-subtitle-color: rgba(198, 242, 255, 0.7);
+}
+
+.tile-art.water-systems::before {
+  background:
+    repeating-linear-gradient(90deg, rgba(101, 213, 255, 0.25) 0 2px, transparent 2px 28px),
+    repeating-linear-gradient(0deg, rgba(80, 160, 255, 0.2) 0 2px, transparent 2px 24px);
+  opacity: 0.7;
+}
+
+.tile-art.water-systems::after {
+  background: radial-gradient(circle at 70% 40%, rgba(101, 213, 255, 0.35) 0 18px, transparent 28px);
+  opacity: 0.35;
+}
+
+.tile-art.water-systems:hover::before {
+  animation: waterFlow 2.2s linear infinite;
+}
+
+.tile-art.water-systems:hover::after {
+  animation: waterPulse 2.8s ease-in-out infinite;
+}
+
+.tile-art.water-systems:hover {
+  animation: waterSurface 3.2s linear infinite;
+}
+
+.tile-art.biosys {
+  background: radial-gradient(circle at 50% 40%, #0d3a2d 0%, #04261f 60%);
+  --tile-title-font: var(--font-body);
+  --tile-title-color: #d8fff1;
+  --tile-subtitle-color: rgba(216, 255, 241, 0.7);
+}
+
+.tile-art.biosys::before {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(125, 255, 195, 0.4) 0 10px, transparent 12px),
+    radial-gradient(circle at 65% 60%, rgba(80, 200, 255, 0.35) 0 12px, transparent 14px);
+}
+
+.tile-art.biosys::after {
+  background: radial-gradient(circle at 45% 55%, rgba(125, 255, 195, 0.35) 0 20px, transparent 30px);
+  opacity: 0.35;
+}
+
+.tile-art.biosys:hover::before {
+  animation: biosysBreath 2.1s ease-in-out infinite;
+}
+
+.tile-art.biosys:hover::after {
+  animation: biosysOrbit 3.2s linear infinite;
+}
+
+.tile-art.biosys:hover {
+  animation: biosysPulse 2.6s ease-in-out infinite;
+}
+
+.tile-art.general-relativity {
+  background: linear-gradient(135deg, #0a0f1e, #141a2f);
+  --tile-title-font: var(--font-display);
+  --tile-title-color: #fff0c2;
+  --tile-subtitle-color: rgba(255, 240, 194, 0.7);
+}
+
+.tile-art.general-relativity::before {
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 228, 154, 0.2) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(0deg, rgba(255, 228, 154, 0.15) 0 1px, transparent 1px 26px),
+    radial-gradient(circle at 50% 50%, rgba(255, 240, 160, 0.35) 0 18px, transparent 28px);
+}
+
+.tile-art.general-relativity::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 228, 154, 0.4) 0 24px, transparent 36px);
+  opacity: 0.35;
+}
+
+.tile-art.general-relativity:hover::before {
+  animation: relativityGrid 2.2s ease-in-out infinite;
+}
+
+.tile-art.general-relativity:hover::after {
+  animation: gravityWell 2.6s ease-in-out infinite;
+}
+
+.tile-art.general-relativity:hover {
+  animation: relativityLens 3s ease-in-out infinite;
+}
+
+.tile-art.arcane-summoning-circle {
+  background: linear-gradient(135deg, #14081f, #2b1035);
+  --tile-title-font: var(--font-display);
+  --tile-title-color: #f1ddff;
+  --tile-subtitle-color: rgba(241, 221, 255, 0.75);
+}
+
+.tile-art.arcane-summoning-circle::before {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(205, 168, 255, 0.3) 0 18px, transparent 20px),
+    repeating-conic-gradient(from 0deg, rgba(205, 168, 255, 0.25) 0 12deg, transparent 12deg 36deg);
+  opacity: 0.7;
+}
+
+.tile-art.arcane-summoning-circle::after {
+  background: radial-gradient(circle at 50% 50%, rgba(205, 168, 255, 0.35) 0 30px, transparent 40px);
+  opacity: 0.35;
+}
+
+.tile-art.arcane-summoning-circle:hover::before {
+  animation: arcaneSpin 2.6s linear infinite;
+}
+
+.tile-art.arcane-summoning-circle:hover::after {
+  animation: arcanePulse 1.9s ease-in-out infinite;
+}
+
+.tile-art.arcane-summoning-circle:hover {
+  animation: arcaneFlicker 2.4s ease-in-out infinite;
+}
+
+@keyframes spectrumBleed {
+  0% { transform: scale(1) translateX(-8%); opacity: 0.35; }
+  50% { transform: scale(1.18) translateX(8%); opacity: 0.8; }
+  100% { transform: scale(1) translateX(-8%); opacity: 0.35; }
+}
+
+@keyframes sedimentErode {
+  0% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(10px); opacity: 0.9; }
+  100% { transform: translateY(0); opacity: 0.5; }
+}
+
+@keyframes sedimentFall {
+  0% { transform: translateY(-6px); opacity: 0.2; }
+  50% { transform: translateY(8px); opacity: 0.6; }
+  100% { transform: translateY(-6px); opacity: 0.2; }
+}
+
+@keyframes zebraBackgroundDrift {
+  0% { background-position: 0% 0%; }
+  100% { background-position: -20% 0%; }
+}
+
+@keyframes zebraPillbugsLeftRight {
+  0% { transform: translateX(-6px); }
+  50% { transform: translateX(10px); }
+  100% { transform: translateX(-6px); }
+}
+
+@keyframes zebraPillbugsAlt {
+  0% { transform: translateX(6px); opacity: 0.2; }
+  50% { transform: translateX(-10px); opacity: 0.55; }
+  100% { transform: translateX(6px); opacity: 0.2; }
+}
+
+@keyframes scentWhisps {
+  0% {
+    opacity: 0.25;
+    transform: translateX(0) translateY(6px) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(8px) translateY(-6px) scale(1.08);
+  }
+  100% {
+    opacity: 0.25;
+    transform: translateX(0) translateY(6px) scale(1);
+  }
+}
+
+@keyframes succulentSway {
+  0%, 100% { transform: translateY(0) scale(1.01); }
+  50% { transform: translateY(-3px) scale(1.03); }
+}
+
+@keyframes waterSurface {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 20% 0%; }
+}
+
+@keyframes biosysPulse {
+  0%, 100% { filter: saturate(1.05) brightness(1.02); }
+  50% { filter: saturate(1.3) brightness(1.08); }
+}
+
+@keyframes relativityLens {
+  0%, 100% { filter: brightness(1.02); }
+  50% { filter: brightness(1.12) contrast(1.05); }
+}
+
+@keyframes arcaneFlicker {
+  0%, 100% { filter: saturate(1.1) brightness(1.05); }
+  50% { filter: saturate(1.35) brightness(1.15); }
+}
+@keyframes spectrumSweep {
+  0% { transform: translateX(-30%) scale(1); opacity: 0.25; }
+  50% { opacity: 0.6; }
+  100% { transform: translateX(30%) scale(1.08); opacity: 0.25; }
+}
+
+@keyframes millipedePulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 0.9; }
+}
+
+@keyframes sedimentDrift {
+  0%, 100% { transform: translateY(0); opacity: 0.65; }
+  50% { transform: translateY(-6px); opacity: 0.9; }
+}
+
+@keyframes sedimentShimmer {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes zebraSlide {
+  0% { transform: translateX(-10%); }
+  100% { transform: translateX(10%); }
+}
+
+@keyframes zebraFlash {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes antDrift {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes antSignal {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+}
+
+@keyframes pawPrints {
+  0%, 100% { opacity: 0.6; transform: translateY(0); }
+  50% { opacity: 0.9; transform: translateY(-4px); }
+}
+
+@keyframes warmGlow {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes succulentBloom {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+
+@keyframes succulentSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes waterFlow {
+  0% { transform: translateX(-8px); }
+  100% { transform: translateX(8px); }
+}
+
+@keyframes waterPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.06); }
+}
+
+@keyframes biosysBreath {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.05); }
+}
+
+@keyframes biosysOrbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes relativityGrid {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.04); }
+}
+
+@keyframes gravityWell {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+@keyframes arcaneSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes arcanePulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.08); }
 }
 
 .hero {
@@ -961,6 +1571,31 @@
 
   .toggle-button {
     align-self: flex-start;
+  }
+}
+
+@media (min-width: 1680px) {
+  .resume-layout {
+    max-width: 1880px;
+    grid-template-columns:
+      minmax(180px, 220px)
+      minmax(180px, 220px)
+      minmax(0, 1fr)
+      minmax(180px, 220px)
+      minmax(180px, 220px);
+  }
+
+  .resume {
+    grid-column: 3;
+  }
+
+  .ad-column.extra,
+  .tile-column.extra {
+    display: grid;
+  }
+
+  .ad-spacer.extra {
+    display: block;
   }
 }
 

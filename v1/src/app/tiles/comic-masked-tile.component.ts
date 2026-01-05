@@ -181,6 +181,56 @@ import { ComicBorderService } from './comic-border.service';
       --comic-border-color: rgba(120, 210, 255, 0.9);
       --comic-border-filter: drop-shadow(0 0 2px rgba(120, 210, 255, 0.5));
     }
+
+    :host-context(.theme-rainbow-millipedes) {
+      --comic-border-color: rgba(255, 205, 120, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(255, 205, 120, 0.5));
+    }
+
+    :host-context(.theme-sediment) {
+      --comic-border-color: rgba(210, 181, 156, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(210, 181, 156, 0.45));
+    }
+
+    :host-context(.theme-zebra-pillbugs) {
+      --comic-border-color: rgba(230, 230, 230, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(230, 230, 230, 0.5));
+    }
+
+    :host-context(.theme-ants) {
+      --comic-border-color: rgba(255, 152, 96, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(255, 152, 96, 0.5));
+    }
+
+    :host-context(.theme-dogs) {
+      --comic-border-color: rgba(241, 197, 155, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(241, 197, 155, 0.5));
+    }
+
+    :host-context(.theme-succulent-plants) {
+      --comic-border-color: rgba(156, 255, 201, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(156, 255, 201, 0.5));
+    }
+
+    :host-context(.theme-water-systems) {
+      --comic-border-color: rgba(101, 213, 255, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(101, 213, 255, 0.5));
+    }
+
+    :host-context(.theme-biosys) {
+      --comic-border-color: rgba(125, 255, 195, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(125, 255, 195, 0.5));
+    }
+
+    :host-context(.theme-general-relativity) {
+      --comic-border-color: rgba(255, 228, 154, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(255, 228, 154, 0.5));
+    }
+
+    :host-context(.theme-arcane-summoning-circle) {
+      --comic-border-color: rgba(205, 168, 255, 0.9);
+      --comic-border-filter: drop-shadow(0 0 2px rgba(205, 168, 255, 0.55));
+    }
     
     /* Default theme */
     :host-context(.theme-default) {
@@ -205,7 +255,7 @@ import { ComicBorderService } from './comic-border.service';
   ]
 })
 export class ComicMaskedTileComponent implements OnInit {
-  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'cell' | 'hanse' | 'json' | 'default' = 'default';
+  @Input() theme: 'candy' | 'hyperlane' | 'sentient' | 'mana' | 'glitch' | 'quantum' | 'factory' | 'port' | 'cell' | 'hanse' | 'json' | 'rainbow-millipedes' | 'sediment' | 'zebra-pillbugs' | 'ants' | 'dogs' | 'succulent-plants' | 'water-systems' | 'biosys' | 'general-relativity' | 'arcane-summoning-circle' | 'default' = 'default';
   @Input() width = 200;
   @Input() height = 100;
   @Input() tileX = 0;

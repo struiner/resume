@@ -135,6 +135,135 @@
 
   <main class="resume-layout">
     @if (!adsHidden() && !adsBypass()) {
+      <aside class="ad-column extra left">
+        <div class="ad-panel">
+          <comic-expandable-tile theme="rainbow-millipedes" [tileX]="2" [tileY]="0">
+            <div tile class="tile-art rainbow-millipedes">
+              <div class="tile-title">RAINBOW MILLIPEDES</div>
+              <div class="tile-subtitle">Chromatic swarm</div>
+            </div>
+            <div dialog class="tile-dialog rainbow-millipedes">
+              <div class="tile-dialog-title">RAINBOW MILLIPEDES</div>
+              <div class="tile-dialog-subtitle">Chromatic swarm cascade.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="sediment" [tileX]="2" [tileY]="1">
+            <div tile class="tile-art sediment">
+              <div class="tile-title">SEDIMENT</div>
+              <div class="tile-subtitle">Strata layers</div>
+            </div>
+            <div dialog class="tile-dialog sediment">
+              <div class="tile-dialog-title">SEDIMENT</div>
+              <div class="tile-dialog-subtitle">Compressed layers of time.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="zebra-pillbugs" [tileX]="2" [tileY]="2">
+            <div tile class="tile-art zebra-pillbugs">
+              <div class="tile-title">ZEBRA PILLBUGS</div>
+              <div class="tile-subtitle">Striped armor</div>
+            </div>
+            <div dialog class="tile-dialog zebra-pillbugs">
+              <div class="tile-dialog-title">ZEBRA PILLBUGS</div>
+              <div class="tile-dialog-subtitle">Banding in motion.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="ants" [tileX]="2" [tileY]="3">
+            <div tile class="tile-art ants">
+              <div class="tile-title">ANTS</div>
+              <div class="tile-subtitle">Trail logic</div>
+            </div>
+            <div dialog class="tile-dialog ants">
+              <div class="tile-dialog-title">ANTS</div>
+              <div class="tile-dialog-subtitle">Swarm routes align.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="dogs" [tileX]="2" [tileY]="4">
+            <div tile class="tile-art dogs">
+              <div class="tile-title">DOGS</div>
+              <div class="tile-subtitle">Signal and scent</div>
+            </div>
+            <div dialog class="tile-dialog dogs">
+              <div class="tile-dialog-title">DOGS</div>
+              <div class="tile-dialog-subtitle">Pack routes stabilize.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+      </aside>
+    } @else if (!adsHidden() && adsBypass()) {
+      <aside class="tile-column extra left">
+        <div class="tile-panel">
+          <comic-expandable-tile theme="rainbow-millipedes" [tileX]="2" [tileY]="0">
+            <div tile class="tile-art rainbow-millipedes">
+              <div class="tile-title">RAINBOW MILLIPEDES</div>
+              <div class="tile-subtitle">Chromatic swarm</div>
+            </div>
+            <div dialog class="tile-dialog rainbow-millipedes">
+              <div class="tile-dialog-title">RAINBOW MILLIPEDES</div>
+              <div class="tile-dialog-subtitle">Chromatic swarm cascade.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="sediment" [tileX]="2" [tileY]="1">
+            <div tile class="tile-art sediment">
+              <div class="tile-title">SEDIMENT</div>
+              <div class="tile-subtitle">Strata layers</div>
+            </div>
+            <div dialog class="tile-dialog sediment">
+              <div class="tile-dialog-title">SEDIMENT</div>
+              <div class="tile-dialog-subtitle">Compressed layers of time.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="zebra-pillbugs" [tileX]="2" [tileY]="2">
+            <div tile class="tile-art zebra-pillbugs">
+              <div class="tile-title">ZEBRA PILLBUGS</div>
+              <div class="tile-subtitle">Striped armor</div>
+            </div>
+            <div dialog class="tile-dialog zebra-pillbugs">
+              <div class="tile-dialog-title">ZEBRA PILLBUGS</div>
+              <div class="tile-dialog-subtitle">Banding in motion.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="ants" [tileX]="2" [tileY]="3">
+            <div tile class="tile-art ants">
+              <div class="tile-title">ANTS</div>
+              <div class="tile-subtitle">Trail logic</div>
+            </div>
+            <div dialog class="tile-dialog ants">
+              <div class="tile-dialog-title">ANTS</div>
+              <div class="tile-dialog-subtitle">Swarm routes align.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="dogs" [tileX]="2" [tileY]="4">
+            <div tile class="tile-art dogs">
+              <div class="tile-title">DOGS</div>
+              <div class="tile-subtitle">Signal and scent</div>
+            </div>
+            <div dialog class="tile-dialog dogs">
+              <div class="tile-dialog-title">DOGS</div>
+              <div class="tile-dialog-subtitle">Pack routes stabilize.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+      </aside>
+    } @else {
+      <div class="ad-spacer extra" aria-hidden="true"></div>
+    }
+    @if (!adsHidden() && !adsBypass()) {
       <aside class="ad-column left">
         <div class="ad-panel">
           <comic-expandable-tile theme="candy" [tileX]="0" [tileY]="0">
@@ -682,6 +811,135 @@
       </aside>
     } @else {
       <div class="ad-spacer" aria-hidden="true"></div>
+    }
+    @if (!adsHidden() && !adsBypass()) {
+      <aside class="ad-column extra right">
+        <div class="ad-panel">
+          <comic-expandable-tile theme="succulent-plants" [tileX]="3" [tileY]="0">
+            <div tile class="tile-art succulent-plants">
+              <div class="tile-title">SUCCULENT PLANTS</div>
+              <div class="tile-subtitle">Rosette bloom</div>
+            </div>
+            <div dialog class="tile-dialog succulent-plants">
+              <div class="tile-dialog-title">SUCCULENT PLANTS</div>
+              <div class="tile-dialog-subtitle">Layered botanical spirals.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="water-systems" [tileX]="3" [tileY]="1">
+            <div tile class="tile-art water-systems">
+              <div class="tile-title">WATER SYSTEMS</div>
+              <div class="tile-subtitle">Flow maps</div>
+            </div>
+            <div dialog class="tile-dialog water-systems">
+              <div class="tile-dialog-title">WATER SYSTEMS</div>
+              <div class="tile-dialog-subtitle">Hydro network routing.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="biosys" [tileX]="3" [tileY]="2">
+            <div tile class="tile-art biosys">
+              <div class="tile-title">BIOSYS</div>
+              <div class="tile-subtitle">Living circuits</div>
+            </div>
+            <div dialog class="tile-dialog biosys">
+              <div class="tile-dialog-title">BIOSYS</div>
+              <div class="tile-dialog-subtitle">Adaptive bio networks.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="general-relativity" [tileX]="3" [tileY]="3">
+            <div tile class="tile-art general-relativity">
+              <div class="tile-title">GENERAL RELATIVITY</div>
+              <div class="tile-subtitle">Gravity wells</div>
+            </div>
+            <div dialog class="tile-dialog general-relativity">
+              <div class="tile-dialog-title">GENERAL RELATIVITY</div>
+              <div class="tile-dialog-subtitle">Spacetime curvature grid.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="ad-panel">
+          <comic-expandable-tile theme="arcane-summoning-circle" [tileX]="3" [tileY]="4">
+            <div tile class="tile-art arcane-summoning-circle">
+              <div class="tile-title">ARCANE CIRCLE</div>
+              <div class="tile-subtitle">Sigil engine</div>
+            </div>
+            <div dialog class="tile-dialog arcane-summoning-circle">
+              <div class="tile-dialog-title">ARCANE SUMMONING CIRCLE</div>
+              <div class="tile-dialog-subtitle">Glyphs lock into orbit.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+      </aside>
+    } @else if (!adsHidden() && adsBypass()) {
+      <aside class="tile-column extra right">
+        <div class="tile-panel">
+          <comic-expandable-tile theme="succulent-plants" [tileX]="3" [tileY]="0">
+            <div tile class="tile-art succulent-plants">
+              <div class="tile-title">SUCCULENT PLANTS</div>
+              <div class="tile-subtitle">Rosette bloom</div>
+            </div>
+            <div dialog class="tile-dialog succulent-plants">
+              <div class="tile-dialog-title">SUCCULENT PLANTS</div>
+              <div class="tile-dialog-subtitle">Layered botanical spirals.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="water-systems" [tileX]="3" [tileY]="1">
+            <div tile class="tile-art water-systems">
+              <div class="tile-title">WATER SYSTEMS</div>
+              <div class="tile-subtitle">Flow maps</div>
+            </div>
+            <div dialog class="tile-dialog water-systems">
+              <div class="tile-dialog-title">WATER SYSTEMS</div>
+              <div class="tile-dialog-subtitle">Hydro network routing.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="biosys" [tileX]="3" [tileY]="2">
+            <div tile class="tile-art biosys">
+              <div class="tile-title">BIOSYS</div>
+              <div class="tile-subtitle">Living circuits</div>
+            </div>
+            <div dialog class="tile-dialog biosys">
+              <div class="tile-dialog-title">BIOSYS</div>
+              <div class="tile-dialog-subtitle">Adaptive bio networks.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="general-relativity" [tileX]="3" [tileY]="3">
+            <div tile class="tile-art general-relativity">
+              <div class="tile-title">GENERAL RELATIVITY</div>
+              <div class="tile-subtitle">Gravity wells</div>
+            </div>
+            <div dialog class="tile-dialog general-relativity">
+              <div class="tile-dialog-title">GENERAL RELATIVITY</div>
+              <div class="tile-dialog-subtitle">Spacetime curvature grid.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+        <div class="tile-panel">
+          <comic-expandable-tile theme="arcane-summoning-circle" [tileX]="3" [tileY]="4">
+            <div tile class="tile-art arcane-summoning-circle">
+              <div class="tile-title">ARCANE CIRCLE</div>
+              <div class="tile-subtitle">Sigil engine</div>
+            </div>
+            <div dialog class="tile-dialog arcane-summoning-circle">
+              <div class="tile-dialog-title">ARCANE SUMMONING CIRCLE</div>
+              <div class="tile-dialog-subtitle">Glyphs lock into orbit.</div>
+            </div>
+          </comic-expandable-tile>
+        </div>
+      </aside>
+    } @else {
+      <div class="ad-spacer extra" aria-hidden="true"></div>
     }
   </main>
 </div>

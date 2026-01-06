@@ -32,7 +32,10 @@ export const resumeDataFr: ResumeData = {
         birthDate: 'Date de naissance',
         nationality: 'Nationalite',
         experienceSince: 'Experience ICT',
-        maritalStatus: 'Etat civil'
+        maritalStatus: 'Etat civil',
+        favoriteColor: 'Couleur preferee',
+        favoriteFramework: 'Framework prefere',
+        driversLicense: 'Permis de conduire'
       }
     },
     personalia: {
@@ -42,7 +45,10 @@ export const resumeDataFr: ResumeData = {
       birthDate: '25-12-1981',
       nationality: 'Neerlandais',
       experienceSince: 'Depuis 2007',
-      maritalStatus: 'En concubinage'
+      maritalStatus: 'En concubinage',
+      favoriteColor: 'Vert',
+      favoriteFramework: 'Angular',
+      driversLicense: 'B'
     },
     profile: {
       paragraphs: [

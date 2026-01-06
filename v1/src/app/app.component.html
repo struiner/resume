@@ -502,7 +502,19 @@
         <div class="hero-header">
           <div class="identity">
             <p class="role">{{ data().personalia.title }}</p>
-            <h1>{{ data().personalia.name }}</h1>
+            <h1 class="hero-name" [attr.aria-label]="data().personalia.name">
+              @for (letter of nameLetters(); track letter.index) {
+                <span
+                  class="hero-letter"
+                  [class.space]="letter.char === ' '"
+                  [class.dragging]="activeLetterIndex() === letter.index"
+                  [style.transform]="'translate(' + letter.offset.x + 'px, ' + letter.offset.y + 'px)'"
+                  (pointerdown)="startLetterDrag($event, letter)"
+                >
+                  {{ letter.char === ' ' ? '\u00A0' : letter.char }}
+                </span>
+              }
+            </h1>
             <p class="location">{{ data().personalia.location }}</p>
           </div>
         </div>
@@ -537,6 +549,18 @@
             <div class="fact">
               <span class="fact-label">{{ data().labels.facts.maritalStatus }}</span>
               <span class="fact-value">{{ data().personalia.maritalStatus }}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.favoriteColor }}</span>
+              <span class="fact-value">{{ data().personalia.favoriteColor }}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.favoriteFramework }}</span>
+              <span class="fact-value">{{ data().personalia.favoriteFramework }}</span>
+            </div>
+            <div class="fact">
+              <span class="fact-label">{{ data().labels.facts.driversLicense }}</span>
+              <span class="fact-value">{{ data().personalia.driversLicense }}</span>
             </div>
           </div>
         </section>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { Language, resumeData } from './resume-data';
 import { TileCandyOverload } from './tiles/candy-overload.component';
 import { TileGlitchCollapse } from './tiles/glitch-collapse.component';
@@ -24,6 +24,7 @@ import { TileJsonInterpreter } from './tiles/json-interpreter-tile.component';
 import { JsonInterpreterComponent } from './tiles/json-interpreter.component';
 
 type SectionKey = 'overview' | 'experience' | 'skills' | 'courses';
+type NameLetter = { char: string; index: number; offset: { x: number; y: number } };
 
 @Component({
   selector: 'app-root',
@@ -62,15 +63,44 @@ export class AppComponent {
   readonly filtersOpen = signal(false);
   readonly adsHidden = signal(false);
   readonly adsBypass = signal(false);
+  readonly nameOffsets = signal<Array<{ x: number; y: number }>>([]);
+  readonly activeLetterIndex = signal<number | null>(null);
   readonly sectionFilters = signal<Record<SectionKey, boolean>>({
     overview: true,
     experience: true,
     skills: true,
     courses: true
   });
+  readonly nameLetters = computed<NameLetter[]>(() => {
+    const letters = Array.from(this.data().personalia.name);
+    const offsets = this.nameOffsets();
+    return letters.map((char, index) => ({
+      char,
+      index,
+      offset: offsets[index] ?? { x: 0, y: 0 }
+    }));
+  });
+
+  private activeDrag: {
+    index: number;
+    startX: number;
+    startY: number;
+    originX: number;
+    originY: number;
+    pointerId: number;
+  } | null = null;
 
   constructor() {
     document.body.classList.remove('tiles-expanded');
+    effect(() => {
+      const length = Array.from(this.data().personalia.name).length;
+      const current = this.nameOffsets();
+      if (current.length === length) {
+        return;
+      }
+      const next = Array.from({ length }, (_, index) => current[index] ?? { x: 0, y: 0 });
+      this.nameOffsets.set(next);
+    });
   }
 
   readonly filteredOverview = computed(() => {
@@ -190,6 +220,51 @@ export class AppComponent {
     return this.expandedId() === id;
   }
 
+  startLetterDrag(event: PointerEvent, letter: NameLetter): void {
+    if (letter.char === ' ' || event.button !== 0) {
+      return;
+    }
+    const current = this.nameOffsets()[letter.index] ?? { x: 0, y: 0 };
+    this.activeDrag = {
+      index: letter.index,
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: current.x,
+      originY: current.y,
+      pointerId: event.pointerId
+    };
+    this.activeLetterIndex.set(letter.index);
+    window.addEventListener('pointermove', this.handleLetterMove);
+    window.addEventListener('pointerup', this.handleLetterEnd);
+    window.addEventListener('pointercancel', this.handleLetterEnd);
+    event.preventDefault();
+  }
+
+  private readonly handleLetterMove = (event: PointerEvent): void => {
+    if (!this.activeDrag || event.pointerId !== this.activeDrag.pointerId) {
+      return;
+    }
+    const deltaX = event.clientX - this.activeDrag.startX;
+    const deltaY = event.clientY - this.activeDrag.startY;
+    const index = this.activeDrag.index;
+    const nextX = this.activeDrag.originX + deltaX;
+    const nextY = this.activeDrag.originY + deltaY;
+    this.nameOffsets.update((offsets) =>
+      offsets.map((offset, i) => (i === index ? { x: nextX, y: nextY } : offset))
+    );
+  };
+
+  private readonly handleLetterEnd = (event: PointerEvent): void => {
+    if (!this.activeDrag || event.pointerId !== this.activeDrag.pointerId) {
+      return;
+    }
+    this.activeDrag = null;
+    this.activeLetterIndex.set(null);
+    window.removeEventListener('pointermove', this.handleLetterMove);
+    window.removeEventListener('pointerup', this.handleLetterEnd);
+    window.removeEventListener('pointercancel', this.handleLetterEnd);
+  };
+
   private normalize(value: string): string {
     return value.trim().toLowerCase();
   }
@@ -254,6 +329,9 @@ export class AppComponent {
     lines.push(`${data.labels.facts.nationality}: ${data.personalia.nationality}`);
     lines.push(`${data.labels.facts.experienceSince}: ${data.personalia.experienceSince}`);
     lines.push(`${data.labels.facts.maritalStatus}: ${data.personalia.maritalStatus}`);
+    lines.push(`${data.labels.facts.favoriteColor}: ${data.personalia.favoriteColor}`);
+    lines.push(`${data.labels.facts.favoriteFramework}: ${data.personalia.favoriteFramework}`);
+    lines.push(`${data.labels.facts.driversLicense}: ${data.personalia.driversLicense}`);
     lines.push('');
     lines.push(data.labels.profile);
     lines.push(...data.profile.paragraphs);
@@ -292,6 +370,9 @@ export class AppComponent {
     lines.push(`- ${data.labels.facts.nationality}: ${data.personalia.nationality}`);
     lines.push(`- ${data.labels.facts.experienceSince}: ${data.personalia.experienceSince}`);
     lines.push(`- ${data.labels.facts.maritalStatus}: ${data.personalia.maritalStatus}`);
+    lines.push(`- ${data.labels.facts.favoriteColor}: ${data.personalia.favoriteColor}`);
+    lines.push(`- ${data.labels.facts.favoriteFramework}: ${data.personalia.favoriteFramework}`);
+    lines.push(`- ${data.labels.facts.driversLicense}: ${data.personalia.driversLicense}`);
     lines.push('');
     lines.push(`## ${data.labels.profile}`);
     data.profile.paragraphs.forEach((paragraph) => lines.push(paragraph));
@@ -331,6 +412,9 @@ export class AppComponent {
     lines.push(`${data.labels.facts.nationality}: ${data.personalia.nationality}`);
     lines.push(`${data.labels.facts.experienceSince}: ${data.personalia.experienceSince}`);
     lines.push(`${data.labels.facts.maritalStatus}: ${data.personalia.maritalStatus}`);
+    lines.push(`${data.labels.facts.favoriteColor}: ${data.personalia.favoriteColor}`);
+    lines.push(`${data.labels.facts.favoriteFramework}: ${data.personalia.favoriteFramework}`);
+    lines.push(`${data.labels.facts.driversLicense}: ${data.personalia.driversLicense}`);
     lines.push('');
     lines.push(data.labels.profile);
     lines.push(...data.profile.paragraphs);

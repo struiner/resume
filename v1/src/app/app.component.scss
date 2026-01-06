@@ -1223,10 +1223,33 @@
   margin-bottom: 28px;
 }
 
-.identity h1 {
+.identity .hero-name {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3vw, 3rem);
   margin: 8px 0 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.04em;
+  line-height: 1.05;
+}
+
+.hero-letter {
+  display: inline-block;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  position: relative;
+}
+
+.hero-letter.space {
+  width: 0.5em;
+  cursor: default;
+  pointer-events: none;
+}
+
+.hero-letter.dragging {
+  cursor: grabbing;
+  z-index: 1;
 }
 
 .role {

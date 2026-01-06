@@ -32,7 +32,10 @@ export const resumeDataZhHans: ResumeData = {
       birthDate: '出生日期',
       nationality: '国籍',
       experienceSince: 'ICT工作经验',
-      maritalStatus: '婚姻状况'
+      maritalStatus: '婚姻状况',
+      favoriteColor: '喜欢的颜色',
+      favoriteFramework: '偏好的框架',
+      driversLicense: '驾照'
     }
   },
   personalia: {
@@ -42,7 +45,10 @@ export const resumeDataZhHans: ResumeData = {
     birthDate: '25-12-1981',
     nationality: '荷兰籍',
     experienceSince: '自2007年起',
-    maritalStatus: '同居'
+    maritalStatus: '同居',
+    favoriteColor: '绿色',
+    favoriteFramework: 'Angular',
+    driversLicense: 'B'
   },
   profile: {
     paragraphs: [
@@ -317,4 +323,3 @@ export const resumeDataZhHans: ResumeData = {
     ]
   }
 };
-

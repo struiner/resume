@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 240 160"
+     width="240"
+     height="160">
+
+  <style>
+    * { shape-rendering: crispEdges; }
+
+    .beam     { fill:#7a1f1f; }
+    .beamHi   { fill:#a93a2a; opacity:.85; }
+    .beamLo   { fill:#4e1212; opacity:.75; }
+
+    .panelL   { fill:#8b3a1f; }
+    .panelR   { fill:#a45a32; }
+
+    .innerBlue { fill:#5f63d8; }
+    .lining    { fill:#bdbdbd; }
+    .liningHi  { fill:#e0e0e0; opacity:.85; }
+  </style>
+
+  <!-- Top beam -->
+  <rect x="70" y="26" width="100" height="16" class="beam"/>
+  <rect x="70" y="26" width="100" height="5"  class="beamHi"/>
+  <rect x="70" y="37" width="100" height="5"  class="beamLo"/>
+
+  <!-- Blue opening -->
+  <polygon class="innerBlue"
+    points="80,42 160,42 146,78 94,78"/>
+
+  <!-- White borders (revealed after opening) -->
+  <!-- Left -->
+  <polygon class="lining"
+    points="80,42 94,78 100,78 88,44"/>
+  <polygon class="liningHi"
+    points="82,44 96,76 100,76 90,46"/>
+
+  <!-- Right -->
+  <polygon class="lining"
+    points="160,42 146,78 140,78 152,44"/>
+  <polygon class="liningHi"
+    points="158,44 144,76 140,76 150,46"/>
+
+  <!-- LEFT PANEL -->
+  <polygon class="panelL">
+    <animate
+      attributeName="points"
+      dur="0.75s"
+      begin="0.15s"
+      fill="freeze"
+      values="
+        /* CLOSED */
+        80,42
+        120,42
+        120,78
+        94,78;
+        /* OPEN – seam edge moved outward & down */
+        80,42
+        112,42
+        118,96
+        94,78
+      "/>
+  </polygon>
+
+  <!-- RIGHT PANEL -->
+  <polygon class="panelR">
+    <animate
+      attributeName="points"
+      dur="0.75s"
+      begin="0.15s"
+      fill="freeze"
+      values="
+        /* CLOSED */
+        120,42
+        160,42
+        146,78
+        120,78;
+        /* OPEN */
+        128,42
+        160,42
+        146,78
+        122,96
+      "/>
+  </polygon>
+
+</svg>

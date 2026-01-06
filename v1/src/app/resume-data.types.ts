@@ -33,6 +33,9 @@ export type ResumeData = {
       nationality: string;
       experienceSince: string;
       maritalStatus: string;
+      favoriteColor: string;
+      favoriteFramework: string;
+      driversLicense: string;
     };
   };
   personalia: {
@@ -43,6 +46,9 @@ export type ResumeData = {
     nationality: string;
     experienceSince: string;
     maritalStatus: string;
+    favoriteColor: string;
+    favoriteFramework: string;
+    driversLicense: string;
   };
   profile: {
     paragraphs: string[];
